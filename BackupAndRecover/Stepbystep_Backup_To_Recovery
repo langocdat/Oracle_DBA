@@ -1,6 +1,7 @@
 ==============================================================================
 --***ATTENSION:
-    - Cần tạo đường dẫn trước khi thực hiện Backup: /home/oracle/backup
+    - Check trạng thái Open của Database 
+    - Tạo đường dẫn trước khi thực hiện Backup: /home/oracle/backup
 ==============================================================================
 -- Phần 1: tạo Backup level 0  --> Chạy trên server nguồn 
 Step 1: Chuẩn bị scripts_backup.rman
