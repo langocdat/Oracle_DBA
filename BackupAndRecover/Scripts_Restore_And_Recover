@@ -1,0 +1,12 @@
+run {
+allocate channel d1 device type disk;
+allocate channel d2 device type disk;
+allocate channel d3 device type disk;
+allocate channel d4 device type disk;
+allocate channel d5 device type disk;
+set newname for database to '/u01/app/oracle/oradata/ORCL/%s_%U.dbf';
+restore database;
+switch datafile all;
+switch tempfile all;
+recover database;
+}
