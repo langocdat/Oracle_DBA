@@ -33,6 +33,7 @@ Step 5: check catalog backup
 Step 6: Crosscheck and delete
     - (rman): crosscheck copy;
               crosscheck backup;
+              crosscheck archivelog all;
               delete noprompt expired archivelog all;
               delete noprompt expired backup;
               delete noprompt obsolete;
