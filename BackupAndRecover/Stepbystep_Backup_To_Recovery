@@ -1,0 +1,38 @@
+-- Phần 1: tạo Backup level 0  --> Chạy trên server nguồn 
+Step 1: Chuẩn bị scripts_backup.rman
+Step 2: Check syntax của scripts_backup.rman
+    - (bash): rman target / checksyntax @'/home/oracle/scripts_backup.rman'
+    --> Result: The cmdfile has no syntax errors
+Step 3: Run scripts in background 
+    - (bash): nohup rman target / @'/home/oracle/scripts_backup.rman' log='/home/oracle/scripts_backup.log' &
+Step 4: 
+    - (sql): Create pfile='/home/oracle/init.ora' from spfile;
+Step 5: Move toàn bộ folder backup và init.ora sang máy chủ cần restore
+    - (bash): scp /home/oracle/backup/ @oracle@192.168.225.210:/home/oracle/backup/
+
+===============================================================================================================
+
+-- Phần 2: thực hiện Restore and Recovery backup
+Step 1: Startup nomount database with init.ora
+    - (sql): Startup nomount pfile='/home/oracle/init.ora';
+Step 2: Using RMAN to restore controlfile backup
+    - (rman): restore controlfile from '/home/oracle/controlfile.bkp';
+Step 3: Mount Database
+    - (rman): alter database mount;
+    OR
+    - (sql): alter database mount;
+Step 4: Catalog backup
+    - (rman): catalog start with ='/home/oracle/backup/';
+Step 5: check catalog backup
+    - (rman): list backup summary;
+Step 6: Crosscheck and delete
+    - (rman): crosscheck copy;
+              crosscheck backup;
+              delete noprompt expired archivelog all;
+              delete noprompt expired backup;
+              delete noprompt obsolete;
+Step 7: Check syntax của scripts_restore_and_recovery.rman
+   - (bash): rman target / checksyntax @'/home/oracle/scripts_restore_and_recovery.rman'
+    --> Result: The cmdfile has no syntax errors
+Step 8: Run scripts in background 
+    - (bash): nohup rman target / @'/home/oracle/scripts_restore_and_recovery.rman' log='/home/oracle/scripts_restore_and_recovery.log' &
