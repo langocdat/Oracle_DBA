@@ -27,7 +27,7 @@ Step 3: Mount Database
     OR
     - (sql): alter database mount;
 Step 4: Catalog backup
-    - (rman): catalog start with ='/home/oracle/backup/';
+    - (rman): catalog start with '/home/oracle/backup/';
 Step 5: check catalog backup
     - (rman): list backup summary;
 Step 6: Crosscheck and delete
