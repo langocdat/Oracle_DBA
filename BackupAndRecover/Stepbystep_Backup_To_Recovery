@@ -2,6 +2,7 @@
 --***ATTENSION:
     - Check trạng thái Open của Database 
     - Tạo đường dẫn trước khi thực hiện Backup: /home/oracle/backup
+    - Check archivelog: SELECT THREAD#,SEQUENCE#,NAME,FIRST_CHANGE#,NEXT_CHANGE#,APPLIED,DELETED FROM V$ARCHIVED_LOG ORDER BY SEQUENCE#;
 ==============================================================================
 -- Phần 1: tạo Backup level 0  --> Chạy trên server nguồn 
 Step 1: Chuẩn bị scripts_backup.rman
@@ -42,3 +43,5 @@ Step 7: Check syntax của scripts_restore_and_recovery.rman
     --> Result: The cmdfile has no syntax errors
 Step 8: Run scripts in background 
     - (bash): nohup rman target / @'/home/oracle/scripts_restore_and_recovery.rman' log='/home/oracle/scripts_restore_and_recovery.log' &
+Step 9: Open resetlogs Database
+    - (sql): alter database open resetlogs;
