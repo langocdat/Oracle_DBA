@@ -1,0 +1,4 @@
+1. Tạo cặp khóa SSH
+(bash): ssh-keygen -t rsa
+2. Copy public key sang node khác
+(bash): ssh-copy-id -i ~/.ssh/id_rsa oracle@rac2

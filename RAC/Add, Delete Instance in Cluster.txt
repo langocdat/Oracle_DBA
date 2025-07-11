@@ -1,0 +1,28 @@
+1. Kiểm tra trạng thái 
+ (bash): srvctl config database -d <db_name>
+2. Dừng Instance muốn xóa
+ (bash): srvctl stop instance -d <db_name> -i <instance_name>
+3. Check thông tin instance
+ (bash): srvctl status database -d <db_name>
+4. Xóa instance RAC
+ (bash): srvctl remove instance -d <db_name> -i <instance_name>
+5. Check lại thông tin
+ (bash): srvctl config database -d <db_name>
+ (bash): srvctl status database -d <db_name>
+6. Loại bỏ node ra khỏi RAC hoàn toàn
+ (bash): crsctl delete node -n rac2
+
+
+---------------------------------------------------------------------
+1. Thêm lại instance
+(bash): srvctl add instance -d <db_name> -i <instance_name> -n <node_name>
+Ex: srvctl add instance -d orcl -i orcl2 -n rac2
+-d orcl: database name
+-i orcl2: tên instance
+-n rac2: node sẽ chạy instance này
+2. Start Instance vừa thêm
+(bash): srvctl start instance -d <db_name> -i <instance_name>
+-- khởi động toàn bộ instance của database
+(bash): srvctl start database -d <db_name>
+
+
