@@ -19,6 +19,16 @@ Step 3: Chạy script
 Step 4: Check result
 
 ===========================================================================================
+-- Hướng dẫn lấy log OSWatcher
+Step 1: Check trạng thái
+	- (bash): ps -ef | grep OSW
+	--> Nếu không có, tức OSW chưa có log nên cần phải chạy OSW 5 ngày để thu thập log.
+Step 2: Chạy OSW để thu thập log
+	- (bash): cd oswbb
+	- (bash): nohup ./startOSWbb.sh 300 120 NONE <duong_dan_chua_result> &
+	Ex: nohup ./startOSWbb.sh 300 120 NONE /home/oracle/HC_report/OSWlog/ &
+===========================================================================================
+
 -- Lệnh gen image
 java -jar oswbba.jar -i archive
 
@@ -41,3 +51,4 @@ find . -type f ! \( -name "*25.05.31*" -o -name "*25.06.01*" -o -name "*25.06.02
 
 Can 4 files: 
 oswiostat  oswmeminfo  oswtop  oswvmstat
+ 
