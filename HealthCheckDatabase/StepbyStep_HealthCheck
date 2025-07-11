@@ -1,1 +1,43 @@
+==========================================================================================
+--ATTTENSION
+  - Cần đọc báo cáo cũ để trả lời các câu hỏi sau:
+    * Danh sách tên những Database cần thực hiện
+    * Hệ thống là RAC hay DataGuard
+      - RAC: hệ thống có bao nhiêu node, tên node -> Yêu cầu khách hàng mở máy chủ chứa node đó để thực hiện
+      - DataGuard: Check đồng bộ của standby. (show database <standby_name> hoặc select name, value from v%dataguard_stats)
+    * Kiểm tra ngay kết quả file database_information.html
+==========================================================================================
 
+Step 1: Check và grant biến ORACLE_SID
+	- (bash): echo $ORACLE_SID
+	- (bash): export ORACLE_SID=<instance_name>
+	Hoặc sử dụng giá trị trong /etc/oratab
+	- (bash): . oraenv
+Step 2: Chọn đường dẫn thực hiện
+	- (bash): df -h
+Step 3: Chạy script
+Step 4: Check result
+
+===========================================================================================
+-- Lệnh gen image
+java -jar oswbba.jar -i archive
+
+ -- Tìm các file .dat và thay thế v22.1.0AHF = v8.4.0
+ find /home/oracle/HC_ver_1.3/oswbb/archive/ -type f -name "*.dat" -exec sed -i '1s/v22.1.0AHF/v8.4.0/' {} \;
+ find . -type f -name "*.dat" -exec sed -i '1s/v22.1.0AHF/v8.4.0/' {} \;
+
+-- Xóa file bên trong nhưng không xóa folder 
+rm -rf /home/oracle/HC_ver_1.3/oswbb/archive/*
+
+-- Di chuyển dữ liệu
+mv /home/oracle/HC_ver_1.3/oswbb/OSW1/OSW1/* /home/oracle/HC_ver_1.3/oswbb/archive/
+
+-- Lệnh giải nén toàn bộ
+find /home/oracle/HC_ver_1.3/oswbb/OSW1 -type f -name "*.dat.gz" -exec gunzip {} \;
+find . -type f -name "*.dat.gz" -exec gunzip {} \;
+
+-- xoa file 
+find . -type f ! \( -name "*25.05.31*" -o -name "*25.06.01*" -o -name "*25.06.02*" -o -name "*25.06.03*" -o -name "*25.06.04*" \) -exec rm -f {} \;
+
+Can 4 files: 
+oswiostat  oswmeminfo  oswtop  oswvmstat
