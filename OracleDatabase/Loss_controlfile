@@ -59,3 +59,8 @@ Step 4: run scripts create_control_file.sql
   - (sql): @create_control_file.sql
 Step 5: 
   - (sql): alter database open resetlogs;
+Nếu hệ thống báo cần recover thì làm các bước sau:
+   Step 5.1:
+    - (rman): recover database;
+   Step 5.2:
+    - (rman/sql): alter database open resetlogs;
