@@ -8,5 +8,12 @@ Step 2: Configure Virtual machine
       (bash): hostname
   - Configure IP Address
       (bash): vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
-
+			 BOOTPROTO=static
+			 ONBOOT=yes
+			 IPADDR=192.168.225.210
+			 NETMASK=255.255.255.0
       (bash): systemctl restart network    ->> Apply change
+		**  Check lại thông tin:
+			- (bash): hostname -I
+			- (bash): nmcli con show
+			- (bash): nmcli dev status  
