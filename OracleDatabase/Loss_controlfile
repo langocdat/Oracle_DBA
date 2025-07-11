@@ -12,7 +12,19 @@ Step 3: startup Database
   - (sql): startup nomount -> alter database mount -> alter database open;
 
 2. Trường hợp mất tất cả các control file trên OS vật lý
+Attension:
+  - (sql): startup nomount; 
 --- Case 1: sử dụng bản backup
+  Step 1:
+    - (rman): restore controlfile from autobackup;
+  OR 
+    - (rman): RMAN> RESTORE CONTROLFILE FROM '/backup/ctrlfile.bkp';
+  Step 2: 
+    - (rman/sql): alter database mount;
+  Step 3: 
+    - (rman): recover database;
+  Step 4: 
+    - (rman/sql): alter database open;
 
 --- Case 2: Tạo lại control file sử dụng scripts
 Step 1: 
