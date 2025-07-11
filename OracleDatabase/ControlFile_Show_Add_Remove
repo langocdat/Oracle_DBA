@@ -1,0 +1,31 @@
+---SHOW
+  - (sql): Show parameter control_files;
+  - (sql): Select name from v$controlfiles;
+
+---ADD
+Step 1: shutdown database
+  - (sql): shutdown immediate / shutdown abort
+Step 2: Copy control file
+  - (bash): cp /u01/app/oracle/oradata/ORCL/control01.ctl /u01/app/oracle/oradata/ORCL/control02.ctl
+Step 3: Update parameter Control_files
+----Case use SPFILE
+  - (sql): startup nomount;
+  - (sql): alter system set control_files='/u01/app/oracle/oradata/ORCL/control01.ctl','/u02/app/oracle/oradata/ORCL/control02.ctl' scope=spfile;
+  - (sql): shutdown immediate;
+  - (sql): startup;
+----Case use PFILE
+  - (bash): vi initORCL.ora
+  Edit: control_files='/u01/oradata/ORCL/control01.ctl','/u02/oradata/ORCL/control02.ctl'
+  - (sql): Startup nomount pfile='/u01/app/oracle/product/19c/dbhome_1/dbs/initORCL/ora';
+  - (sql): alter database mount;
+  - (sql): alter database open;
+
+---REMOVE 
+Step 1: shutdown database
+  - (sql): shutdown immediate / shutdown abort;
+Step 2: Update control_files
+  - (sql): startup nomount;
+  - (sql): alter system set control_files='/u01/app/oracle/oradata/ORCL/control01.ctl' scope=spfile;
+  - (bash): rm -rf /u01/app/oracle/oradata/ORCL/control02.ctl
+  - (sql): startup;
+
