@@ -1,0 +1,19 @@
+Khai báo tham số fast_recovery_area
+Step 1: 
+  - (Sql): Startup nomount;
+Step 2: Tạo thư mục và cấp quyền cho user oracle
+  - (Bash): mkdir -p /u01/app/oracle/fast_recovery_area
+Step 3: DB ở level nomount
+  - (Sql): alter system set db_recovery_file_dest_size=5G scope=spfile;
+  - (Sql): alter system set db_recovery_file_dest='/u01/app/oracle/fast_recovery_are' scope=spfile;
+
+-------------------------------------------
+| Bonus: config archive log nằm trong FRA |
+-------------------------------------------
+  - (Sql): alter system set log_archive_dest_1='LOCATION=USE_DB_RECOVERY_FILE_DEST' SCOPE=SPFILE;
+
+Step 4: Shutdown and Restart
+Step 5: Kiểm tra 
+  - (Sql): Show parameter DB_RECOVERY_FILE_DEST
+  - (Sql): Show parameter DB_RECOVERY_FILE_DEST_SIZE
+  - (Sql): Show parameter log_archive_dest_1
