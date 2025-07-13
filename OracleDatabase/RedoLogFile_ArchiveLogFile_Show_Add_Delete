@@ -31,6 +31,6 @@
 
 =======================================================================================================
 (sql): ALTER SYSTEM ARCHIVE LOG CURRENT; archive process write redo entries to archivelog file from redo log file.
-(sql): ALTER DATABASE CLEAR LOGFILE GROUP 2;
-(sql): ALTER DATABASE CLEAR UNARCHIVED LOGFILE GROUP 2;
+(sql): ALTER DATABASE CLEAR LOGFILE GROUP 2; -- Xóa redo entries trong group
+(sql): ALTER DATABASE CLEAR UNARCHIVED LOGFILE GROUP 2; -- Xóa redo entries trong group ngay cả khi chưa chuyển thành archived
 (sql): ALTER SYSTEM ARCHIVE LOG CURRENT; -- DBA tác động archive process copy data to Archivelog file from online group redo log file.
