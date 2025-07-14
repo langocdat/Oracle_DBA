@@ -1,8 +1,0 @@
-==================================================================
-Chuẩn bị:
-  - Cài đặt oracle database trên cả 2 node
-  - Primary Databae cần có database
-==================================================================
-Step 1: Đặt hostname cho 2 node
-  - (bash): hostnamectl set-hostname srv1.localdomain
-  - (bash): hostnamectl set-hostname srv2.localdomain
