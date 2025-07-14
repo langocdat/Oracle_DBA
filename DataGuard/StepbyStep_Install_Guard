@@ -27,4 +27,15 @@ Step 3: Archive log mode
         * (Sql): startup mount;
         * (Sql): alter database archivelog;
         * (Sql): alter database open;
-    
+Step 4: Mode Force Logging
+  - (Sql): Select force_logging from v$database;
+  - (Sql): alter database force logging;
+Step 5: Standby redo log size:
+  - (Sql): Select group#, thread#, bytes/1024/1024 mb from v$log;
+  - (Sql): Select thread#, instance from v$thread;
+-->> Tạo standby redo logs giống redo log groups về kích thước, số lượng+1
+      - (Sql): alter database add standby logfile thread 1 size 200m;
+      - (Sql): alter database add standby logfile thread 1 size 200m;
+      - (Sql): alter database add standby logfile thread 1 size 200m;
+      - (Sql): select group#, thread#, sequence#, bytes/1024/1024 mb, archived, status from v$standby_log;
+               select member from v$logfile where type = 'STANDBY';
