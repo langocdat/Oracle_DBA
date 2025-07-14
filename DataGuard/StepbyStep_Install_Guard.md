@@ -22,5 +22,9 @@ Step 3: Archive log mode
   - (Sql): alter system set log_archive_dest_1='LOCATION=USE_DB_RECOVERY_FILE_DEST' scope=both;
   - (Sql): Select log_mode from v$database;
   - (Sql): archive log list;
--->> Set đường dẫn USE_DB_RECOVERY_FILE_DEST: [Config parameter FRA] (https://github.com/langocdat/Oracle_DBA/blob/main/OracleDatabase/Parameter_FRA)
+-->> Set đường dẫn USE_DB_RECOVERY_FILE_DEST: https://github.com/langocdat/Oracle_DBA/blob/main/OracleDatabase/Parameter_FRA
+  - Nếu chưa bật archive log mode thì off database -> khởi động mount và alter database archivelog;
+        * (Sql): startup mount;
+        * (Sql): alter database archivelog;
+        * (Sql): alter database open;
     
