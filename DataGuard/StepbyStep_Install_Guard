@@ -39,3 +39,15 @@ Step 5: Standby redo log size:
       - (Sql): alter database add standby logfile thread 1 size 200m;
       - (Sql): select group#, thread#, sequence#, bytes/1024/1024 mb, archived, status from v$standby_log;
                select member from v$logfile where type = 'STANDBY';
+Step 6: Set log_archive_config
+  - (Sql): alter system set log_archive_config='DG_CONFIG=(orcl, orclstd1)' scope=both;
+  - (Sql): alter system set log_archive_dest_2='SERVICE=orclstd1 ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=orclstd1' scope=both;
+Step 7: Set fal_server
+  - (Sql): show parameter fal_server;
+  - (Sql): alter system set fal_server = 'orclstd1' scope=both;
+Step 8: Set standby_file_management: AUTO
+  - (Sql): show parameter standby_file_management
+  - (Sql): alter system set standby_file_management='AUTO' scope=both;
+Step 9: enable flashback
+  - (Sql): select flashback_on from v$database;
+  - (Sql): alter database flashback on;
