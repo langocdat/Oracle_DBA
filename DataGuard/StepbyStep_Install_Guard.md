@@ -9,6 +9,7 @@ Chuẩn bị:
 Step 1: Đặt hostname cho 2 node
   - (bash): hostnamectl set-hostname srv1.localdomain
   - (bash): hostnamectl set-hostname srv2.localdomain
+    
 Step 2: Sửa file /etc/hosts trên 2 node
   - (bash): vi /etc/hosts
     192.168.68.11 srv1.localdomain srv1
