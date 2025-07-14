@@ -184,3 +184,9 @@ Step 2: duplicate
   - (Sql_Primary): Select sequence#, first_time, next_time from v$archived_log order by sequence#;
   - (Sql_Primary): alter system switch logfile;
   - (Sql_Standby): Select sequence#, first_time, next_time, applied from v$archived_log order by sequence#;
+
+=============================================
+|            SWITCHOVER                     |
+=============================================
+  - (Sql_Primary): ALTER DATABASE SWITCHOVER TO ORCLSTD1;
+  - (Sql_Primary): Select status, gap_status from v$archive_dest_status where dest_id = 2; -- Kiểm tra gap
