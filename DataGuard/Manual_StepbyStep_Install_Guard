@@ -192,5 +192,6 @@ Step 2: duplicate
 =============================================
 |            SWITCHOVER                     |
 =============================================
-  - (Sql_Primary): ALTER DATABASE SWITCHOVER TO ORCLSTD1;
+  - (Sql_Primary): ALTER DATABASE SWITCHOVER TO ORCLSTD1; --Tiến trình redo apply phải đang run trên Standby.
+  - (Sql_Primary): select database_role, switchover_status from v$database;
   - (Sql_Primary): Select status, gap_status from v$archive_dest_status where dest_id = 2; -- Kiểm tra gap
