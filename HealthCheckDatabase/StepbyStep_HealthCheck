@@ -30,6 +30,7 @@ Step 2: Chạy OSW để thu thập log
 ===========================================================================================
 
 -- Lệnh gen image
+Attension: cần cài đặt java để chạy tool
 java -jar oswbba.jar -i archive
 
  -- Tìm các file .dat và thay thế v22.1.0AHF = v8.4.0
