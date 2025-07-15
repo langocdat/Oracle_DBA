@@ -27,7 +27,7 @@ Step 3: Archive log mode
         * (Sql): startup mount;
         * (Sql): alter database archivelog;
         * (Sql): alter database open;
-Step 4: Mode Force Logging
+Step 4: Mode Force Logging --> Bắt buộc mọi thao tác đều phải sinh ra redo log
   - (Sql): Select force_logging from v$database;
   - (Sql): alter database force logging;
 Step 5: Standby redo log size:
@@ -42,12 +42,16 @@ Step 5: Standby redo log size:
 Step 6: Set log_archive_config
   - (Sql): alter system set log_archive_config='DG_CONFIG=(orcl, orclstd1)' scope=both;
   - (Sql): alter system set log_archive_dest_2='SERVICE=orclstd1 ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=orclstd1' scope=both;
-Step 7: Set fal_server
+Step 7: Set fal_server --> standby tự động truy xuất archive log từ primary nếu phát hiện ra thiếu log trong quá trình apply redo
   - (Sql): show parameter fal_server;
   - (Sql): alter system set fal_server = 'orclstd1' scope=both;
-Step 8: Set standby_file_management: AUTO
+        Set tham số trên standby
+        ALTER SYSTEM SET FAL_SERVER='orcl'   SCOPE=BOTH;   -- trỏ về PRIMARY  
+        ALTER SYSTEM SET FAL_CLIENT='orclstd1' SCOPE=BOTH; -- tên của chính standby
+Step 8: Set standby_file_management: AUTO 
   - (Sql): show parameter standby_file_management
   - (Sql): alter system set standby_file_management='AUTO' scope=both;
+      Explain: Khi bạn ADD DATAFILE, DROP DATAFILE hoặc ADD TEMPFILE ở primary, Oracle sẽ tự động thực hiện thao tác tương ứng trên standby trong lúc Managed Recovery đang chạy.
 Step 9: enable flashback
   - (Sql): select flashback_on from v$database;
   - (Sql): alter database flashback on;
