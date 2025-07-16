@@ -23,7 +23,7 @@ Step 3: Update parameter Control_files
 ---REMOVE 
 Step 1: shutdown database
   - (sql): shutdown immediate / shutdown abort;
-Step 2: Update control_files
+Step 2: Update parameter file
   - (sql): startup nomount;
   - (sql): alter system set control_files='/u01/app/oracle/oradata/ORCL/control01.ctl' scope=spfile;
   - (bash): rm -rf /u01/app/oracle/oradata/ORCL/control02.ctl
