@@ -9,3 +9,20 @@ Step 2: trên standby
       (Sql): alter database open;
 
 =====================================================================
+
+--- Thiết lập Primary old thành Standby New
+Step1: Configure và clear data cũ cho các folder sau, delete spfile cũ
+    mkdir -p /u01/app/oracle/admin/STAND/adump
+    mkdir -p /u01/app/oracle/oradata
+    mkdir -p /u01/app/oracle/fast_recovery_area
+Step 2: Thực hiện RMAN duplicate
+    DUPLICATE TARGET DATABASE FOR STANDBY FROM ACTIVE DATABASE DORECOVER
+        SPFILE
+        SET DB_UNIQUE_NAME 'orcl' COMMENT 'Is standby'
+        SET LOG_ARCHIVE_DEST_2 'SERVICE=orclstd1 ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=orclstd1'
+        SET AUDIT_FILE_DEST '/u01/app/oracle/admin/orcl/adump'
+        SET CONTROL_FILES '/u01/app/oracle/oradata/orcl/controlfile/control01.ctl'
+        SET FAL_SERVER 'orclstd1'
+        NOFILENAMECHECK;
+
+  
