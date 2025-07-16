@@ -167,7 +167,7 @@ Step 20: Tạo folder
 |             DUPLICATE DATABASE            |
 =============================================
 Step 1: 
-  - (Sql_Primary): rman target sys/oracle@orcl auxiliary sys/oracle@ỏclstd1
+  - (Sql_Primary): rman target sys/oracle@orcl auxiliary sys/oracle@orclstd1
 Step 2: duplicate
     DUPLICATE TARGET DATABASE FOR STANDBY FROM ACTIVE DATABASE DORECOVER
     SPFILE
