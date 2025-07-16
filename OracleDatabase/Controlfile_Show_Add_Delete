@@ -1,0 +1,24 @@
+1. Show controlfile
+  - (Sql): Show parameter control_file;
+2. Add controlfile
+Step 1: add control file vào spfile
+  - (Sql): alter system set control_files = 'duongdan1','duongdan2' scope=spfile;
+  - (Sql): shutdown immediate
+Step 2: copy controlfile1 sang controlfile2
+  - (bash): cp duongdan1 duongdan2
+Step 3: khởi động database
+  - (Sql): startup nomount -> alter database mount -> alter database open --->> reload controlfile
+
+====================================================
+
+Xử lý trường hợp mất control file khi DB đang hoạt động
+--------BEGIN--------------------------------------------------------
+
+Cách 1: shutdown abort ---> cp duongdan1 duongdan2 ---> startup; 
+	Cần phải shutdown được DB trước khi copy control file từ đường dẫn số 1 sang đường dẫn số 2. Then, startup lại thôi =)))
+Cách 2: shutdown abort ---> tạo pfile từ spfile (tạm thời xóa bỏ đường dẫn control file bị mất trong spfile) ---> khởi động với spfile ---> then, tạo lại pfile từ spfile;
+	shutdown abort;
+	Edit pfile;
+	startup nomount pfile = ''; 
+	create spfile from pfile = '';
+	ALTER DATABASE MOUNT; --> OPEN;	
