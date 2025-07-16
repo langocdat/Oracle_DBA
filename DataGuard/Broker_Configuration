@@ -1,0 +1,61 @@
+--- Require: 
+========== PRIMARY + STANDBY ================
+1. alter database flashback on -->> enable flashback
+2. Priamry + Standby: đã configure dataguard thủ công
+3. Enable DG_BROKERE_START
+    - (Sql): alter system set dg_broker_start=true scope=both;
+    - (Sql): show parameter dg_brokere_start;
+4. Configure tnsnames.ora và listener.ora
+
+========== PRIMARY ============
+  - (dgmgrl): create configuration 'my_dg' as primary database is 'orcl' connect identifier is 'orcl';
+  - (dgmgrl): add database 'orclstd1' as connect identifier is 'orclstd1' maintained as physical;
+  - (dgmgrl): enable configuration;
+
+======== CHECK TRẠNG THÁI ===========
+  - (dgmgrl):	SHOW CONFIGURATION;
+  - (dgmgrl):	SHOW DATABASE ‘orcl’
+  - (dgmgrl):	SHOW DATABASE ‘orclstd1’
+  - (dgmgrl):SHOW DATABASE VERBOSE PRIMDB;
+  - (dgmgrl):SHOW DATABASE VERBOSE STBYDB;
+
+-	Thực hiện trên PrimaryDb 
+DGMGRL>		ENABLE FAST_START FAILOVER;
+			SET FAST_START FAILOVER TARGET =  ‘stand’
+			SET FAST_START FAILOVER THRESHOLD = 30;
+			SET FAST_START FAILOVER LAG_LIMIT= 30;
+			SET FAST_START FAILOVER AUTO-REINSTATE = ON;
+EDIT CONFIGURATION SET PROTECTION MODE AS MAXAVAILABILITY;
+EDIT DATABASE 'orcl' SET Property FastStartFailoverTarget = 'stand';
+EDIT DATABASE 'stand' SET Property FastStartFailoverTarget = 'orcl';
+EDIT CONFIGURATION SET FASTSTARTFAILOVER THRESHOLD = 30;
+EDIT CONFIGURATION SET FASTSTARTFAILOVER LAGLIMIT = 30;
+EDIT CONFIGURATION SET FASTSTARTFAILOVER AUTOREINSTATE = ON;
+-- Thiết lập đối tượng failover cho từng database
+DGMGRL> EDIT DATABASE orcl SET PROPERTY FastStartFailoverTarget = 'stand';
+DGMGRL> EDIT DATABASE stand SET PROPERTY FastStartFailoverTarget = 'orcl';
+-- Đặt ngưỡng thời gian phát hiện lỗi (tính bằng giây)
+DGMGRL> EDIT CONFIGURATION SET PROPERTY FastStartFailoverThreshold = 30;
+-- Giới hạn độ trễ (tính bằng giây)
+DGMGRL> EDIT CONFIGURATION SET PROPERTY FastStartFailoverLagLimit = 30;
+-- Bật tự động phục hồi lại database khi nó khả dụng trở lại
+DGMGRL> EDIT CONFIGURATION SET PROPERTY FastStartFailoverAutoReinstate = TRUE;
+ 
+	Set mode truyen
+DGMGRL> edit database orcl set property LogXptMode = SYNC;
+Property "logxptmode" updated
+
+Exception: Nếu lỗi, tắt tạm thời FSFO 
+Dgmgrl>	DISABLE FAST_START FAILOVER;
+
+
+Step 7: Install and run Observer
+DGMGRL>	START OBSERVER;
+DGMGRL>	SHOW OBSERVER;
+
+Step 8: Check status
+DGMGRL>	SHOW FAST_START FAILOVER;
+DGMGRL> 	SHOW CONFIGURATION;
+Kết quả mong muốn:
+Fast-Start Failover: ENABLED
+Observer Status     : Running
