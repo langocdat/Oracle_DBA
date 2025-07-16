@@ -171,11 +171,11 @@ Step 1:
 Step 2: duplicate
     DUPLICATE TARGET DATABASE FOR STANDBY FROM ACTIVE DATABASE DORECOVER
     SPFILE
-    SET DB_UNIQUE_NAME 'ORCLSTD1' COMMENT 'Is standby'
-    SET LOG_ARCHIVE_DEST_2 'SERVICE=ORCL ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=ORCL'
-    SET AUDIT_FILE_DEST '/u01/app/oracle/admin/ORCLSTD1/adump'
-    SET CONTROL_FILES '/u01/app/oracle/oradata/ORCLSTD1/controlfile/control01.ctl'
-    SET FAL_SERVER 'ORCL'
+    SET DB_UNIQUE_NAME 'orclstd1' COMMENT 'Is standby'
+    SET LOG_ARCHIVE_DEST_2 'SERVICE=orcl ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=orcl'
+    SET AUDIT_FILE_DEST '/u01/app/oracle/admin/orclstd1/adump'
+    SET CONTROL_FILES '/u01/app/oracle/oradata/orclstd1/controlfile/control01.ctl'
+    SET FAL_SERVER 'orcl'
     NOFILENAMECHECK;
 
 =============================================
