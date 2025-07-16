@@ -1,0 +1,11 @@
+--- Manual Failover
+Step 1: Check Primary -->> có thể shutdown abort để test
+Step 2: trên standby
+  - Tắt process redo apply
+      (Sql): alter database recover managed standby database cancel;
+  - Active standby 
+      (Sql): alter database activate standby database;
+  - Open Database  
+      (Sql): alter database open;
+
+=====================================================================
