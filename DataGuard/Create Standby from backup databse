@@ -1,0 +1,20 @@
+Step 1: Trên primary database 
+  - Tạo backup:
+    (rman): backup database plus archivelog; -->> Path: /u01/app/oracle/fast_recovery_area/ORCL/backupset/....
+  - Tạo controlfile for standby
+    (rman): backup current controlfile for standby format '/tmp/backupcontrolfile.bkp';
+  - Chuyển các file trên sang standby database 
+Step 2: Trên standby database
+  - Tạo pfile với 2 giá trị
+    db_name='orcl'
+    db_unique_name='orclstd1'
+  - Start nomount với pfile vừa khởi tạo
+    (sql): startup nomount;
+  - Restore backup controlfile
+    (rman): restore controlfile from '/.........';
+  - Mount database
+    (rman/sqlplus): alter database mount;
+  - Chỉ định file backup
+    (rman): catalog start with '/....................';
+  - Recover database
+  - Restore database
