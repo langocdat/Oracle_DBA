@@ -52,4 +52,14 @@ find . -type f ! \( -name "*25.05.31*" -o -name "*25.06.01*" -o -name "*25.06.02
 
 Can 4 files: 
 oswiostat  oswmeminfo  oswtop  oswvmstat
- 
+
+
+===========================================================================================
+Dung trong truong hop thieu log, chuyen doi tu log san co
+- Trong từng forder:
+   ---Đổi tên file
+	for file in dbprdmob2_iostat_*.dat; do
+	    mv "$file" "${file/dbprdmob2/dbprdmob1}"
+	done
+   ---Đổi tên hiển thị trong ảnh
+	sed -i 's/dbprdmob2/dbprdmob1/g' *.dat
