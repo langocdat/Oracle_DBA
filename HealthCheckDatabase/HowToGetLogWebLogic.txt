@@ -1,0 +1,12 @@
+1. cd /rda
+2. ./rda.sh -p WebLogicServer
+
+3.3.1. Product Loadapp	 	1  RDA_output_spn-prloapp01.zip
+3.3.2.  Product Webapp		1  RDA_output_spn-prlowebapp01.zip
+3.3.3. Product BI			1  RDA_output_spn-prcbsbi01.zip
+3.3.4. Product FCUBS		1  RDA_output_spn-prcbsapp01.zip
+3.3.5. DR FCUBS				1  RDA_output_spn-drcbsapp.zip
+3.3.6. DR BI				1  RDA_output_spn-drcbsbi.zip
+3.3.7. UAT Testingapp		1  RDA_output_TestingAPP.zip
+3.3.8. UAT-Webapp			1  RDA_output_WebApp.zip
+3.3.9. UAT BI				1  RDA_output_TestingBI.zip
