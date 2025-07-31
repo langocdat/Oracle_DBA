@@ -31,7 +31,7 @@ Step 2: Chạy OSW để thu thập log
 
 -- Lệnh gen image
 Attension: cần cài đặt java để chạy tool
-'yum install java -y'
+`yum install java -y`
 Step 1: export DISPLAY=<IP_ADDR>:0.0
 Step 2: java -jar oswbba.jar -i archive
 
