@@ -1,0 +1,57 @@
+Step 1: Get path ORACLE_HOME, ORACLE_SID
+	(bash): env | grep ORA
+
+Step 2: Prepare path /export/home/oracle/MPS/gather_db.sh or similar path...
+Step 3: Prepare file gather.sh
+
+export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
+export ORACLE_SID=SPNUAT
+export PATH=$ORACLE_HOME/bin:$PATH
+sqlplus / as sysdba << EOF
+spool /tmp/gather_output.txt
+set timing on
+exec dbms_stats.gather_dictionary_stats;
+exec dbms_stats.gather_fixed_objects_stats;
+exec DBMS_STATS.GATHER_DATABASE_STATS (estimate_percent => DBMS_STATS.AUTO_SAMPLE_SIZE, gather_sys=>TRUE, degree => 8, method_opt => 'FOR ALL COLUMNS SIZE AUTO', cascade => TRUE);
+exit;
+EOF
+
+Step 4: permission
+	(bash): chmod +x gather.sh 
+Step 5: run scipts in backgroud	
+	(bash): nohup ./gather.sh &
+
+--->>> Check: 
+	1. (bash): tail -1000f nohup.out
+	2. You can check the background job is still running or not with command 'jobs'
+	
+--->>> After run scripts finish, join sql to check: 
+1. (sql): select owner,table_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') 
+		  from dba_tables
+		  where (last_analyzed is null or last_analyzed < (sysdate -60))
+		  and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) order by owner;
+
+2. (sql): select owner,table_name,index_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') 
+		  from dba_indexes
+		  where (last_analyzed is null or last_analyzed < (sysdate -60))-
+		  and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
+
+======Use crontab to schedule automatic running========================
+Step 1: 
+	(bash): crontab -e
+Step 2: add schedule
+	Example:0 19 * * 6 /export/home/oracle/MPS/gather.sh 
+	:wq!
+	
+			* * * * * command_to_run
+			│ │ │ │ │
+			│ │ │ │ └─ Thứ trong tuần (0-7) (Chủ nhật là 0 hoặc 7)
+			│ │ │ └─── Tháng (1 - 12)
+			│ │ └───── Ngày trong tháng (1 - 31)
+			│ └─────── Giờ (0 - 23)
+			└───────── Phút (0 - 59)
+	
+Step 3: Check crontab is exit
+	(bash): crontab -l
+
+--->> Đảm bảo "systemctl status crond" phải chạy, nếu chưa chạy, thực hiện "systemctl start crond"
