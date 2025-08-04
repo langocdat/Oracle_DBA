@@ -5,6 +5,11 @@
     * Hệ thống là RAC hay DataGuard
       - RAC: hệ thống có bao nhiêu node, tên node -> Yêu cầu khách hàng mở máy chủ chứa node đó để thực hiện
       - DataGuard: Check đồng bộ của standby. (show database <standby_name> hoặc select name, value from v%dataguard_stats)
+		col name format a10;
+		col value format a15;
+		col datum_time format a20;
+		col time_computed format a20;
+		select name,value,datum_time,time_computed from v$dataguard_stats where name like '% lag';
     * Kiểm tra ngay kết quả file database_information.html
 ==========================================================================================
 
