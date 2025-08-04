@@ -44,17 +44,27 @@ Step 1:
 Step 2: add schedule
 	Example:0 19 * * 6 /export/home/oracle/MPS/gather.sh 
 	:wq!
-	
-			* * * * * command_to_run
-			│ │ │ │ │
-			│ │ │ │ └─ Thứ trong tuần (0-7) (Chủ nhật là 0 hoặc 7)
-			│ │ │ └─── Tháng (1 - 12)
-			│ │ └───── Ngày trong tháng (1 - 31)
-			│ └─────── Giờ (0 - 23)
-			└───────── Phút (0 - 59)
+		* * * * * command_to_run
+		│ │ │ │ │
+		│ │ │ │ └─ Thứ trong tuần (0-7) (Chủ nhật là 0 hoặc 7)
+		│ │ │ └─── Tháng (1 - 12)
+		│ │ └───── Ngày trong tháng (1 - 31)
+		│ └─────── Giờ (0 - 23)
+		└───────── Phút (0 - 59)
 	
 Step 3: Check crontab is exit
 	(bash): crontab -l
-
-
 --->> Đảm bảo "systemctl status crond" phải chạy, nếu chưa chạy, thực hiện "systemctl start crond"
+
+
+SQL> select owner,table_name,index_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') from dba_indexes
+where (last_analyzed is null or last_analyzed < (sysdate -1))
+and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
+
+no rows selected
+
+SQL> select owner,table_name,index_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') from dba_indexes
+where (last_analyzed is null or last_analyzed < (sysdate -1))
+and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
+
+no rows selected
