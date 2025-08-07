@@ -25,4 +25,25 @@ Step 2: Thực hiện RMAN duplicate
         SET FAL_SERVER 'orclstd1'
         NOFILENAMECHECK;
 
+=============================================
+|        DUPLICATE FOR GRID/RAC             |
+=============================================
+DUPLICATE TARGET DATABASE 
+  FOR STANDBY 
+  FROM ACTIVE DATABASE 
+  DORECOVER
+  SPFILE
+    SET DB_UNIQUE_NAME='orclstd1' COMMENT 'Is standby'
+    SET FAL_SERVER='orcl'
+    SET FAL_CLIENT='orclstd1'
+    SET CONTROL_FILES='+DATA/ORCLSTD1/CONTROLFILE/control01.ctl'
+    SET LOG_ARCHIVE_DEST_1='LOCATION=USE_DB_RECOVERY_FILE_DEST VALID_FOR=(ALL_LOGFILES,ALL_ROLES) DB_UNIQUE_NAME=orclstd1'
+    SET LOG_ARCHIVE_DEST_2='SERVICE=orcl ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=orcl'
+    SET AUDIT_FILE_DEST='/u01/app/oracle/admin/orclstd1/adump'
+    SET DB_FILE_NAME_CONVERT='+DATA/ORCL/','+DATA/ORCLSTD1/'
+    SET LOG_FILE_NAME_CONVERT='+DATA/ORCL/','+DATA/ORCLSTD1/'
+  NOFILENAMECHECK;
+
+mkdir -p /u01/app/oracle/admin/orclstd1/adump
+chown -R oracle:oinstall /u01/app/oracle/admin/orclstd1
   
