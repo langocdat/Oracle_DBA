@@ -1,0 +1,44 @@
+============================
+| LISTENER.ORA | USER GRID
+
+ - PATH: /u01/app/19c/grid/network/admin/listener.ora
+
+Step 1: User grid
+	
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (GLOBAL_DBNAME = orcl_DGMGRL.localdomain)
+      (ORACLE_HOME = /u01/app/oracle/product/19c/dbhome_1)
+      (SID_NAME = orcl)
+    )
+  )
+
+Step 2: User grid
+(bash): srvctl stop listener
+(bash): srvctl start listener
+(bash): srvctl status listener
+
+Step 3: Check - User oracle
+(bash): lsnrctl status
+
+============================
+| TNSNAMES.ORA | USER ORACLE 
+ 
+ - PATH: $ORACLE_HOME/network/admin/tnsnames.ora
+
+orcl =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = rac-scan.localdomain)(PORT = 1521))
+    (LOAD_BALANCE = yes)
+    (FAILOVER = on)
+    (CONNECT_DATA =
+      (SERVICE_NAME = orcl.localdomain)
+    )
+  )
+  
+==================================
+(bash - oracle): srvctl modify database -d orclstd1 -n orcl
+(bash - oracle): srvctl config database -d orclstd1  --->>> Check 
+
+  
