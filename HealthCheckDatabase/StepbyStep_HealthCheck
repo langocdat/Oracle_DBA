@@ -4,6 +4,7 @@
     * Danh sách tên những Database cần thực hiện
     * Hệ thống là RAC hay DataGuard
       - RAC: hệ thống có bao nhiêu node, tên node -> Yêu cầu khách hàng mở máy chủ chứa node đó để thực hiện
+		(sql): select instance_name,status from gv$instance;
       - DataGuard: Check đồng bộ của standby. (show database <standby_name> hoặc select name, value from v%dataguard_stats)
 		col name format a10;
 		col value format a15;
