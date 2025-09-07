@@ -1,0 +1,40 @@
+*** Nguyên nhân: 
+  - Cluster Ready Services Deamon (CRSD) và các tiến trình hạ tầng Oracle Clusterware không chạy.
+  - Khi crsctl stat res -t được gọi, nó cần giao tiếp với Clusterware stack (ohasd → cssd → crsd → evmd). Nếu tầng này chưa khởi động, lệnh sẽ báo không thể kết nối.
+==============================================================
+| [grid@rac1 ~]$ crsctl stat res -t                          |
+| CRS-4535: Cannot communicate with Cluster Ready Services   |
+| CRS-4000: Command Status failed, or completed with errors. |
+==============================================================
+*** Check: 
+  - (root): ps -ef | grep ohasd
+Expected result: ===>>> root@rac1 bin]# ps -ef | grep ohasd
+                        root      1432     1  0 15:36 ?        00:00:00 /bin/sh /etc/init.d/init.ohasd run >/dev/null 2>&1 </dev/null
+                        root      1934     1  1 15:36 ?        00:00:29 /u01/app/19c/grid/bin/ohasd.bin reboot
+                        root      7182 19444  0 16:19 pts/0    00:00:00 grep --color=auto ohasd
+
+*** Begin:
+  - Start cluster in current node via user root
+    (root): cd /u01/app/19c/grid/bin
+    (root): ./crsctl start cluster
+  - Start cluster in all node via user root
+    (root): cd /u01/app/19c/grid/bin
+    (root): ./crsctl start cluster -all
+Expected result: ===>>> CRS-2672: Attempting to start 'ora.cssd' on 'rac1'
+                        CRS-2672: Attempting to start 'ora.diskmon' on 'rac1'
+                        CRS-2676: Start of 'ora.diskmon' on 'rac1' succeeded
+                        CRS-2676: Start of 'ora.cssd' on 'rac1' succeeded
+                        CRS-2672: Attempting to start 'ora.ctssd' on 'rac1'
+                        CRS-2672: Attempting to start 'ora.cluster_interconnect.haip' on 'rac1'
+                        CRS-2676: Start of 'ora.ctssd' on 'rac1' succeeded
+                        CRS-2676: Start of 'ora.cluster_interconnect.haip' on 'rac1' succeeded
+                        CRS-2672: Attempting to start 'ora.asm' on 'rac1'
+                        CRS-2676: Start of 'ora.asm' on 'rac1' succeeded
+                        CRS-2672: Attempting to start 'ora.storage' on 'rac1'
+                        CRS-2676: Start of 'ora.storage' on 'rac1' succeeded
+                        CRS-2672: Attempting to start 'ora.crsd' on 'rac1'
+                        CRS-2676: Start of 'ora.crsd' on 'rac1' succeeded
+
+*** Check status:
+  - (bash - grid): crsctl start res -t 
+
