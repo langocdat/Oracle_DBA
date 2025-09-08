@@ -1,0 +1,25 @@
+Các việc cần làm khi đầy phân vùng u01 dẫn tới việc không truy cập được rman và sqlplus
+ ===>>> Mục tiêu: cleanup space phân vùng u01
+
+*** Thực hiện:
+1. Xóa audit file
+Case 1:
+	(bash): sqlplus / as sysdba
+	(sql): 	show parameter audit_file_dest
+	(bash): cd path
+	For example: /u01/app/oracle/admin/CARDZONEDR/adump/
+	(bash): rm -rf *
+	
+Case 2: không truy cập được sqlplus
+	- Mở init<SID>.ora, tìm đường dẫn chứa audit file
+	For example: *.audit_file_dest='/u01/app/oracle/admin/CARDZONEDR/adump/'
+	(bash): cd path
+	(bash): rm -rf *
+
+2. Xóa alert log and trace_file 
+Attension: chỉ xóa các file chứa ký tự số, không được xóa file không chứa số
+(bash): rm -rf *_*
+
+3. Xóa Archive log
+	(rman): crosscheck archivelog all;
+	(rman): delete noprompt archivelog until time 'sysdate-2';
