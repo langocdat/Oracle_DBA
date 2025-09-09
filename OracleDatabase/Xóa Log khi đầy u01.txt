@@ -2,6 +2,10 @@ Các việc cần làm khi đầy phân vùng u01 dẫn tới việc không truy
  ===>>> Mục tiêu: cleanup space phân vùng u01
 
 *** Thực hiện:
+- Kiểm tra: 
+	(bash): du -sh * --->>> Xem dung lượng của all file
+	(bash): df -h	--->>> Xem % use của phân vùng
+
 1. Xóa audit file
 Case 1:
 	(bash): sqlplus / as sysdba
@@ -19,7 +23,16 @@ Case 2: không truy cập được sqlplus
 2. Xóa alert log and trace_file 
 Attension: chỉ xóa các file chứa ký tự số, không được xóa file không chứa số
 (bash): rm -rf *_*
+	- Thực hiện xóa file, giữ lại 15 ngày gần nhất
+	(bash): find . -type f -name "*_*.xml" -mtime +15 -exec rm -f {} \;
 
 3. Xóa Archive log
 	(rman): crosscheck archivelog all;
 	(rman): delete noprompt archivelog until time 'sysdate-2';
+
+4. Thực hiện xóa file log, nén file
+	(bash): mv listener_scan1.log listener_scan1.log.bk  --->>> đổi tên
+	(bash): touch listener_scan1.log --->>> tạo file mới
+	(bash): rm listener_scan1.log.bk --->>> xóa file cũ
+Hoặc có thể zip file
+	(bash): zip listener_scan1.zip listener_scan1.log
