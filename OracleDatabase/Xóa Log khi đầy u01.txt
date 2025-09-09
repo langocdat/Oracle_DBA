@@ -36,3 +36,7 @@ Attension: chỉ xóa các file chứa ký tự số, không được xóa file 
 	(bash): rm listener_scan1.log.bk --->>> xóa file cũ
 Hoặc có thể zip file
 	(bash): zip listener_scan1.zip listener_scan1.log
+
+-r (recursive): xóa thư mục và toàn bộ file con bên trong (nếu chỉ rm sẽ không xóa được thư mục).
+-f (force): ép xóa, không hỏi y/n, bỏ qua lỗi (vd: file không tồn tại).
+
