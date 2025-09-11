@@ -59,3 +59,10 @@ DGMGRL> 	SHOW CONFIGURATION;
 Kết quả mong muốn:
 Fast-Start Failover: ENABLED
 Observer Status     : Running
+
+
+============================
+Check listener trong dgmgrl đối với RAC
+(bash): dgmgrl /
+(dgmgrl): show database verbose <db_name>
+(dgmgrl): show instance verbose <instance_name>
