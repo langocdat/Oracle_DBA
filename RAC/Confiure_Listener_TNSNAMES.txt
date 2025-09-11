@@ -47,4 +47,9 @@ orcl =
 (bash - oracle): srvctl config database -d orclstd1  --->>> Check 
 
 
-  
+============================
+Check listener trong dgmgrl đối với RAC
+(bash): dgmgrl /
+(dgmgrl): show database verbose <db_name>
+(dgmgrl): show instance verbose <instance_name>
+
