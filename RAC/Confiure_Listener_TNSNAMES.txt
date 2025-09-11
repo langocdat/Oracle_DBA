@@ -4,7 +4,7 @@
  - PATH: /u01/app/19c/grid/network/admin/listener.ora
 
 Step 1: User grid
-	
+****Configure listener for Standalone
 SID_LIST_LISTENER =
   (SID_LIST =
     (SID_DESC =
@@ -19,13 +19,33 @@ SID_LIST_LISTENER =
     )
   )
 
+****Configure listener for RAC (2 node or more)
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (GLOBAL_DBNAME = orcl_DGMGRL.localdomain)
+      (ORACLE_HOME = /u01/app/oracle/product/19c/dbhome_1)
+      (SID_NAME = orcl1)
+    )
+    (SID_DESC =
+      (GLOBAL_DBNAME = orcl_DGMGRL.localdomain)
+      (ORACLE_HOME = /u01/app/oracle/product/19c/dbhome_1)
+      (SID_NAME = orcl2)
+    )
+  )
+
 Step 2: User grid
 (bash): srvctl stop listener
 (bash): srvctl start listener
 (bash): srvctl status listener
 
-Step 3: Check - User oracle
+Step 3: Đăng ký service động sau khi configure static listener
+(sql): alter system register;
+(bash): lsnrctl status LISTENER
+
+Step 4: Check - User oracle
 (bash): lsnrctl status
+===>>> Lúc này sẽ thấy tất cả listener động và static
 
 ============================
 | TNSNAMES.ORA | USER ORACLE 
@@ -52,4 +72,5 @@ Check listener trong dgmgrl đối với RAC
 (bash): dgmgrl /
 (dgmgrl): show database verbose <db_name>
 (dgmgrl): show instance verbose <instance_name>
+
 
