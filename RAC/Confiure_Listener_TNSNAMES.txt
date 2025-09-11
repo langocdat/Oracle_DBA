@@ -45,6 +45,7 @@ Step 3: Đăng ký service động sau khi configure static listener
 
 Step 4: Check - User oracle
 (bash): lsnrctl status
+(sql): show parameter listener
 ===>>> Lúc này sẽ thấy tất cả listener động và static
 
 ============================
@@ -72,5 +73,6 @@ Check listener trong dgmgrl đối với RAC
 (bash): dgmgrl /
 (dgmgrl): show database verbose <db_name>
 (dgmgrl): show instance verbose <instance_name>
+
 
 
