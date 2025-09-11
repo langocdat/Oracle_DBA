@@ -8,9 +8,14 @@ Step 1: User grid
 SID_LIST_LISTENER =
   (SID_LIST =
     (SID_DESC =
-      (GLOBAL_DBNAME = orcl_DGMGRL.localdomain)
+      (GLOBAL_DBNAME = orclstd1_DGMGRL.localdomain)
       (ORACLE_HOME = /u01/app/oracle/product/19c/dbhome_1)
-      (SID_NAME = orcl)
+      (SID_NAME = orclstd1)
+    )
+    (SID_DESC =
+      (GLOBAL_DBNAME = orclstd1.localdomain)
+      (ORACLE_HOME = /u01/app/oracle/product/19c/dbhome_1)
+      (SID_NAME = orclstd1)
     )
   )
 
@@ -40,5 +45,6 @@ orcl =
 ==================================
 (bash - oracle): srvctl modify database -d orclstd1 -n orcl
 (bash - oracle): srvctl config database -d orclstd1  --->>> Check 
+
 
   
