@@ -3,6 +3,7 @@ Các việc cần làm khi đầy phân vùng u01 dẫn tới việc không truy
 
 *** Thực hiện:
 - Kiểm tra: 
+	(bash): du -sh --->>> Xem dung lượng của file
 	(bash): du -sh * --->>> Xem dung lượng của all file
 	(bash): df -h	--->>> Xem % use của phân vùng
 
@@ -39,4 +40,5 @@ Hoặc có thể zip file
 
 -r (recursive): xóa thư mục và toàn bộ file con bên trong (nếu chỉ rm sẽ không xóa được thư mục).
 -f (force): ép xóa, không hỏi y/n, bỏ qua lỗi (vd: file không tồn tại).
+
 
