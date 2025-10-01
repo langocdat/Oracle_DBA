@@ -76,3 +76,16 @@ Check listener trong dgmgrl đối với RAC
 
 
 
+============================================================================
+||             Config manual service <SID>_DGMGRL.localdomain             ||
+1. Check current service 
+ (bash - user oracle): lsnrctl status
+ (sql): show parameter service_names;
+2. Add service <SID>_DGMGRL.localdomain
+ - Add parameter for service_names
+    (sql): alter system set service_names='orcl.localdomain,orcl_DGMGRL.localdomain' scope=both;
+ - Register listener
+    (sql): alter system register;
+ - Check again
+    (bash - user oracle): lsnrctl status
+
