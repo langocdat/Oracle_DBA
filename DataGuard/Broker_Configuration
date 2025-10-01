@@ -93,10 +93,10 @@ Step 5: Khởi động RAC
 ---------------
 Create new configuration
 Step 1: 
-	(sql): ALTER SYSTEM SET dg_broker_start = TRUE SCOPE = BOTH;
-Step 2: 
 	(sql): ALTER SYSTEM SET dg_broker_config_file1 = '+DATA/ORCL/DATAGUARDCFG/dr1orcl.dat' SCOPE=SPFILE;
 	(sql): ALTER SYSTEM SET dg_broker_config_file2 = '+DATA/ORCL/DATAGUARDCFG/dr2orcl.dat' SCOPE=SPFILE;
+Step 2: 
+	(sql): ALTER SYSTEM SET dg_broker_start = TRUE SCOPE = BOTH;
 Step 3: 
 ========== PRIMARY ============
   - (dgmgrl): create configuration 'my_dg' as primary database is 'orcl' connect identifier is 'orcl';
