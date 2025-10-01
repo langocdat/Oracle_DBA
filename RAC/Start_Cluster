@@ -38,3 +38,30 @@ Expected result: ===>>> CRS-2672: Attempting to start 'ora.cssd' on 'rac1'
 *** Check status:
   - (bash - grid): crsctl start res -t 
 
+------------------------------------------------------------------------------
+- Tắt database
+  (bash - grid): srvctl stop database -d <db_unique_name>
+- Bật database
+  (bash - grid): srvctl start database -d <db_unique_name>
+------------------------------------------------------------------------------
+
+1. Check stage CRS
+(bash - grid): crsctl check crs or crsctl stat res -t
+2. Khởi động CRS
+(bash - grid): crsctl start crs
+      Bạn cần thấy 3 thành phần đều ONLINE:
+      CRS
+      CSS
+      EVM
+
+3. Check process
+(bash - grid): ps -ef | grep asm_pmon
+Nếu ASM không chạy -> Start ASM
+(bash - grid): sqlplus / as sysasm
+(sql): startup;
+
+---- User root
+(bash - root): crsctl stop crs -f
+(bash - root): crsctl start crs
+(bash - root): crsctl check crs
+
