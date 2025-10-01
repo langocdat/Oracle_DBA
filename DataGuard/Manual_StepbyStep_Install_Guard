@@ -221,3 +221,16 @@ DUPLICATE TARGET DATABASE
 mkdir -p /u01/app/oracle/admin/orclstd1/adump
 chown -R oracle:oinstall /u01/app/oracle/admin/orclstd1
 
+--New
+DUPLICATE TARGET DATABASE FOR STANDBY FROM ACTIVE DATABASE
+  DORECOVER
+  SPFILE
+    SET db_unique_name='orcldr'
+    SET cluster_database='FALSE'
+	SET audit_file_dest='/u01/app/oracle/admin/orcldr/adump'
+    SET log_archive_config='DG_CONFIG=(orcl,orcldr)'
+    SET log_archive_dest_1='LOCATION=+FRA VALID_FOR=(ALL_LOGFILES,ALL_ROLES) DB_UNIQUE_NAME=orcldr'
+    SET log_archive_dest_2='SERVICE=orcl ASYNC VALID_FOR=(ONLINE_LOGFILES,PRIMARY_ROLE) DB_UNIQUE_NAME=orcl'
+    SET fal_server='orcl'
+    SET fal_client='orcldr'
+  NOFILENAMECHECK;
