@@ -103,4 +103,10 @@ Step 3:
   - (dgmgrl): add database 'orclstd1' as connect identifier is 'orclstd1' maintained as physical;
   - (dgmgrl): enable configuration;
 
-
+3. Trường hợp không dùng ASM
+Nếu bạn không có ASM/diskgroup cho FRA, có thể:
+Tạo một thư mục trên ACFS hoặc NFS mount chung cho cả 2 node, ví dụ /u02/dg_broker_cfg/.
+Sau đó chỉnh:
+	ALTER SYSTEM SET dg_broker_config_file1 = '/u02/dg_broker_cfg/dr1orcl.dat' SCOPE=SPFILE;
+	ALTER SYSTEM SET dg_broker_config_file2 = '/u02/dg_broker_cfg/dr2orcl.dat' SCOPE=SPFILE;
+Restart database + bật lại broker như trên.
