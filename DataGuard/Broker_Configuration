@@ -44,7 +44,7 @@ DGMGRL> EDIT CONFIGURATION SET PROPERTY FastStartFailoverAutoReinstate = TRUE;
 	Set mode truyen
 DGMGRL> edit database orcl set property LogXptMode = SYNC;
 Property "logxptmode" updated
-
+	
 Exception: Nếu lỗi, tắt tạm thời FSFO 
 Dgmgrl>	DISABLE FAST_START FAILOVER;
 
@@ -61,8 +61,46 @@ Fast-Start Failover: ENABLED
 Observer Status     : Running
 
 
-============================
+=====================================================================
+||						DATAGUARD FOR RAC						   ||
+=====================================================================
+
 Check listener trong dgmgrl đối với RAC
 (bash): dgmgrl /
 (dgmgrl): show database verbose <db_name>
 (dgmgrl): show instance verbose <instance_name>
+Step 1: Dừng broker 
+	(sql): ALTER SYSTEM SET dg_broker_start=FALSE SCOPE=BOTH;
+
+Step 2: Attension: Phải kiểm tra file config dataguard đang nằm ở đâu?
+	(sql): SHOW PARAMETER dg_broker_config_file1; Old Path way:  /u01/app/oracle/product/19c/dbhome_1/dbs/dr1orcl.dat
+	(sql): SHOW PARAMETER dg_broker_config_file2; Old Path way:  /u01/app/oracle/product/19c/dbhome_1/dbs/dr1orc2.dat
+	===>>> Cần phải đảm bảo chúng trỏ tới phân vùng chung để 2 instance đều đọc được. 
+Trỏ địa chỉ mới
+	(sql): ALTER SYSTEM SET dg_broker_config_file1 = '+DATA/ORCL/DATAGUARDCFG/dr1orcl.dat' SCOPE=SPFILE;
+	(sql): ALTER SYSTEM SET dg_broker_config_file2 = '+DATA/ORCL/DATAGUARDCFG/dr2orcl.dat' SCOPE=SPFILE;
+
+Step 3: Nếu đã có file cũ, cần phải copy file đấy sang phân vùng mới
+	asmcmd cp /u01/app/oracle/product/19c/dbhome_1/dbs/dr1orcl.dat +DATA/ORCL/DATAGUARDCFG/dr1orcl.dat
+	asmcmd cp /u01/app/oracle/product/19c/dbhome_1/dbs/dr2orcl.dat +DATA/ORCL/DATAGUARDCFG/dr2orcl.dat
+Step 4: Enable configuration
+	(sql): ALTER SYSTEM SET dg_broker_start = TRUE SCOPE = BOTH;
+
+Step 5: Khởi động RAC
+	srvctl stop database -d orcl
+	srvctl start database -d orcl
+
+---------------
+Create new configuration
+Step 1: 
+	(sql): ALTER SYSTEM SET dg_broker_start = TRUE SCOPE = BOTH;
+Step 2: 
+	(sql): ALTER SYSTEM SET dg_broker_config_file1 = '+DATA/ORCL/DATAGUARDCFG/dr1orcl.dat' SCOPE=SPFILE;
+	(sql): ALTER SYSTEM SET dg_broker_config_file2 = '+DATA/ORCL/DATAGUARDCFG/dr2orcl.dat' SCOPE=SPFILE;
+Step 3: 
+========== PRIMARY ============
+  - (dgmgrl): create configuration 'my_dg' as primary database is 'orcl' connect identifier is 'orcl';
+  - (dgmgrl): add database 'orclstd1' as connect identifier is 'orclstd1' maintained as physical;
+  - (dgmgrl): enable configuration;
+
+
