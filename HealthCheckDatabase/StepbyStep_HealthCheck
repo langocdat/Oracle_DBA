@@ -25,7 +25,7 @@ Step 3: Chạy script
 Step 4: Check result
 
 ===========================================================================================
--- Hướng dẫn lấy log OSWatcher
+-- Hướng dẫn lấy log OSWatcher (dùng user oracle)
 Step 1: Check trạng thái
 	- (bash): ps -ef | grep OSW
 	--> Nếu không có, tức OSW chưa có log nên cần phải chạy OSW 5 ngày để thu thập log.
