@@ -35,6 +35,14 @@ Step 2: Chạy OSW để thu thập log
 	Ex: nohup ./startOSWbb.sh 300 120 NONE /home/oracle/HC_report/OSWlog/ &
 ===========================================================================================
 
+-- Hướng dẫn lấy log Exawatcher (dùng user root)
+Step 1: Check space
+	- (bash): du -sh 
+Step 2: Chạy OSW để thu thập log
+	- (bash - root): /opt/oracle.ExaWatcher/GetExaWatcherResults.sh --from MM/dd/yyyy_00:00:00 --to MM/dd/yyyy_23:59:59
+	Ex: /opt/oracle.ExaWatcher/GetExaWatcherResults.sh --from 08/19/2025_00:00:00 --to 08/21/2025_23:59:59
+===========================================================================================
+
 -- Lệnh gen image
 Attension: cần cài đặt java để chạy tool
 	   --->> yum install java -y
