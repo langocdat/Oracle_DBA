@@ -57,8 +57,9 @@ Step 5: add disk và diskgroup
    
     <img width="731" height="266" alt="image" src="https://github.com/user-attachments/assets/376ab208-a6c7-4a38-be18-1d0dad8b4218" />
 
-  + (sqlplus_asm): alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0003' name DATA_0003 rebalance power 16;
-                   alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0004' name DATA_04 rebalance power 16;
+  + (sqlplus_asm):
+     * alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0003' name DATA_0003 rebalance power 16;
+     * alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0004' name DATA_04 rebalance power 16;
 
     <img width="1069" height="88" alt="image" src="https://github.com/user-attachments/assets/1ea6c573-725d-43c9-bc4c-6a8bf60faa36" />
     
