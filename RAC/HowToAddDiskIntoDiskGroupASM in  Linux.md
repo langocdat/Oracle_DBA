@@ -62,11 +62,10 @@ Step 5: add disk và diskgroup
 
 - Check:
   + (sqlplus_asm):
-
-  set lines 9999;
-  col diskgroup for a15
-  col diskgroup for a15
-  col path for a35
+    * set lines 9999;
+    * col diskgroup for a15
+    * col diskgroup for a15
+    * col path for a35
   
      select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status from v$asm_disk b, v$asm_diskgroup a where a.group_number (+) =b.group_number order by b.group_number,b.name;
 
@@ -74,6 +73,7 @@ Step 5: add disk và diskgroup
 
   + (bash_grid): asmcmd lsdg
 
-    <img width="1543" height="127" alt="image" src="https://github.com/user-attachments/assets/45d468bc-a0eb-4380-98f3-e5aff25cb6e1" />
+    <img width="1532" height="118" alt="image" src="https://github.com/user-attachments/assets/5f8ae4b8-fdd5-4e31-905c-9ec3abeb8759" />
+
 
 
