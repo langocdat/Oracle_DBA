@@ -14,5 +14,8 @@ Step 1: Add disk thô vào máy chủ
 
 Step 2: List disk OS đã nhận
  - (bash_root): fdisk -l
-   <img width="978" height="337" alt="image" src="https://github.com/user-attachments/assets/80325901-afdc-4d1e-8079-810c0f04cb4f" />
+   
+<img width="978" height="337" alt="image" src="https://github.com/user-attachments/assets/80325901-afdc-4d1e-8079-810c0f04cb4f" />
+
+
 
