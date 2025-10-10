@@ -43,6 +43,14 @@ Step 4: Partition disk
 (bash_root): oracleasm scandisks
 (bash_root): oracleasm listdisks
 
-<img width="370" height="124" alt="image" src="https://github.com/user-attachments/assets/5f8bbe86-02ae-4306-8565-bb6d65231649" />
+<img width="439" height="123" alt="image" src="https://github.com/user-attachments/assets/bba137e4-7680-4795-951c-ffd23a88e86a" />
+
+Step 5: add disk và diskgroup 
+(ở đây add vào diskgroup DATA)
+- Before: (bash_grid): asmcmd lsdg
+
+<img width="439" height="123" alt="image" src="https://github.com/user-attachments/assets/fbd5524a-766f-4629-9eec-8c68f57c6bce" />
+
+
 
 
