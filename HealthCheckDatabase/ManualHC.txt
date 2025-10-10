@@ -23,5 +23,5 @@ Mục tiêu gồm 4 file:
  - Alert					: cp /u01/app/oracle/diag/rdbms/orcl/orcl1/trace/alert_orcl1.log /home/oracle/HC_ver_1.3/
  - Awrrpt					:
  - Check_oracle....log		: check_oracle_2025_08_14_orcl.log
-
  - database_information.html: database_information.html
+
