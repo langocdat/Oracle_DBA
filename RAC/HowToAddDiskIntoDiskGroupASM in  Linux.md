@@ -62,6 +62,7 @@ Step 5: add disk và diskgroup
 
 - Check:
   + (sqlplus_asm):
+
      set lines 999;
      col diskgroup for a15
      col diskname for a15
