@@ -61,14 +61,15 @@ Step 5: add disk và diskgroup
     <img width="1069" height="88" alt="image" src="https://github.com/user-attachments/assets/1ea6c573-725d-43c9-bc4c-6a8bf60faa36" />
 
 - Check:
-  + (sqlplus_asm): set lines 999;
-col diskgroup for a15
-col diskname for a15
-col path for a35
-select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status
-from v$asm_disk b, v$asm_diskgroup a
-where a.group_number (+) =b.group_number
-order by b.group_number,b.name;
+  + (sqlplus_asm):
+     set lines 999;
+     col diskgroup for a15
+     col diskname for a15
+     col path for a35
+     select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status
+     from v$asm_disk b, v$asm_diskgroup a
+     where a.group_number (+) =b.group_number
+     order by b.group_number,b.name;
 
     <img width="1219" height="176" alt="image" src="https://github.com/user-attachments/assets/16ba240c-2cbb-4f7f-974f-fa0b43bb593d" />
 
