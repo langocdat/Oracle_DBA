@@ -1,20 +1,21 @@
 Step 1: sqlplus / as sysdba
-	@database_information.sql
-	@HealthCheck.sql
-	@?/rdbms/admin/awrrpt
+	(sql): @database_information.sql
+	(sql): @HealthCheck.sql
+	(sql): @?/rdbms/admin/awrrpt
 Step 2: Check dung lượng 
-	df -h
+	(bash): df -h
 	Chụp màn hình this PC
 Step 3: Check listener
-	lsnrctl status 
+	(bash - oracle): lsnrctl status 
 Step 4:	Check OSpatch 
-	$ORACLE_HOME/OPatch/opatch lsinventory
+	(bash - oracle): $ORACLE_HOME/OPatch/opatch lsinventory
 	--->>> Lấy thông tin: Patch  29585399     : applied on Thu Apr 18 14:21:33 ICT 2019
 						  Unique Patch ID:  22840393
 						  Patch description:  "OCW RELEASE UPDATE 19.3.0.0.0 (29585399)"
-Step 5: crsctl stat res -t
+Step 5: 
+	(bash - grid): crsctl stat res -t
 Step 7: copy alert log
-	cp /u01/app/oracle/diag/rdbms/orcl/orcl1/trace/alert_orcl1.log /home/oracle/HC_ver_1.3/
+	(bash): cp /u01/app/oracle/diag/rdbms/orcl/orcl1/trace/alert_orcl1.log /home/oracle/HC_ver_1.3/
 Step 8: check đồng bộ giữa DC và DR
 	(DR): select name,value from v$dataguard_stats;
 
@@ -22,4 +23,5 @@ Mục tiêu gồm 4 file:
  - Alert					: cp /u01/app/oracle/diag/rdbms/orcl/orcl1/trace/alert_orcl1.log /home/oracle/HC_ver_1.3/
  - Awrrpt					:
  - Check_oracle....log		: check_oracle_2025_08_14_orcl.log
+
  - database_information.html: database_information.html
