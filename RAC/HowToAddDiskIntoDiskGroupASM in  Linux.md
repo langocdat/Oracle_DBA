@@ -40,6 +40,7 @@ Step 4: Partition disk
 <img width="580" height="69" alt="image" src="https://github.com/user-attachments/assets/72706048-5736-4f51-82fc-9f5ed71b50dd" />
 
 - After (bắt buộc phải scandisk và listdisk trên tất cả các node thuộc RAC)
+  
 (bash_root): oracleasm scandisks
 (bash_root): oracleasm listdisks
 
