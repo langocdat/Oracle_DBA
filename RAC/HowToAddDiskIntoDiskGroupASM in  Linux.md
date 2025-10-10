@@ -29,8 +29,8 @@ Step 3: Định dạng disk thô
 
 Step 4: Partition disk
 - Before
-(bash_root): oracleasm scandisks
-(bash_root): oracleasm listdisks
+ + (bash_root): oracleasm scandisks
+ + (bash_root): oracleasm listdisks
 
 <img width="390" height="107" alt="image" src="https://github.com/user-attachments/assets/b275ed6e-b05f-4903-b019-118b65071d72" />
 
