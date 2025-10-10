@@ -66,8 +66,7 @@ Step 5: add disk và diskgroup
     * col diskgroup for a15
     * col diskgroup for a15
     * col path for a35
-  
-     select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status from v$asm_disk b, v$asm_diskgroup a where a.group_number (+) =b.group_number order by b.group_number,b.name;
+    * select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status from v$asm_disk b, v$asm_diskgroup a where a.group_number (+) =b.group_number order by b.group_number,b.name;
 
     <img width="1219" height="176" alt="image" src="https://github.com/user-attachments/assets/16ba240c-2cbb-4f7f-974f-fa0b43bb593d" />
 
