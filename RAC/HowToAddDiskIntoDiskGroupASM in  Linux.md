@@ -7,6 +7,7 @@
 =====================================================
 
 Step 1: Add disk thô vào máy chủ
+
        <img width="580" height="223" alt="image" src="https://github.com/user-attachments/assets/b82124b1-4f34-4660-869e-82e7cbc5945d" />
        
 ===>>> Start máy chủ OS
