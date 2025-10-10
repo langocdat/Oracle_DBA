@@ -49,8 +49,31 @@ Step 5: add disk và diskgroup
 (ở đây add vào diskgroup DATA)
 - Before: (bash_grid): asmcmd lsdg
 
-<img width="439" height="123" alt="image" src="https://github.com/user-attachments/assets/fbd5524a-766f-4629-9eec-8c68f57c6bce" />
+<img width="1528" height="133" alt="image" src="https://github.com/user-attachments/assets/f3dde8a4-bf5c-4a09-b62c-dcc5e0c49f81" />
 
+- Perform:
+ - (bash_grid): sqlplus / as sysasm
+   
+   <img width="731" height="266" alt="image" src="https://github.com/user-attachments/assets/376ab208-a6c7-4a38-be18-1d0dad8b4218" />
 
+ - (sqlplus_asm): alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0003' name DATA_0003 rebalance power 16;
+
+   <img width="1069" height="88" alt="image" src="https://github.com/user-attachments/assets/1ea6c573-725d-43c9-bc4c-6a8bf60faa36" />
+
+- Check:
+ - (sqlplus_asm): set lines 999;
+col diskgroup for a15
+col diskname for a15
+col path for a35
+select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status
+from v$asm_disk b, v$asm_diskgroup a
+where a.group_number (+) =b.group_number
+order by b.group_number,b.name;
+
+<img width="1219" height="176" alt="image" src="https://github.com/user-attachments/assets/16ba240c-2cbb-4f7f-974f-fa0b43bb593d" />
+
+ - (bash_grid): asmcmd lsdg
+
+<img width="1543" height="127" alt="image" src="https://github.com/user-attachments/assets/45d468bc-a0eb-4380-98f3-e5aff25cb6e1" />
 
 
