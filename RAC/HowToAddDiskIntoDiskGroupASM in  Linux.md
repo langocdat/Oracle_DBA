@@ -39,7 +39,7 @@ Step 4: Partition disk
 
 <img width="580" height="69" alt="image" src="https://github.com/user-attachments/assets/72706048-5736-4f51-82fc-9f5ed71b50dd" />
 
-- After
+- After (bắt buộc phải scandisk và listdisk trên tất cả các node thuộc RAC)
 (bash_root): oracleasm scandisks
 (bash_root): oracleasm listdisks
 
@@ -57,8 +57,12 @@ Step 5: add disk và diskgroup
     <img width="731" height="266" alt="image" src="https://github.com/user-attachments/assets/376ab208-a6c7-4a38-be18-1d0dad8b4218" />
 
   + (sqlplus_asm): alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0003' name DATA_0003 rebalance power 16;
+                   alter diskgroup DATA add disk '/dev/oracleasm/disks/DATA_0004' name DATA_04 rebalance power 16;
 
     <img width="1069" height="88" alt="image" src="https://github.com/user-attachments/assets/1ea6c573-725d-43c9-bc4c-6a8bf60faa36" />
+    
+    <img width="1035" height="108" alt="image" src="https://github.com/user-attachments/assets/bfeff6c4-eb4e-4c22-8bcd-8affa24f32dc" />
+
 
 - Check:
   + (sqlplus_asm):
