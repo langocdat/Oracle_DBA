@@ -12,6 +12,29 @@ Step 4:	Check OSpatch
 	--->>> Lấy thông tin: Patch  29585399     : applied on Thu Apr 18 14:21:33 ICT 2019
 						  Unique Patch ID:  22840393
 						  Patch description:  "OCW RELEASE UPDATE 19.3.0.0.0 (29585399)"
+
+
+host=$(hostname)
+ORACLE_HOME=$ORACLE_HOME
+$ORACLE_HOME/OPatch/opatch lsinventory | grep -B 2 "Patch description" | grep -v "Unique" | \
+awk -v hs="$host" -v oraclehome="$ORACLE_HOME" '
+BEGIN {
+    print("|-------------------------------|------------------------------------------------|")
+    print("|             SERVER            |                  ORACLE_HOME                   |")
+    print("|-------------------------------|------------------------------------------------|")
+    printf("| %-29s | %-46s |\n", hs, oraclehome)
+    print("|-------------------------------|------------------------------------------------|")
+}
+{
+    if ($0 != "") {
+        print($0)
+    }
+}
+END {
+    print("|-------------------------------|------------------------------------------------|")
+}'
+
+
 Step 5: 
 	(bash - grid): crsctl stat res -t
 Step 7: copy alert log
@@ -24,4 +47,5 @@ Mục tiêu gồm 4 file:
  - Awrrpt					:
  - Check_oracle....log		: check_oracle_2025_08_14_orcl.log
  - database_information.html: database_information.html
+
 
