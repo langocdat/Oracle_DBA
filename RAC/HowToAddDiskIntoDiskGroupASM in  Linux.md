@@ -68,7 +68,9 @@ Step 5: add disk và diskgroup
 
 - Check:
   + (sqlplus_asm):
+    
     (bash_grid): sqlplus / as sysasm
+    
     * set lines 9999;
     * col diskgroup for a15
     * col diskgroup for a15
