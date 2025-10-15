@@ -32,6 +32,19 @@
 
 <img width="759" height="494" alt="image" src="https://github.com/user-attachments/assets/b9f38b7b-b2f8-4349-b7cd-2319045c21d2" />
 
+=============================================================================
+Cai software
+<img width="1004" height="386" alt="image" src="https://github.com/user-attachments/assets/1a78b74b-dbde-41c2-ad72-be36472e7046" />
+
+<img width="998" height="283" alt="image" src="https://github.com/user-attachments/assets/3a7a7739-f912-42ae-aae9-0f670ff04c9c" />
+
+<img width="996" height="650" alt="image" src="https://github.com/user-attachments/assets/3c05ef5e-891c-47f5-8775-22589c0cd691" />
+
+<img width="1008" height="335" alt="image" src="https://github.com/user-attachments/assets/2362ac25-b036-4954-b31a-39b62624e95f" />
+
+<img width="1004" height="299" alt="image" src="https://github.com/user-attachments/assets/58b5a440-0c51-4323-9fef-d4d5149b3eec" />
+
+<img width="1004" height="419" alt="image" src="https://github.com/user-attachments/assets/63a90736-0748-44ec-bed4-6d206b7d01c1" />
 
 
 
