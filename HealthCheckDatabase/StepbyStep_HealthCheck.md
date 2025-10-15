@@ -69,7 +69,6 @@ find . -type f ! \( -name "*25.05.31*" -o -name "*25.06.01*" -o -name "*25.06.02
 Can 4 files: 
 oswiostat  oswmeminfo  oswtop  oswvmstat
 
-
 ===========================================================================================
 Dung trong truong hop thieu log, chuyen doi tu log san co
 - Trong từng forder:
@@ -79,3 +78,11 @@ Dung trong truong hop thieu log, chuyen doi tu log san co
 	done
    ---Đổi tên hiển thị trong ảnh
 	sed -i 's/dbprdmob2/dbprdmob1/g' *.dat
+
+===========================================================================================
+Dùng trong trường hợp bị lỗi không phân tích được log với tool oswbba.jar 
+===>>> Sử dụng tool oswbba9020.jar thay thế
+
+<img width="791" height="322" alt="image" src="https://github.com/user-attachments/assets/1229f2f7-6e73-4090-8802-5ee00ed691b9" />
+
+
