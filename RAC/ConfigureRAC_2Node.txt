@@ -1,0 +1,285 @@
+=============CONFIGURE INSTALLER RAC 2 NODE IN ORACLE DATABASE=============
+
+-----Overview
+
+==================Node 1================================
+ - Hostname: rac1
+ - IP hostonly: 192.168.56.11
+ - IP internal network: 192.168.57.11
+ - Db name: orcl
+ - instance name: orcl1
+ - db_unique_name: orcl1
+ - db_home: /u01/app/oracle/product/19c/dbhome_1
+ - db_base: /u01/app/oracle
+ - grid_base: /u01/app/grid
+ - grid_home: /u01/app/19c/grid
+
+==================Node 2================================
+ - Hostname: rac1
+ - IP hostonly: 192.168.56.12
+ - IP internal network: 192.168.57.12
+ - Db name: orcl
+ - instance name: orcl2
+ - db_unique_name: orcl2
+ 
+======== Configure tren 2 node ==========================
+
+Step 1: 
+	(root): vi /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+# Public
+192.168.56.11 rac1.localdomain rac1
+192.168.56.12 rac2.localdomain rac2
+
+# Private
+192.168.57.11 rac1-priv.localdomain rac1-priv
+192.168.57.12 rac2-priv.localdomain rac2-priv
+
+# Virtual IP
+192.168.56.13 rac1-vip.localdomain rac1-vip
+192.168.56.14 rac2-vip.localdomain rac2-vip
+
+# SCAN
+192.168.56.15 rac-scan.localdomain rac-scan
+192.168.56.16 rac-scan.localdomain rac-scan
+192.168.56.17 rac-scan.localdomain rac-scan
+
+# DNS
+192.168.56.18 dnsss.localdomain dnsss
+
+Step 2: configure hostname
+	(root - Node 1): hostnamectl set-hostname rac1.localdomain
+	(root - Node 2): hostnamectl set-hostname rac2.localdomain
+
+Step 3: off firewalld and enable chrony
+	(root): systemctl stop firewalld.service
+	(root): systemctl disable firewalld.service
+	
+	-- Install chrony -->> đồng bộ thời gian
+	(root): yum install chrony -y
+	(root): systemctl enable chronyd.service
+	(root): systemctl restart chronyd.service
+	(root): systemctl status chronyd
+	(root): chronyc tracking
+	(root): chronyc sources
+	(root): chronyc -a 'burst 4/4'
+	(root): chronyc -a makestep
+	
+Step 4:
+	(root): yum update -y -->> update OS
+	(root): yum list | grep 19c -i
+	(root): yum install oracle-database-preinstall-19c.x86_64 -y
+	(root): yum list | grep oracleasm -i
+	(root): yum install oracleasm-support.x86_64 -y
+
+Step 5: Tạo đường dẫn (user grid)
+mkdir -p /u01/app/19c/grid
+mkdir -p /u01/app/grid
+mkdir -p /u01/app/oracle/product/19c/dbhome_1
+
+Step 6: create group (user grid)
+groupadd asmdba
+groupadd asmoper
+groupadd asmadmin
+
+==>> Đổi tên asmopers thành asmoper: groupmod -n asmoper asmopers
+==>> Check các group hiện có: cat /etc/group hoặc getent group
+
+Step 7: create user oracle and user grid and grant priviliges
+	(root): passwd oracle 
+	-->> double fill password
+	(root): useradd -g oinstall -G asmadmin,asmdba,asmoper,dba grid
+	(root): passwd grid
+	-->>: double fill password
+	
+	usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba oracle
+	usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba grid
+	
+==>> Check nhóm quyền của user: id <user>. Ex: id grid
+==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
+
+su -
+chown -R grid:oinstall /u01
+chown -R oracle:oinstall /u01/app/oracle
+chmod -R 775 /u01
+
+Step 8: create environment variable
+====== Environment cho user oracle
+	(root): su - oracle
+	(oracle): vi .bash_profile
+	(oracle): . .bash_profile  -->> load profile mới
+
+Node 1
+
+export TMP=/tmp
+export TMPDIR=$TMP
+export ORACLE_BASE=/u01/app/oracle
+export GRID_HOME=/u01/app/19c/grid
+export DB_HOME=$ORACLE_BASE/product/19c/dbhome_1
+export ORACLE_HOME=$DB_HOME
+export ORACLE_SID=orcl1
+export ORACLE_TERM=xterm
+export BASE_PATH=/usr/sbin:$PATH
+export PATH=$ORACLE_HOME/bin:$BASE_PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+
+Node 2
+
+export TMP=/tmp 
+export TMPDIR=$TMP 
+export ORACLE_BASE=/u01/app/oracle 
+export GRID_HOME=/u01/app/19c/grid 
+export DB_HOME=$ORACLE_BASE/product/19c/dbhome_1 
+export ORACLE_HOME=$DB_HOME 
+export ORACLE_SID=orcl2
+export ORACLE_TERM=xterm 
+export BASE_PATH=/usr/sbin:$PATH 
+export PATH=$ORACLE_HOME/bin:$BASE_PATH 
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib 
+export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+
+====== Environment cho user grid
+	(grid): vi /home/grid/grid.env
+	
+Node 1:
+
+export ORACLE_SID=+ASM1
+export ORACLE_HOME=/u01/app/19c/grid
+export BASE_PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
+export PATH=$ORACLE_HOME/bin:$BASE_PATH
+export LD_LIBRARY_PATH=$ORACLE_SID/lib:/lib:/usr/lib
+export CLASSPATH=$ORACLE_SID/JRE:$ORACLE_SID/jlib:$ORACLE_SID/rdbms/jlib
+
+Node 2:
+
+export ORACLE_SID=+ASM2
+export ORACLE_HOME=/u01/app/19c/grid
+export BASE_PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
+export PATH=$ORACLE_HOME/bin:$BASE_PATH
+export LD_LIBRARY_PATH=$ORACLE_SID/lib:/lib:/usr/lib
+export CLASSPATH=$ORACLE_SID/JRE:$ORACLE_SID/jlib:$ORACLE_SID/rdbms/jlib
+
+Step 9: Add đĩa vào máy ảo
+
+ - Shutdown 2 node
+ - Tạo đĩa ảo, type: shareable 
+ - Add đĩa ảo
+
+Step 10: 
+ - Ping 2 máy ảo
+ping -c 2 rac1
+ping -c 2 rac2
+ping -c 2 rac1-priv
+ping -c 2 rac2-priv
+
+=========================================================
+Trên Node 1
+=========================================================
+ - Tải và giải nén bộ cài đặt
+Đường dẫn chứa bộ cài đặt grid: /home/grid/
+--> giải nén (dùng user grid): unzip /u01/app/19c/grid
+Đường dẫn chứa bộ cài đặt oracle: /home/oracle
+--> giải nén (dùng user oracle): unzip /u01/app/oracle/product/19c/dbhome_1
+
+su -
+chown -R grid:oinstall /u01
+chown -R oracle:oinstall /u01/app/oracle
+chmod -R 775 /u01
+
+Step 11: User root
+		(bash): cd /u01/app/19c/grid/cv/rpm
+		(bash): rpm -Uvh cvuqdisk*
+	- Copy sang node 2
+		(bash): scp ./cvuqdisk* root@rac2:/tmp
+	- Update gói cài đặt U = update trên RAC2 qua ssh
+		(bash): ssh root@rac2 rpm -Uvh /tmp/cvuqdisk*
+
+Step 12: User root - định dạng ổ đĩa dùng cho shareable
+ - 3 ổ đĩa: sdb, sdbc, sdd
+	(bash): fdisk -l  -- list disk trong os
+	(bash): fdisk /dev/sdb
+	Step 12.1: n - new
+	Step 12.2: p - primary
+	Step 13.3: enter
+	Step 13.4: enter
+	Step 13.5: enter
+	Step 13.6: w - write
+  -->> Thực hiện tương tự với sdc, sdd
+
+Step 13: Cấu hình ASM: Configure oracleasm utility (user root)
+	su -
+	/usr/sbin/oracleasm configure -i
+	grid 
+	oinstall
+	y
+	y
+
+	### verify
+	/usr/sbin/oracleasm configure
+
+	### init
+	/usr/sbin/oracleasm status
+	/usr/sbin/oracleasm init
+	/usr/sbin/oracleasm status
+
+	### check
+	df -ha | grep oracle
+
+Step 14:  Tạo ASM disk tương ứng với từng đĩa (user root)
+	===>> Partition disk
+	oracleasm createdisk DATA /dev/sdb1
+	oracleasm createdisk FRA /dev/sdc1
+	oracleasm createdisk OCR /dev/sdd1
+
+	## quét và check đĩa DG
+	oracleasm scandisks
+	oracleasm listdisks
+	
+Step 14: configure SSH 2 node (user grid and user oracle)
+	1. Tạo cặp khóa SSH
+	(bash): ssh-keygen -t rsa
+	2. Copy public key sang node khác
+	(bash): ssh-copy-id -i ~/.ssh/id_rsa.pub oracle@rac2
+	
+	
+=============================================
+Trên node 2 
+=============================================
+Step 15: user root
+	su -
+	/usr/sbin/oracleasm configure -i
+	grid
+	oinstall
+	y
+	y
+
+	## check
+	/usr/sbin/oracleasm status
+	/usr/sbin/oracleasm init
+	/usr/sbin/oracleasm status
+	oracleasm scandisks
+	oracleasm listdisks
+
+=============================================
+Trên node 1 
+=============================================
+Step 16:
+	su grid
+	cd
+	. grid.env
+	cd /u01/app/19c/grid/
+	./runcluvfy.sh stage -pre crsinst -n rac1,rac2 -verbose
+	
+Step 17:	
+	export DISPLAY=192.168.68.222:0.0
+	cd /u01/app/19c/grid/
+	./gridSetup.sh
+	
+	
+==========================
+Nếu chạy xong scripts mà server bị tắt, thực hiện:
+Step 1 (user grid): vi /etc/oratab 
+		add +ASM1:/u01/app/19c/grid:Y
