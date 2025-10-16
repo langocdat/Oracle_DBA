@@ -58,6 +58,21 @@ Cai software
 
 <img width="1184" height="266" alt="image" src="https://github.com/user-attachments/assets/0d10a6e2-2fd1-4559-85c7-d49cf3bfa9c3" />
 
+=============================================================================
 
+Create database
 
+<img width="629" height="400" alt="image" src="https://github.com/user-attachments/assets/5390b046-002f-486e-aa31-3cb9ae1fece6" />
+
+<img width="1009" height="228" alt="image" src="https://github.com/user-attachments/assets/c80c47f1-4163-4191-8844-157fb0093aae" />
+
+<img width="1004" height="570" alt="image" src="https://github.com/user-attachments/assets/019dce93-e6e5-4460-b353-b97b14183ae4" />
+
+<img width="1005" height="473" alt="image" src="https://github.com/user-attachments/assets/cc04d73b-3e75-4f40-bfdb-fa882a5e279c" />
+
+<img width="1003" height="265" alt="image" src="https://github.com/user-attachments/assets/dd0243de-a84a-48a1-b21d-3d103e39c68e" />
+
+<img width="1012" height="479" alt="image" src="https://github.com/user-attachments/assets/0a6a09d6-0c1e-4a49-a3ff-88baac7ac197" />
+
+<img width="1000" height="515" alt="image" src="https://github.com/user-attachments/assets/2d7ad26e-fba1-4d28-8ff2-59ed17e7bd2b" />
 
