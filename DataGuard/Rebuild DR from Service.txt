@@ -42,9 +42,6 @@ Step 7:
 	  RECOVER DATABASE FROM SERVICE PROCBS;
 	}
 
-	RESTORE DATABASE FROM SERVICE 'orclpri';
-	
-	(rman)> recover standby database from service '....';
 	Starting recover at 20-OCT-25
 	Starting implicit crosscheck backup at 20-OCT-25
 	.......................
@@ -86,3 +83,4 @@ Step 9: Open database and open MRP process
 
 	(SQL)> alter database recover managed standby database disconnect from session;
 	Database altered.
+
