@@ -41,6 +41,8 @@ Step 7:
 	Finished recover at 20-OCT-25
 
 Step 8: clear log file
+	(SQL)> set lines 200 pages 200
+		   col member for a85
 
 	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
 	  GROUP#    THREAD#      BYTES TYPE    MEMBER                                                                                STATUS
@@ -72,3 +74,4 @@ Step 9: Open database and open MRP process
 
 	(SQL)> alter database recover managed standby database disconnect from session;
 	Database altered.
+
