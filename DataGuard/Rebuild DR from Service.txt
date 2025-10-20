@@ -1,0 +1,74 @@
+Step 1: Xác định đường dẫn các file cần xóa (datafile, controlfile, redo log file,  tempfile)
+	(sql_oracle)> select name from v$datafile;
+	(sql_oracle)> select member from v$logfile;
+	(sql_oracle)> select name from v$tempfile;
+	(sql_oracle)> show parameter control_files;
+	
+	===>>>Attension: must keep parameter file
+	(SQL)> show parameter spfile;
+	NAME                                 TYPE        VALUE
+	------------------------------------ ----------- ------------------------------
+	spfile                               string      /u01/app/oracle/product/19c/db
+													 home_1/dbs/spfileorcldr1.ora
+
+Step 2: shutdown database
+	(sql_oracle)> shutdown immediate;
+
+Step 3: Xóa các file theo đường dẫn trên
+	(bash): rm -rf *
+
+Step 4: 
+	(bash_oracle)> rman target /
+	(rman)> startup nomount;
+
+Step 5: 
+	(rman)> restore standby controlfile from service '....';
+	Starting restore at 20-OCT-25
+	using target database control file instead of recovery catalog
+	allocated channel: ORA_DISK_1
+	channel ORA_DISK_1: SID=21 instance=orcldr1 device type=DISK
+	.............
+
+Step 6: Mount database
+	(rman)> alter database mount;
+
+Step 7: 
+	(rman)> recover standby database from service '....';
+	Starting recover at 20-OCT-25
+	Starting implicit crosscheck backup at 20-OCT-25
+	.......................
+	Executing: alter system set standby_file_management=auto
+	Finished recover at 20-OCT-25
+
+Step 8: clear log file
+
+	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+	  GROUP#    THREAD#      BYTES TYPE    MEMBER                                                                                STATUS
+	---------- ---------- ---------- ------- ------------------------------------------------------------------------------------- ----------
+			 5          1  209715200 STANDBY +DATA/ORCL/ONLINELOG/group_5.269.1214949163                                           UNASSIGNED
+			 5          1  209715200 STANDBY +FRA/ORCL/ONLINELOG/group_5.270.1214949163                                            UNASSIGNED
+			 6          1  209715200 STANDBY +DATA/ORCL/ONLINELOG/group_6.270.1214949177                                           UNASSIGNED
+			 6          1  209715200 STANDBY +FRA/ORCL/ONLINELOG/group_6.271.1214949179                                            UNASSIGNED
+			 7          2  209715200 STANDBY +DATA/ORCL/ONLINELOG/group_7.271.1214949195                                           UNASSIGNED
+			 7          2  209715200 STANDBY +FRA/ORCL/ONLINELOG/group_7.272.1214949197                                            UNASSIGNED
+			 8          2  209715200 STANDBY +DATA/ORCL/ONLINELOG/group_8.272.1214949209                                           UNASSIGNED
+			 8          2  209715200 STANDBY +FRA/ORCL/ONLINELOG/group_8.273.1214949209                                            UNASSIGNED
+	SQL> alter database clear logfile group 5;
+	Database altered.
+
+	SQL> alter database clear logfile group 6;
+	Database altered.
+
+	SQL> alter database clear logfile group 7;
+	Database altered.
+
+	SQL> alter database clear logfile group 8;
+	Database altered.
+
+Step 9: Open database and open MRP process
+
+	(SQL)> alter database open;
+	Database altered.
+
+	(SQL)> alter database recover managed standby database disconnect from session;
+	Database altered.
