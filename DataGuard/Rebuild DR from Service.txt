@@ -23,37 +23,43 @@ Step 4:
 
 Step 5: 
 	(rman)> restore standby controlfile from service '....';
+	
 	Starting restore at 20-OCT-25
 	using target database control file instead of recovery catalog
 	allocated channel: ORA_DISK_1
 	channel ORA_DISK_1: SID=21 instance=orcldr1 device type=DISK
 	.............
 
+
 Step 6: Mount database
 	(rman)> alter database mount;
+	
+	crosscheck archivelog all
+	crosscheck backup
+	crossheck copy
+	delete noprompt obsolete
+	delete noprompt expired backup;
+	delete noprompt expired copy;
+	delete noprompt expired archivelog all;
 
 Step 7: 
 
 	RUN {
-	  SET NEWNAME FOR DATABASE TO '+DATA/DRCBS/%U';
+	  SET NEWNAME FOR DATABASE TO '+DATA/DRCBS/DATAFILE/%b';
 	  RESTORE DATABASE FROM SERVICE 'PROCBS';
 	  SWITCH DATAFILE ALL;
 	  SWITCH TEMPFILE ALL;
 	  RECOVER DATABASE FROM SERVICE PROCBS;
 	}
 
-	Starting recover at 20-OCT-25
-	Starting implicit crosscheck backup at 20-OCT-25
-	.......................
-	Executing: alter system set standby_file_management=auto
-	Finished recover at 20-OCT-25
-
 Step 8: clear log file
 
 	(SQL)> set lines 200 pages 200
 		   col member for a85
+	(SQL)> select group# from v$logfile; -->> clear toàn bộ logfile của những group này.
 	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
 	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+	
 	  GROUP#    THREAD#      BYTES TYPE    MEMBER                                                                                STATUS
 	---------- ---------- ---------- ------- ------------------------------------------------------------------------------------- ----------
 			 5          1  209715200 STANDBY +DATA/ORCL/ONLINELOG/group_5.269.1214949163                                           UNASSIGNED
@@ -78,9 +84,11 @@ Step 8: clear log file
 
 Step 9: Open database and open MRP process
 
+	(dgmgrl)> show configuration
+	(dgmgrl)> enable database <DR site>
+
 	(SQL)> alter database open;
 	Database altered.
 
 	(SQL)> alter database recover managed standby database disconnect from session;
 	Database altered.
-
