@@ -1,0 +1,51 @@
+1. Tao duong dan 
+/home/oracle/dbsat ->> giai nen tool
+
+2. Cai Java :
+Tao java_home
+[root@rac2 jvm]# readlink -f $(which java)
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.432.b06-1.0.1.el7_9.x86_64/jre/bin/java
+Java nằm trong .../jre/bin/java, nên JAVA_HOME chính là phần trước /bin/java.
+
+(bash_oracle): export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.432.b06-1.0.1.el7_9.x86_64/jre
+
+[oracle@rac2 ~]$ ls
+dbsat  jdk-25_linux-x64_bin.tar.gz
+[oracle@rac2 ~]$ tar -xzf jdk-25_linux-x64_bin.tar.gz
+[oracle@rac2 ~]$ ls
+dbsat  jdk-25  jdk-25_linux-x64_bin.tar.gz
+[oracle@rac2 ~]$ cd jdk-25/
+[oracle@rac2 jdk-25]$ ls
+bin  conf  include  jmods  legal  lib  LICENSE  man  README  release
+[oracle@rac2 jdk-25]$ pwd
+/home/oracle/jdk-25
+
+[oracle@rac2 jdk-25]$ export JAVA_HOME=/home/oracle/jdk-25
+
+[oracle@rac2 jdk-25]$ export PATH=$JAVA_HOME/bin:$PATH
+
+[oracle@rac2 jdk-25]$ java -version
+java version "25" 2025-09-16 LTS
+Java(TM) SE Runtime Environment (build 25+37-LTS-3491)
+Java HotSpot(TM) 64-Bit Server VM (build 25+37-LTS-3491, mixed mode, sharing)
+
+3. Tao user
+
+create user dbsat_user identified by dbsat_user;
+grant create session to dbsat_user;
+grant select_catalog_role to dbsat_user;
+grant select on ctxsys.ctx_indexes to dbsat_user;
+grant select on sys.registry$history to dbsat_user;
+grant read on sys.dba_audit_mgmt_config_params to dbsat_user;
+grant select on sys.dba_users_with_defpwd to dbsat_user;
+grant read on sys.dba_credentials to dbsat_user;
+grant execute on sys.dbms_sql to dbsat_user;
+grant audit_viewer to dbsat_user; 
+grant capture_admin to dbsat_user;
+
+4. run collected
+[oracle@rac2 dbsat]$ ./dbsat collect -n dbsat_user@ORCL output_ORCL
+
+(bash_oracle) ./dbsat collect dbsat_user@ORCL output_ORCL
+(bash_oracle) ./dbsat report output_ORCL
+(bash_oracle) ./dbsat extract output_ORCL_report
