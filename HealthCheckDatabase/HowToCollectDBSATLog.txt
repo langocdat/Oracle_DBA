@@ -35,7 +35,8 @@
 
 4. run collected
   (bash_oracle) ./dbsat collect -n dbsat_user@ORCL output_ORCL  --->>> khong ma hoa
-  (bash_oracle) ./dbsat collect dbsat_user@ORCL output_ORCL
+  (bash_oracle) ./dbsat collect dbsat_user@ORCL output_ORCL  --->>> @ORCL ở đây là service_name
   (bash_oracle) ./dbsat report output_ORCL
   (bash_oracle) ./dbsat extract output_ORCL_report
+
 
