@@ -43,14 +43,33 @@ Step 6: Mount database
 	delete noprompt expired archivelog all;
 
 Step 7: 
-
-	RUN {
-	  SET NEWNAME FOR DATABASE TO '+DATA/DRCBS/DATAFILE/%b';
-	  RESTORE DATABASE FROM SERVICE 'PROCBS';
-	  SWITCH DATAFILE ALL;
-	  SWITCH TEMPFILE ALL;
-	  RECOVER DATABASE FROM SERVICE PROCBS;
-	}
+-- Check syntax:  
+	(bash): rman target / checksyntax @'/home/oracle/scripts_backup.rman'
+-- Chay nohup
+	(bash): nohup rman target / @'/home/oracle/scripts_backup.rman' log='/home/oracle/scripts_backup.log' &
+run {
+allocate channel c1 device type disk;
+allocate channel c2 device type disk;
+allocate channel c3 device type disk;
+allocate channel c4 device type disk;
+allocate channel c5 device type disk;
+allocate channel c6 device type disk;
+allocate channel c7 device type disk;
+allocate channel c8 device type disk;
+allocate channel c9 device type disk;
+allocate channel c10 device type disk;
+allocate channel c11 device type disk;
+allocate channel c12 device type disk;
+allocate channel c13 device type disk;
+allocate channel c14 device type disk;
+allocate channel c15 device type disk;
+allocate channel c16 device type disk;
+set newname for database to '+DATA';
+restore database from service PROCBS;
+switch datafile all;
+switch tempfile all;
+recover database from service PROCBS;
+}
 
 Step 8: clear log file
 
@@ -92,3 +111,4 @@ Step 9: Open database and open MRP process
 
 	(SQL)> alter database recover managed standby database disconnect from session;
 	Database altered.
+
