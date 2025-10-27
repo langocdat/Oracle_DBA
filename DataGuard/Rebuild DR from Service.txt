@@ -124,14 +124,6 @@ COLUMN TOTALWORK FORMAT 999,999,999
 COLUMN PCT FORMAT 999.99
 COLUMN UNITS FORMAT A10
 
-SELECT sid,
-       opname,
-       sofar,
-       totalwork,
-       ROUND(sofar/totalwork*100,2) AS pct,
-       units
-FROM   gv$session_longops
-WHERE  opname LIKE 'RMAN%'
-AND    totalwork > 0
-ORDER  BY start_time;
+SELECT sid,opname,sofar,totalwork,ROUND(sofar/totalwork*100,2) AS pct,units FROM gv$session_longops WHERE opname LIKE 'RMAN%' AND totalwork > 0 ORDER BY start_time;
+
 
