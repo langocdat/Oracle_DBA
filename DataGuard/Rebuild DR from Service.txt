@@ -112,3 +112,26 @@ Step 9: Open database and open MRP process
 	(SQL)> alter database recover managed standby database disconnect from session;
 	Database altered.
 
+=========================================================================
+Check percent completed
+SET LINESIZE 200
+SET PAGESIZE 200
+SET COLSEP ' | '
+COLUMN SID FORMAT 9999
+COLUMN OPNAME FORMAT A50
+COLUMN SOFAR FORMAT 999,999,999
+COLUMN TOTALWORK FORMAT 999,999,999
+COLUMN PCT FORMAT 999.99
+COLUMN UNITS FORMAT A10
+
+SELECT sid,
+       opname,
+       sofar,
+       totalwork,
+       ROUND(sofar/totalwork*100,2) AS pct,
+       units
+FROM   gv$session_longops
+WHERE  opname LIKE 'RMAN%'
+AND    totalwork > 0
+ORDER  BY start_time;
+
