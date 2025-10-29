@@ -126,4 +126,35 @@ COLUMN UNITS FORMAT A10
 
 SELECT sid,opname,sofar,totalwork,ROUND(sofar/totalwork*100,2) AS pct,units FROM gv$session_longops WHERE opname LIKE 'RMAN%' AND totalwork > 0 ORDER BY start_time;
 
+=========================================================================
+SET LINESIZE 200
+SET PAGESIZE 200
+SET COLSEP ' | '
+COLUMN SID FORMAT 9999
+COLUMN OPNAME FORMAT A30
+COLUMN PCT_COMPLETE FORMAT 999.99
+COLUMN MB_DONE FORMAT 999,999.99
+COLUMN MB_TOTAL FORMAT 999,999.99
+COLUMN MB_PER_SEC FORMAT 999.99
+COLUMN ELAPSED_SECONDS FORMAT 999,999
+COLUMN REMAINING_MIN FORMAT 999,999.99
+COLUMN ETA FORMAT A20
+
+SELECT sid,
+       opname,
+       ROUND(sofar / totalwork * 100, 2) AS pct_complete,
+       ROUND((sofar * 32 / 1024), 2) AS mb_done,
+       ROUND((totalwork * 32 / 1024), 2) AS mb_total,
+       ROUND((sofar * 32 / 1024) / NULLIF(elapsed_seconds, 0), 2) AS mb_per_sec,
+       elapsed_seconds,
+       ROUND((elapsed_seconds * (totalwork - sofar) / NULLIF(sofar, 0)) / 60, 2) AS remaining_min,
+       TO_CHAR(SYSDATE + (elapsed_seconds * (totalwork - sofar) / NULLIF(sofar, 0)) / 86400, 
+               'YYYY-MM-DD HH24:MI:SS') AS eta
+FROM v$session_longops
+WHERE opname LIKE 'RMAN%' 
+  AND totalwork > 0
+  AND sofar > 0
+  AND elapsed_seconds > 0
+ORDER BY REMAINING_MIN DESC;
+
 
