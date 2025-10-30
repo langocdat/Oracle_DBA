@@ -158,3 +158,41 @@ WHERE opname LIKE 'RMAN%'
 ORDER BY REMAINING_MIN DESC;
 
 
+SELECT file# FROM v$recover_file; --->> Check datafile nào đang restore
+channel c14: restore complete, elapsed time: 01:19:58
+channel c10: restore complete, elapsed time: 01:20:22
+channel c12: restore complete, elapsed time: 01:20:21
+.............................
+Mỗi channel tương ứng với 1 data file (mỗi channel phụ trách 1 datafile)
+
+----------------------------------------------------
+file recover.sh (dùng để recover, sau khi recover ở trên file restore bị hỏng)
+-->>
+		rman target / log=/export/home/oracle/recover1.log << EOF
+		run {
+		allocate channel c1 device type disk;
+		allocate channel c2 device type disk;
+		allocate channel c3 device type disk;
+		allocate channel c4 device type disk;
+		allocate channel c5 device type disk;
+		allocate channel c6 device type disk;
+		allocate channel c7 device type disk;
+		allocate channel c8 device type disk;
+		allocate channel c9 device type disk;
+		allocate channel c10 device type disk;
+		allocate channel c11 device type disk;
+		allocate channel c12 device type disk;
+		allocate channel c13 device type disk;
+		allocate channel c14 device type disk;
+		allocate channel c15 device type disk;
+		allocate channel c16 device type disk;
+		recover datafile 37,52,53,54,6,12,13,38,39,40,41,42,43,44,45,48,49,50 from service PROCBS;
+		}
+		EOF
+<<--
+Run: nohup sh ./recover.sh &
+
+
+
+
+
