@@ -192,6 +192,17 @@ file recover.sh (dùng để recover, sau khi recover ở trên file restore b�
 <<--
 Run: nohup sh ./recover.sh &
 
+====================================================
+Quy trình:
+1. (rman): dùng rman hoặc viết scripts nohup: Restore datafile 1,2,3 from service PROCBS;
+2. (rman): Switch datafile to copy;
+---> kiểm tra: (rman)> report schema;
+Nếu thấy size của datafile nào = 0 thì cần phải switch bằng tay.
+Switch nhiều datafile. Ex: switch datafile 1,2,3 to copy;
+3. Recover
+Nếu recover bên trong scripts restore bị lỗi, thì cần check validate ở datafile báo lỗi. Ex: Validate datafile 22;
+Sau khi đã validate, cần recover lại datafile
+
 
 
 
