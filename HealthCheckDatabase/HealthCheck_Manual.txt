@@ -1,3 +1,11 @@
+Trên Window:
+Gan bien
+	$env:ORACLE_SID = "ORCL"
+Check bien:
+	echo $env:ORACLE_SID
+Tim SID
+	Get-Service | Where-Object { $_.Name -like "OracleService*" }
+------------------------------------------------------
 Step 1: sqlplus / as sysdba
 	(sql): @database_information.sql
 	(sql): @HealthCheck.sql
@@ -47,5 +55,6 @@ Mục tiêu gồm 4 file:
  - Awrrpt					:
  - Check_oracle....log		: check_oracle_2025_08_14_orcl.log
  - database_information.html: database_information.html
+
 
 
