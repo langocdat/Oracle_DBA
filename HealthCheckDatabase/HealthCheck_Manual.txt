@@ -42,6 +42,7 @@ END {
     print("|-------------------------------|------------------------------------------------|")
 }'
 
+Hoặc dùng: ./opatch lspatches
 
 Step 5: 
 	(bash - grid): crsctl stat res -t
@@ -55,6 +56,7 @@ Mục tiêu gồm 4 file:
  - Awrrpt					:
  - Check_oracle....log		: check_oracle_2025_08_14_orcl.log
  - database_information.html: database_information.html
+
 
 
 
