@@ -80,8 +80,12 @@ Step 5: add disk và diskgroup
     <img width="1219" height="176" alt="image" src="https://github.com/user-attachments/assets/16ba240c-2cbb-4f7f-974f-fa0b43bb593d" />
 
   + (bash_grid): asmcmd lsdg
-
+    
     <img width="1532" height="118" alt="image" src="https://github.com/user-attachments/assets/5f8ae4b8-fdd5-4e31-905c-9ec3abeb8759" />
+
+  ===========================================================================
+  |                          Dùng mpath, udev                               |
+  ===========================================================================
 
 
 
