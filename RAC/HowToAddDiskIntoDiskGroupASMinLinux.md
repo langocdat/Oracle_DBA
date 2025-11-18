@@ -108,6 +108,12 @@ Step 5: add disk và diskgroup
 
      <img width="952" height="474" alt="image" src="https://github.com/user-attachments/assets/d03b0ca6-9c10-48cf-9f36-f17be10c7c1e" />
 
+     <img width="1624" height="699" alt="image" src="https://github.com/user-attachments/assets/44d18a85-d4a7-4ccf-b1d2-d1bcf64af592" />
+
+     <img width="1516" height="119" alt="image" src="https://github.com/user-attachments/assets/cff4f7bf-a887-404f-9a3f-95aa25178518" />
+
+
+
 
 
 
