@@ -95,11 +95,20 @@ Step 5: add disk và diskgroup
    <img width="531" height="262" alt="image" src="https://github.com/user-attachments/assets/a247333d-b05b-4454-93d6-65e55f7540ac" />
 
 2. Add disk vao file 99-asm
+   
    (bash_root): cd /etc/udev/rules.d/
+   
    (bash_root): vi 99-asm.rules(....)
+   
    -->> Add:
-  <img width="740" height="427" alt="image" src="https://github.com/user-attachments/assets/4ca3e9da-81ca-4d03-8f9b-e4daf89a899f" />
-  <img width="1492" height="715" alt="image" src="https://github.com/user-attachments/assets/5186a259-3738-4529-be31-ddeb8c422a0c" />
+   
+     <img width="740" height="427" alt="image" src="https://github.com/user-attachments/assets/4ca3e9da-81ca-4d03-8f9b-e4daf89a899f" />
+  
+     <img width="1492" height="715" alt="image" src="https://github.com/user-attachments/assets/5186a259-3738-4529-be31-ddeb8c422a0c" />
+
+     <img width="952" height="474" alt="image" src="https://github.com/user-attachments/assets/d03b0ca6-9c10-48cf-9f36-f17be10c7c1e" />
+
+
 
 
 
