@@ -88,5 +88,9 @@ Step 5: add disk và diskgroup
 
   Dùng mpath, udev
 =======================================
+ -  Check disk:
+    (bash_root): lsblk
+   ![Uploading image.png…]()
+
 
 
