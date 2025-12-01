@@ -40,15 +40,45 @@ select sofar,totalwork,round(sofar/totalwork*100,2) pct,units,to_char(start_time
 where opname LIKE '%Gather%' and totalwork > 0 and time_remaining > 0 order by time_remaining desc;
 
 --->>> After run scripts finish, join sql to check: 
-1. (sql): select owner,table_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') 
-		  from dba_tables
-		  where (last_analyzed is null or last_analyzed < (sysdate -60))
-		  and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) order by owner;
+col OWNER format a20;
+col TABLE_NAME format a30;
+col INDEX_NAME format a20;
+set linesize 200
+set pagesize 100
 
-2. (sql): select owner,table_name,index_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') 
-		  from dba_indexes
-		  where (last_analyzed is null or last_analyzed < (sysdate -60))
-		  and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
+SELECT OWNER,TABLE_NAME,INDEX_NAME,"DATE"
+FROM (
+        SELECT OWNER,TABLE_NAME,INDEX_NAME,NVL(TO_CHAR(LAST_ANALYZED,'DD-MON-YYYY'),'NEVER ANALYZE') "DATE",LAST_ANALYZED
+        FROM DBA_INDEXES
+        WHERE (LAST_ANALYZED IS NULL OR LAST_ANALYZED < (SYSDATE)) AND OWNER IN (
+                SELECT USERNAME
+                FROM DBA_USERS
+                WHERE ACCOUNT_STATUS='OPEN' AND TRUNC(CREATED) > (
+                        SELECT TRUNC(CREATED)
+                        FROM DBA_USERS
+                        WHERE USERNAME='SYS'
+                    )
+            )
+        ORDER BY LAST_ANALYZED DESC
+    )
+WHERE ROWNUM <= 30 AND "DATE" NOT IN ('NEVER ANALYZE');
+
+SELECT OWNER,TABLE_NAME,"DATE"
+FROM (
+        SELECT OWNER,TABLE_NAME,NVL(TO_CHAR(LAST_ANALYZED,'DD-MON-YYYY'),'NEVER ANALYZE') "DATE",LAST_ANALYZED
+        FROM DBA_TABLES
+        WHERE (LAST_ANALYZED IS NULL OR LAST_ANALYZED < (SYSDATE)) AND OWNER IN (
+                SELECT USERNAME
+                FROM DBA_USERS
+                WHERE ACCOUNT_STATUS='OPEN' AND TRUNC(CREATED) > (
+                        SELECT TRUNC(CREATED)
+                        FROM DBA_USERS
+                        WHERE USERNAME='SYS'
+                    )
+            )
+        ORDER BY LAST_ANALYZED DESC
+    )
+WHERE ROWNUM <= 30 AND "DATE" NOT IN ('NEVER ANALYZE');
 
 ======Use crontab to schedule automatic running========================
 Step 1: 
@@ -80,4 +110,5 @@ where (last_analyzed is null or last_analyzed < (sysdate -1))
 and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
 
 no rows selected
+
 
