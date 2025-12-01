@@ -115,6 +115,28 @@ Step 5: add disk và diskgroup
      <img width="1516" height="119" alt="image" src="https://github.com/user-attachments/assets/cff4f7bf-a887-404f-9a3f-95aa25178518" />
 
 
+1. create file .rules
+- Path: /etc/udev/rules.d/
+- Example: vi 99-oracle-asm.rules
+- Contents:
+
+KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBdc3019df-654420f3", \
+	SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd41081cb-546d752b", \
+	SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+KERNEL=="sdd", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB34fd1593-f259e982", \
+	SYMLINK+="ASM_OCR", OWNER="grid", GROUP="asmadmin", MODE="0660"
+KERNEL=="sde", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB0f2183cb-95c9acf8", \
+	SYMLINK+="ASM_DATA2", OWNER="grid", GROUP="asmadmin", MODE="0660"
+	
+- Query: 
+	lsblk
+	fdisk -l
+	udevadm info --query=all --name=/dev/sde
+- Reload:
+	udevadm control --reload-rules && udevadm trigger
+	ls -ln /dev/ASM*
+
 
 
 
