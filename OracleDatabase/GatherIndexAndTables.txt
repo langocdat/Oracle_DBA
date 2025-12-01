@@ -25,7 +25,19 @@ Step 5: run scipts in backgroud
 	1. (bash): tail -1000f nohup.out
 	2. You can check the background job is still running or not with command 'jobs'
 	--->> Check tiến độ 
-	3. (sql): select sofar, totalwork,units,start_time,time_remaining,message from v$session_longops where opname LIKE '%Gather%' AND time_remaining !=0;
+	3. (sql): 
+set linesize 200
+set pagesize 100
+col sofar         format 9,999,999
+col totalwork     format 9,999,999
+col pct           format 999.99   
+col units         format a9       
+col start_time    format a19      
+col elapsed       format 999,999  
+col remain        format 999,999  
+col message       format a100     
+select sofar,totalwork,round(sofar/totalwork*100,2) pct,units,to_char(start_time,'YYYY-MM-DD HH24:MI:SS') start_time,elapsed_seconds elapsed,time_remaining remain,message from v$session_longops 
+where opname LIKE '%Gather%' and totalwork > 0 and time_remaining > 0 order by time_remaining desc;
 
 --->>> After run scripts finish, join sql to check: 
 1. (sql): select owner,table_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') 
@@ -35,7 +47,7 @@ Step 5: run scipts in backgroud
 
 2. (sql): select owner,table_name,index_name,NVL(to_char(last_analyzed,'dd-MON-YYYY'),'Never Analyze') 
 		  from dba_indexes
-		  where (last_analyzed is null or last_analyzed < (sysdate -60))-
+		  where (last_analyzed is null or last_analyzed < (sysdate -60))
 		  and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
 
 ======Use crontab to schedule automatic running========================
@@ -68,3 +80,4 @@ where (last_analyzed is null or last_analyzed < (sysdate -1))
 and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
 
 no rows selected
+
