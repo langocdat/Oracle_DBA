@@ -28,9 +28,9 @@ Open:
 2. Check autostart
 	root> ./crsctl config crs
 	-->> Example result: CRS-4622: Oracle High Availability Services autostart is enabled.
-3. Open autostart
+3. Open autostart (each node)
 	root> ./crsctl enable crs
-4. Stop autostart
+4. Stop autostart (each node)
 	root> ./crsctl disable crs
 
 -------------------------------------
@@ -52,3 +52,19 @@ Instance orcl2 is not running on node rac2
 [oracle@rac1 ~]$ srvctl status database -d orcl
 Instance orcl1 is running on node rac1
 Instance orcl2 is running on node rac2
+
+---------------------------------------
+Check list
+1. Check state database
+	(oracle)> srvctl status database -d <dbname>
+	(oracle)> srvctl stop instance -d <dbname> -n <nodename>
+	(oracle)> srvctl stop instance -d <dbname> -i <instance_name>
+2. Check state autostart of grid
+	(root)> ./crsctl config crs
+3. Disable autostartof Grid
+	(root)> ./crsctl disable crs
+4. Stop crs in node 
+	(root)> ./crsctl stop crs -f
+5. Check state Grid after stop crs
+	(root)> ./crsctl check crs
+	(root)> ./crsctl stat res -t
