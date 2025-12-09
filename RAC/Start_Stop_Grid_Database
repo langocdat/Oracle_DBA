@@ -1,0 +1,54 @@
+1. Shutdown DB (one node)
+	oracle> srvctl stop database -d <dbname>
+- Check: 
+	oracle> srvctl status database -d <dbname>
+2. Stop crs: (each node)
+	root> ./crsctl stop crs -f
+ - Check
+	root> ./crsctl stat res -t
+
+-----------------------------------
+Open:
+1. Start crs (each node)
+	root> ./crsctl start crs
+ - Check:
+	root> ./crsctl stat res -t
+2. Start database (one node)
+	oracle> srvctl start database -d <dbname>
+ - Check: 
+	oracle> srvctl status database -d <dbname>
+	oracle> srvctl listener database -d <dbname>
+	(sqlplus / as sysdba)> select instance_name, status from gv$instance;
+	(dgmgrl): show configuration -->> show database ...
+	
+-------------------------------------
+ Auto start of Grid 
+1. Check state crs
+	root,grid> ./crsctl check crs
+2. Check autostart
+	root> ./crsctl config crs
+	-->> Example result: CRS-4622: Oracle High Availability Services autostart is enabled.
+3. Open autostart
+	root> ./crsctl enable crs
+4. Stop autostart
+	root> ./crsctl disable crs
+
+-------------------------------------
+ Auto start of Database
+1. Check state autostart of database
+ srvctl config database -d <db_name>
+2. 
+
+[oracle@rac1 ~]$ srvctl status database -d orcl
+Instance orcl1 is not running on node rac1
+Instance orcl2 is not running on node rac2
+
+[oracle@rac1 ~]$ srvctl start instance -d orcl -n rac1
+[oracle@rac1 ~]$ srvctl status database -d orcl
+Instance orcl1 is running on node rac1
+Instance orcl2 is not running on node rac2
+
+[oracle@rac1 ~]$ srvctl start instance -d orcl -i orcl2
+[oracle@rac1 ~]$ srvctl status database -d orcl
+Instance orcl1 is running on node rac1
+Instance orcl2 is running on node rac2
