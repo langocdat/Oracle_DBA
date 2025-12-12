@@ -27,6 +27,7 @@ RUN {
 	delete noprompt obsolete;
 }
 2. Check syntax
-	(bash_oracle): rman target / @'/home/oracle/clean_archivelog_obsolete_and_expired.rman'
+	(bash_oracle): rman target / checksyntax @'/home/oracle/clean_archivelog_obsolete_and_expired.rman'
 3. Run scripts
 	(bash_oralce): rman target / @'/home/oracle/clean_archivelog_obsolete_and_expired.rman' log='/home/oracle/clean_archivelog_obsolete_and_expired.log' &
+
