@@ -20,6 +20,7 @@ Step 4: permission
 	(bash): chmod +x gather.sh 
 Step 5: run scipts in backgroud	
 	(bash): nohup ./gather.sh &
+			nohup ./gather.sh > /export/home/oracle/gather.log 2>&1 &
 
 --->>> Check: 
 	1. (bash): tail -1000f nohup.out
@@ -110,5 +111,6 @@ where (last_analyzed is null or last_analyzed < (sysdate -1))
 and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
 
 no rows selected
+
 
 
