@@ -1,0 +1,48 @@
+======= Recompile invalid object
+
+Step 1: Check invalid object
+
+COL OBJECT_NAME   FORMAT A50 
+COL OBJECT_TYPE   FORMAT A20 
+col OWNER FORMAT A20 
+SET LINESIZE 200
+SET PAGESIZE 100
+SELECT OWNER,object_name, object_type FROM dba_objects WHERE status = 'INVALID';
+
+SELECT OWNER,object_name,OBJECT_TYPE FROM DBA_OBJECTS WHERE STATUS='INVALID' GROUP BY OWNER,OBJECT_TYPE;
+
+Step 2: Create the scripts recompile.sh
+
+	export ORACLE_SID=SPNUAT
+	export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
+	export PATH=$ORACLE_HOME/bin:$PATH
+	sqlplus / as sysdba << EOF
+	SET TIMING ON;
+	@/u01/app/oracle/product/19c/dbhome_1/rdbms/admin/utlrp.sql 8
+	exit;
+	EOF
+
+Step 3: Run scripts
+	(bash_oracle): nohup ./recompile.sh > /export/home/oracle/recompile.log 2>&1 &
+
+Step 4: Check again
+-----
+COLUMN sid FORMAT 999
+COLUMN stime FORMAT A8
+COLUMN message FORMAT A40
+COLUMN percent FORMAT 999.99
+SELECT sid, TO_CHAR(start_time, 'HH24:MI:SS') AS stime,message,ROUND((sofar/totalwork)*100, 2) AS percent FROM v$session_longops WHERE totalwork > 0 AND sofar/totalwork < 1;
+-----
+set linesize 200
+set pagesize 100
+col sofar         format 9,999,999
+col totalwork     format 9,999,999
+col pct           format 999.99   
+col units         format a9       
+col start_time    format a19      
+col elapsed       format 999,999  
+col remain        format 999,999  
+col message       format a100     
+select sofar,totalwork,round(sofar/totalwork*100,2) pct,units,to_char(start_time,'YYYY-MM-DD HH24:MI:SS') start_time,elapsed_seconds elapsed,time_remaining remain,message from v$session_longops 
+where opname LIKE '%Gather%' and totalwork > 0 and time_remaining > 0 order by time_remaining desc;
+

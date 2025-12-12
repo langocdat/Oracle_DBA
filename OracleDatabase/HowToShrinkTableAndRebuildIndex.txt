@@ -1,0 +1,28 @@
+======= Shrink table and rebuid index
+
+Step 1: Chạy file database_information.sql
+Step 2: Check database actual size
+	(sqlplus): select sum(bytes/1024/1024/1024) "DB Actual Size(GB)" from dba_segments;
+
+Step 3: Create file shrinktbl_rebuildidx.sh
+	export ORACLE_SID=orcl1
+	export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
+	export PATH=$ORACLE_HOME/bin:$PATH
+	sqlplus / as sysdba << EOF
+	spool /home/oracle/shrinktbl_rebuildidx_output.txt
+	SET TIMING ON;
+	ALTER INDEX SYS.SHRINK_TEST_IDX REBUILD;
+	ALTER TABLE SYS.SHRINK_TEST ENABLE ROW MOVEMENT;
+	ALTER TABLE SYS.SHRINK_TEST SHRINK SPACE CASCADE;
+	ALTER TABLE SYS.SHRINK_TEST DISABLE ROW MOVEMENT;
+	ALTER INDEX SYS.SHRINK_TEST_IDX REBUILD;
+	ALTER TABLE SYS.SHRINK_TEST DEALLOCATION UNUSED;
+
+	exit;
+	EOF
+Step 4: Run scripts sh
+	(bash_oracle): nohup ./shrinktbl_rebuildidx.sh > /home/oracle/shrinktbl_rebuildidx.log 2>&1 &
+	
+Step 5: After scripts run completed, check agin database actual size 
+	(sqlplus): select sum(bytes/1024/1024/1024) "DB Actual Size(GB)" from dba_segments;
+
