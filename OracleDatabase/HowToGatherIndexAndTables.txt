@@ -8,7 +8,6 @@ export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
 export ORACLE_SID=SPNUAT
 export PATH=$ORACLE_HOME/bin:$PATH
 sqlplus / as sysdba << EOF
-spool /tmp/gather_output.txt
 set timing on
 exec dbms_stats.gather_dictionary_stats;
 exec dbms_stats.gather_fixed_objects_stats;
@@ -111,6 +110,7 @@ where (last_analyzed is null or last_analyzed < (sysdate -1))
 and owner in (select username from dba_users where account_status='OPEN' and trunc(created) > (select trunc(created) from dba_users where username='SYS')) and NVL(to_char(last_analyzed,'dd-MON-YYYY'), 'Never Analyze') !='Never Analyze' order by owner;  2    3
 
 no rows selected
+
 
 
 
