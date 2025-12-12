@@ -1,0 +1,32 @@
+-- Before:
+1. Check path archive log
+	(sqlplus): archive log list;
+	(sqlplus): show parameter db_recovery_file_dest
+	(bash_grid): asmcmd lsdg
+-- Perform
+1. (rman): rman target /
+2. Crosscheck all archived
+	(rman): crosscheck archivelog all;
+3. Reivew which ones have been marked as expired
+	(rman): list expired archivelog all;
+	(rman): report obsolete;
+4. Delete:
+	(rman): Delete noprompt expired archivelog all;
+	(rman): DELETE NOPROMPT OBSOLETE;
+-- After: 
+1. Check space again
+	(bash_grid): asmcmd lsdg
+		
+-- Use file sh
+1. Create file clean_archivelog_obsolete_and_expired
+(bash_oracle): vi clean_archivelog_obsolete_and_expired.rman
+RUN {
+	crosscheck archivelog all;
+	delete noprompt expired archivelog all;
+	report obsolete;
+	delete noprompt obsolete;
+}
+2. Check syntax
+	(bash_oracle): rman target / @'/home/oracle/clean_archivelog_obsolete_and_expired.rman'
+3. Run scripts
+	(bash_oralce): rman target / @'/home/oracle/clean_archivelog_obsolete_and_expired.rman' log='/home/oracle/clean_archivelog_obsolete_and_expired.log' &
