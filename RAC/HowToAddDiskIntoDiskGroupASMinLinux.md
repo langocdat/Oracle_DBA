@@ -129,13 +129,20 @@ KERNEL=="sdd", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB34fd1593-f259e982", \
 KERNEL=="sde", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB0f2183cb-95c9acf8", \
 	SYMLINK+="ASM_DATA2", OWNER="grid", GROUP="asmadmin", MODE="0660"
 	
-- Query: 
+- Query:
+  
 	lsblk
+
 	fdisk -l
+
 	udevadm info --query=all --name=/dev/sde
+
 - Reload:
+  
 	udevadm control --reload-rules && udevadm trigger
+
 	ls -ln /dev/ASM*
+
 
 
 
