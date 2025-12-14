@@ -27,9 +27,11 @@ Step 3: Run scripts
 
 Step 4: Check again
 -----
+SET LINESIZE 200
+SET PAGESIZE 100
 COLUMN sid FORMAT 999
 COLUMN stime FORMAT A8
-COLUMN message FORMAT A40
+COLUMN message FORMAT A70
 COLUMN percent FORMAT 999.99
 SELECT sid, TO_CHAR(start_time, 'HH24:MI:SS') AS stime,message,ROUND((sofar/totalwork)*100, 2) AS percent FROM v$session_longops WHERE totalwork > 0 AND sofar/totalwork < 1;
 -----
@@ -45,4 +47,5 @@ col remain        format 999,999
 col message       format a100     
 select sofar,totalwork,round(sofar/totalwork*100,2) pct,units,to_char(start_time,'YYYY-MM-DD HH24:MI:SS') start_time,elapsed_seconds elapsed,time_remaining remain,message from v$session_longops 
 where opname LIKE '%Gather%' and totalwork > 0 and time_remaining > 0 order by time_remaining desc;
+
 
