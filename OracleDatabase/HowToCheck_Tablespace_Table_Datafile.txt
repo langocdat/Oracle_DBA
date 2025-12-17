@@ -1,0 +1,101 @@
+
+SQL> select TABLESPACE_NAME, STATUS from dba_tablespaces;
+
+TABLESPACE_NAME                STATUS
+------------------------------ ---------
+SYSTEM                         ONLINE
+SYSAUX                         ONLINE
+UNDOTBS1                       ONLINE
+TEMP                           ONLINE
+USERS                          ONLINE
+UNDOTBS2                       ONLINE
+
+6 rows selected.
+====================================================
+
+set pagesize 300;
+set linesize 200;
+col TABLESPACE_NAME format a30;
+col FILE_NAME format a50;
+SQL> select TABLESPACE_NAME, FILE_NAME, bytes/1024/1024 AS size_mb, autoextensible, STATUS from dba_data_files ORDER BY tablespace_name;
+
+TABLESPACE_NAME                FILE_NAME                                             SIZE_MB AUT STATUS
+------------------------------ -------------------------------------------------- ---------- --- ---------
+SYSAUX                         +DATA/ORCL/DATAFILE/sysaux.258.1218750107                 710 YES AVAILABLE
+SYSTEM                         +DATA/ORCL/DATAFILE/system.257.1218749993                 950 YES AVAILABLE
+UNDOTBS1                       +DATA/ORCL/DATAFILE/undotbs1.259.1218750163               325 YES AVAILABLE
+UNDOTBS2                       +DATA/ORCL/DATAFILE/undotbs2.265.1218750941                50 YES AVAILABLE
+USERS                          +DATA/ORCL/DATAFILE/users.260.1218750165                    5 YES AVAILABLE
+====================================================
+
+SQL> SELECT
+  df.tablespace_name,
+  ROUND(SUM(df.bytes)/1024/1024) AS total_mb,
+  ROUND(SUM(df.bytes - NVL(fs.bytes,0))/1024/1024) AS used_mb,
+  ROUND(SUM(NVL(fs.bytes,0))/1024/1024) AS free_mb
+FROM dba_data_files df
+LEFT JOIN (
+  SELECT tablespace_name, SUM(bytes) bytes
+  FROM dba_free_space
+  GROUP BY tablespace_name
+) fs ON df.tablespace_name = fs.tablespace_name
+GROUP BY df.tablespace_name
+ORDER BY df.tablespace_name;
+
+TABLESPACE_NAME                  TOTAL_MB    USED_MB    FREE_MB
+------------------------------ ---------- ---------- ----------
+SYSAUX                                710        675         35
+SYSTEM                                950        941          9
+UNDOTBS1                              325         30        295
+UNDOTBS2                               50         29         21
+USERS                                   5          3          2
+====================================================
+
+SQL> SELECT
+  owner,
+  table_name,
+  tablespace_name
+FROM dba_tables
+WHERE table_name = 'EMPLOYEE';
+
+OWNER                TABLE_NAME                     TABLESPACE_NAME
+-------------------- ------------------------------ ------------------------------
+SYS                  EMPLOYEE                       SYSTEM
+====================================================
+
+--Size only data của bảng
+SQL> SELECT
+  owner,
+  segment_name,
+  tablespace_name,
+  ROUND(SUM(bytes)/1024/1024, 2) AS size_mb
+FROM dba_segments
+WHERE segment_name = 'EMPLOYEE'
+GROUP BY owner, segment_name, tablespace_name;
+
+OWNER                SEGMENT_NAME         TABLESPACE_NAME                   SIZE_MB
+-------------------- -------------------- ------------------------------ ----------
+SYS                  EMPLOYEE             SYSTEM                                 34
+====================================================
+--Size data + index của bảng
+SQL> SELECT
+  owner,
+  segment_type,
+  segment_name,
+  tablespace_name,
+  ROUND(SUM(bytes)/1024/1024, 2) AS size_mb
+FROM dba_segments
+WHERE segment_name = 'EMPLOYEE'
+   OR segment_name IN (
+       SELECT index_name
+       FROM dba_indexes
+       WHERE table_name = 'EMPLOYEE'
+   )
+GROUP BY owner, segment_type, segment_name, tablespace_name
+ORDER BY owner, segment_type;
+  2    3    4    5    6    7    8    9   10   11   12   13   14   15
+
+OWNER                SEGMENT_TYPE       SEGMENT_NAME         TABLESPACE_NAME                   SIZE_MB
+-------------------- ------------------ -------------------- ------------------------------ ----------
+SYS                  TABLE              EMPLOYEE             SYSTEM                                 34
+
