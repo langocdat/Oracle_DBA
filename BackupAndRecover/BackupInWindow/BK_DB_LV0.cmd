@@ -49,9 +49,6 @@ echo     archivelog all
 echo     format '%BKDIR%\arch_LV0_%%d_%%T_%%U.bkp'
 echo     tag='ARC_LV0_%TODAYDATE%';
 echo.
-echo   crosscheck archivelog all;
-echo   delete noprompt archivelog until time 'SYSDATE - 15';
-echo.
 echo   release channel d1;
 echo   release channel d2;
 echo   release channel d3;
@@ -72,4 +69,5 @@ rman target / cmdfile="%RMANSCRIPT%" log="%LOGFILE%"
 
 echo Ending Backup >> "%LOGFILE%"
 echo %DATE% %TIME% >> "%LOGFILE%"
+
 
