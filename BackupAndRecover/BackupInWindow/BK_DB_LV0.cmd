@@ -56,6 +56,13 @@ echo   release channel d1;
 echo   release channel d2;
 echo   release channel d3;
 echo   release channel d4;
+echo.
+echo   crosscheck backup;
+echo   crosscheck archivelog all;
+echo   delete noprompt expired backup;
+echo   delete noprompt expired archivelog all;
+echo   delete noprompt obsolete;
+echo.
 echo }
 ) > "%RMANSCRIPT%"
 
@@ -65,3 +72,4 @@ rman target / cmdfile="%RMANSCRIPT%" log="%LOGFILE%"
 
 echo Ending Backup >> "%LOGFILE%"
 echo %DATE% %TIME% >> "%LOGFILE%"
+
