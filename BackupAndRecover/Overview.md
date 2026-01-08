@@ -24,7 +24,7 @@
    - Check backup và archivelog obsolete theo policy:
      + (RMAN): report obsolete;
    - Delete backup và archivelog obsolete theo policy:
-     + (RMAN): delete noprompt
+     + (RMAN): delete noprompt obsolete;
    - Check backup expired:
      + (RMAN): crosscheck backup;
      + (RMAN): list backup summary;
