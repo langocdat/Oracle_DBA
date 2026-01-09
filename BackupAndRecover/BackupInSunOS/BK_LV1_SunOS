@@ -1,3 +1,4 @@
+#File name: scritps_bk_lv1.sh
 #!/bin/sh
 
 export ORACLE_SID=loprodb1
