@@ -1,0 +1,35 @@
+https://github.com/langocdat/MySQL_DBA/blob/main/HealthCheck%20Database%20MySQL/Collect%20OS%20log%20in%20Window.md
+
+1. Create the file "OSLog.ps1" in the C disk
+  --->>> Link file https://github.com/langocdat/MySQL_DBA/blob/main/Scripts/OSLog.ps1
+2. Run scripts:
+  (powershell-Adminstrator): .\OSLog.ps1
+  --->>> Bypass policy: 
+                      
+                        Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+                        powershell -ExecutionPolicy Bypass -File "C:\OSLog.ps1"
+4. Monitor:
+  (powershell-Adminstrator): logman query OSLog
+5. Stop scripts:
+  (powershell-Adminstrator): logman stop OSLog
+--->>> Result: File CSV contains the log OS
+
+
+==============================================
+
+Gen Image
+
+<img width="1032" height="686" alt="image" src="https://github.com/user-attachments/assets/aa90abe4-f913-4ae8-8ee5-8ec04faae7ab" />
+
+<img width="832" height="690" alt="image" src="https://github.com/user-attachments/assets/0e790ace-73db-4178-83b3-8ef281735106" />
+
+<img width="1145" height="762" alt="image" src="https://github.com/user-attachments/assets/fe2ead8c-9719-48ff-b0e1-8bd5eb92a489" />
+
+<img width="1097" height="790" alt="image" src="https://github.com/user-attachments/assets/ef878c93-9d70-4cce-9c80-a6cd14f1f9b0" />
+
+<img width="773" height="544" alt="image" src="https://github.com/user-attachments/assets/778b61d4-8ccf-449e-8204-5c0d7727a811" />
+
+
+
+
+
