@@ -1,0 +1,59 @@
+#!/bin/sh
+
+export ORACLE_SID=loprodb1
+export ORACLE_BASE=/u01/app/oracle
+export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
+export PATH=$ORACLE_HOME/bin:/usr/bin:/usr/sbin:$PATH
+export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
+
+
+DATE_STR=`date +%d%m%y`
+LOGDIR="/test-backup/backup/bk_level0"
+BK_DEST="${LOGDIR}/database/${DATE_STR}"
+FULL_LOG="${LOGDIR}/bkdb_level0_${DATE_STR}.log"
+
+mkdir -p "${BK_DEST}"
+
+echo "--- BEGEIN BACKUP: `date` ---" > "${FULL_LOG}"
+echo "Hostname: `hostname`" >> "${FULL_LOG}"
+echo "Oracle SID: ${ORACLE_SID}" >> "${FULL_LOG}"
+echo "------------------------------------------" >> "${FULL_LOG}"
+
+rman target / <<EOS >> "${FULL_LOG}" 2>&1
+RUN {
+    ALLOCATE CHANNEL c1 DEVICE TYPE DISK;
+    ALLOCATE CHANNEL c2 DEVICE TYPE DISK;
+    ALLOCATE CHANNEL c3 DEVICE TYPE DISK;
+    ALLOCATE CHANNEL c4 DEVICE TYPE DISK;
+
+    CROSSCHECK BACKUP;
+    CROSSCHECK ARCHIVELOG ALL;
+    DELETE NOPROMPT EXPIRED BACKUP;
+    DELETE NOPROMPT EXPIRED ARCHIVELOG ALL;
+    DELETE NOPROMPT OBSOLETE;
+
+    BACKUP AS COMPRESSED BACKUPSET INCREMENTAL LEVEL 0 DATABASE FORMAT '${BK_DEST}/db_%U.bak' MAXSETSIZE 80G;
+    BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL FORMAT '${BK_DEST}/arc_%U.bak';
+    BACKUP CURRENT CONTROLFILE FORMAT '${BK_DEST}/ctl_%U.bak';
+    BACKUP SPFILE FORMAT '${BK_DEST}/loprodb_spfile_%T%U.bak';
+    RELEASE CHANNEL c1;
+    RELEASE CHANNEL c2;
+    RELEASE CHANNEL c3;
+    RELEASE CHANNEL c4;
+}
+EXIT;
+EOS
+
+echo "--- RMAN completed: `date` ---" >> "${FULL_LOG}"
+
+echo "--- Cleaning empty backup directories ---" >> "${FULL_LOG}"
+
+find ${LOGDIR}/database -type d -depth ! -path ${LOGDIR}/database -print | while read dir
+do
+    rmdir "$dir" >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "Removed empty directory: $dir" >> "${FULL_LOG}"
+    fi
+done
+
+echo "--- END Backup: `date` ---" >> "${FULL_LOG}"
