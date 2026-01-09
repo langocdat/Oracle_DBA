@@ -1,7 +1,7 @@
-https://github.com/langocdat/MySQL_DBA/blob/main/HealthCheck%20Database%20MySQL/Collect%20OS%20log%20in%20Window.md
+https://github.com/langocdat/Oracle_DBA/blob/main/HealthCheckDatabase/OSLog.ps1
 
 1. Create the file "OSLog.ps1" in the C disk
-  --->>> Link file https://github.com/langocdat/MySQL_DBA/blob/main/Scripts/OSLog.ps1
+  --->>> Link file https://github.com/langocdat/Oracle_DBA/blob/main/HealthCheckDatabase/OSLog.ps1
 2. Run scripts:
   (powershell-Adminstrator): .\OSLog.ps1
   --->>> Bypass policy: 
@@ -10,7 +10,9 @@ https://github.com/langocdat/MySQL_DBA/blob/main/HealthCheck%20Database%20MySQL/
                         powershell -ExecutionPolicy Bypass -File "C:\OSLog.ps1"
 4. Monitor:
   (powershell-Adminstrator): logman query OSLog
-5. Stop scripts:
+  Để kiểm tra trạng thái: C:\Windows\System32\logman.exe query OSLog
+  Để dừng thu thập dữ liệu: C:\Windows\System32\logman.exe stop OSLog
+6. Stop scripts:
   (powershell-Adminstrator): logman stop OSLog
 --->>> Result: File CSV contains the log OS
 
