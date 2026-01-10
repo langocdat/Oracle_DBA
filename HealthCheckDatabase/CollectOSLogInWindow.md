@@ -10,8 +10,8 @@ https://github.com/langocdat/Oracle_DBA/blob/main/HealthCheckDatabase/OSLog.ps1
                         powershell -ExecutionPolicy Bypass -File "C:\OSLog.ps1"
 4. Monitor:
   (powershell-Adminstrator): logman query OSLog
-  Để kiểm tra trạng thái: C:\Windows\System32\logman.exe query OSLog
-  Để dừng thu thập dữ liệu: C:\Windows\System32\logman.exe stop OSLog
+  - Để kiểm tra trạng thái: C:\Windows\System32\logman.exe query OSLog
+  - Để dừng thu thập dữ liệu: C:\Windows\System32\logman.exe stop OSLog
 6. Stop scripts:
   (powershell-Adminstrator): logman stop OSLog
 --->>> Result: File CSV contains the log OS
