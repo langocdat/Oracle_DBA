@@ -47,9 +47,7 @@
    - Step 1: Lấy BackupSet key theo tag
      + (RMAN): LIST BACKUP TAG 'WEEKLY_FULL_20260112';
        
-      BS Key  Type LV Size    Completion Time
-      ------- ---- -- ------- ----------------
-      123     Full  0  35.2G  12-JAN-26
-     
+      <img width="337" height="79" alt="image" src="https://github.com/user-attachments/assets/1423ced3-9a0e-4e83-8784-9258a686a92d" />
+
    - Step 2: Validate bằng BackupSet Key
      + (RMAN): VALIDATE BACKUPSET 123;
