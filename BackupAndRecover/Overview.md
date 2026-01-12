@@ -44,7 +44,12 @@
      <img width="645" height="718" alt="image" src="https://github.com/user-attachments/assets/43a686f8-2cb3-4239-9b2e-92b2fb92bb8f" />
 
 6. How to check validate từng file backup, tức kiểm tra file backup có dùng được hay ko
-   - Step 1: Lấy BackupSet key theo tag
+   - Step 1: Lấy Tag, Key trong RMAN (skip step 2)
+     + (RMAN): LIST BACKUP SUMMARY;
+       
+       <img width="968" height="381" alt="image" src="https://github.com/user-attachments/assets/5cae87e1-ad8d-4d54-a790-44513f5432e0" />
+
+   - Step 2: Lấy BackupSet Key theo tag
      + (RMAN): LIST BACKUP TAG 'WEEKLY_FULL_20260112';
        
       <img width="337" height="79" alt="image" src="https://github.com/user-attachments/assets/1423ced3-9a0e-4e83-8784-9258a686a92d" />
