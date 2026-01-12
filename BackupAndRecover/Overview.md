@@ -42,4 +42,12 @@
    - Đối với backup level 0:
      
      <img width="645" height="718" alt="image" src="https://github.com/user-attachments/assets/43a686f8-2cb3-4239-9b2e-92b2fb92bb8f" />
-     
+
+6. How to check validate từng file backup, tức kiểm tra file backup có dùng được hay ko
+   - Step 1: Lấy BackupSet key theo tag
+     + (RMAN): LIST BACKUP TAG 'WEEKLY_FULL_20260112';
+      BS Key  Type LV Size    Completion Time
+      ------- ---- -- ------- ----------------
+      123     Full  0  35.2G  12-JAN-26
+   - Step 2: Validate bằng BackupSet Key
+     + (RMAN): VALIDATE BACKUPSET 123;
