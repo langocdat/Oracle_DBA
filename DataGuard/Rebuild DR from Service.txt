@@ -75,9 +75,9 @@ Step 8: clear log file
 
 	(SQL)> set lines 200 pages 200
 		   col member for a85
-	(SQL)> select group# from v$logfile; -->> clear toàn bộ logfile của những group này.
-	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
-	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+	(SQL)> select group# from v$logfile; -->> clear toàn bộ logfile của những group này. (view chứa tổng hợp các group bao gồm cả online redo log và standby redo log)
+	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$log l, v$logfile f where l.group#=f.group# order by f.type, l.group#; (view chứa only online redo log)
+	(SQL)> select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#; (view chứa only standby redo log)
 	
 	  GROUP#    THREAD#      BYTES TYPE    MEMBER                                                                                STATUS
 	---------- ---------- ---------- ------- ------------------------------------------------------------------------------------- ----------
@@ -202,6 +202,7 @@ Switch nhiều datafile. Ex: switch datafile 1,2,3 to copy;
 3. Recover
 Nếu recover bên trong scripts restore bị lỗi, thì cần check validate ở datafile báo lỗi. Ex: Validate datafile 22;
 Sau khi đã validate, cần recover lại datafile
+
 
 
 
