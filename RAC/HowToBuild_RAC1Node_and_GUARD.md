@@ -154,7 +154,7 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 - Thực hiện trên cả DC và DR
 ### Use Udev
 
-1.Create file .rules
+1. Create file .rules
 
 - Path: /etc/udev/rules.d/
   
@@ -163,12 +163,12 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
   [bash_root]: ```vi 99-oracle-asm.rules```
   
 - Contents:
-```
-KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf5b28eeb-d612bbec", \
-	SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
-KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
-	SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
-```
+	```
+	KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf5b28eeb-d612bbec", \
+		SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+	KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
+		SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+	```
 2. Query
 	[bash_root]:
 	```
