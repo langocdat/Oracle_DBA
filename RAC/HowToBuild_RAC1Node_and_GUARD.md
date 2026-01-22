@@ -262,6 +262,29 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 
 <img width="999" height="400" alt="image" src="https://github.com/user-attachments/assets/e071bf4f-7c08-4f8c-96c6-44451dfa8ebd" />
 
+## Step 6: Create database
+[bash_oracle]:
+```
+export DISPLAY=192.168.58.1:0.0
+cd $ORACLe_HOME
+dbca
+```
+<img width="1001" height="336" alt="image" src="https://github.com/user-attachments/assets/4de96a06-97ba-4b7b-b71a-b2b8edc27b74" />
+
+<img width="1001" height="516" alt="image" src="https://github.com/user-attachments/assets/7e8e1618-3486-435b-9043-15d2207b7a27" />
+
+<img width="1001" height="448" alt="image" src="https://github.com/user-attachments/assets/ede43f96-7d7d-4f55-8757-9e210065f54e" />
+
+<img width="1001" height="263" alt="image" src="https://github.com/user-attachments/assets/fef905cb-6eac-4df6-ac47-93ae3b4962d7" />
+
+<img width="1001" height="276" alt="image" src="https://github.com/user-attachments/assets/578111ad-6d65-4091-bace-b49570ecbfc3" />
+
+<img width="1001" height="439" alt="image" src="https://github.com/user-attachments/assets/33a66ae0-9b30-4b9d-8da2-a9b2065faa2a" />
+
+<img width="1001" height="343" alt="image" src="https://github.com/user-attachments/assets/164ecf0f-5d8b-42cb-8b8e-fc9595a1d313" />
+
+<img width="1001" height="485" alt="image" src="https://github.com/user-attachments/assets/b0087981-05f1-4dcb-8116-cc7484334650" />
+
 
 
 
