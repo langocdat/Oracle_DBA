@@ -134,6 +134,12 @@ export PATH=$ORACLE_HOME/bin:$BASE_PATH
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
 export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ```
+## Step 10: Shutdown machine and add disk
+
+1. Shutdown machine
+2. Add disk
+
+
 
 
 
