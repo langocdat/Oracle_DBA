@@ -1,7 +1,9 @@
 Step 1: Configuration hostname
-  [bash_root_dc]: hostnamectl set-hostname srvdc.localdomain
-  [bash_root_dr]: hostnamectl set-hostname srvdr.localdomain
 
+  [bash_root_dc]: hostnamectl set-hostname srvdc.localdomain
+  
+  [bash_root_dr]: hostnamectl set-hostname srvdr.localdomain
+  
 Step 2: Configuration IP
   [bash_root]: nmcli con show
   [bash_root]: vi /etc/sysconfig/network-scripts/ifcfg-...
