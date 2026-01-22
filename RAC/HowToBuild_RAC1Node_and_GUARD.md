@@ -55,18 +55,21 @@
   yum list | grep oracleasm -i
   yum install oracleasm-support.x86_64 -y
 ```
-Step 5: Off firewall and enable chrony
-  [bash_root_dc_dr]: systemctl stop firewalld.service
-  [bash_root_dc_dr]: systemctl disable firewalld.service
-  [bash_root_dc_dr]: yum install chronyd.service
-  [bash_root_dc_dr]: systemctl enable chronyd.service
-  [bash_root_dc_dr]: systemctl restart chronyd.service
-  [bash_root_dc_dr]: systemctl status chronyd
-  [bash_root_dc_dr]: chronyc tracking
-  [bash_root_dc_dr]: chronyc sources
-  [bash_root_dc_dr]: chronyc -a 'burst 4/4'
-  [bash_root_dc_dr]: chronyc -a makestep
+## Step 5: Off firewall and enable chrony
 
+  [bash_root_dc_dr]:
+``` 
+  systemctl stop firewalld.service
+  systemctl disable firewalld.service
+  yum install chronyd.service
+  systemctl enable chronyd.service
+  systemctl restart chronyd.service
+  systemctl status chronyd
+  chronyc tracking
+  chronyc sources
+  chronyc -a 'burst 4/4'
+  chronyc -a makestep
+```
 Step 6: Create path
   [bash_root_dc_dr]: mkdir -p /u01/app/oracle/product/19c/dbhome_1
   [bash_root_dc_dr]: mkdir -p /u01/app/19c/grid
