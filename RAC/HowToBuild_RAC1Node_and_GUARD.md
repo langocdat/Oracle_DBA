@@ -232,14 +232,19 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 <img width="743" height="367" alt="image" src="https://github.com/user-attachments/assets/f7c15d6a-6ee6-4e10-9181-40e7df8335ac" />
 
 ## Step 4: Create diskgroup in ASM
-	[bash_grid]: ```asmca```
+[bash_grid]: 
+
+	```
+	asmca
+	```
 
 <img width="1185" height="316" alt="image" src="https://github.com/user-attachments/assets/6f77930b-cdff-477a-b9a5-4b6b9e115f2c" />
 
 <img width="1185" height="216" alt="image" src="https://github.com/user-attachments/assets/0c5e21c2-6af0-4226-ae02-eb9598a312e4" />
 
 ## Step 5: Install Oracle Software
-	[bash_grid]: 
+[bash_grid]: 
+
 	```
 	export DISPLAY=192.168.58.1:0.0
 	cd /u01/app/oracle/product/19c/dbhome_1
