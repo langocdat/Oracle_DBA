@@ -140,6 +140,8 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 2. Add disk
 3. Start machine
 
+---
+
 # ***INSTALL GRID AND ORACLE SOFTWARE***
 
 
