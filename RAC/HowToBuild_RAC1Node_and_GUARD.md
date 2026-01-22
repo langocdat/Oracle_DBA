@@ -1,4 +1,4 @@
-# ***8CONFIGURATION SYSTEM***
+# ***CONFIGURATION SYSTEM***
 
 ## Step 1: Configuration hostname
 
