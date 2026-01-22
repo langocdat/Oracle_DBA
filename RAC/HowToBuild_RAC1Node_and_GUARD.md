@@ -18,9 +18,10 @@
   | 2 | Internal | 192.168.59. 11 | 192.168.59.12 |
   | 3 | NAT | | |  
 
+## Step 3: Configure /etc/hosts
 
-Step 3: Configure /etc/hosts
-  [bash_root_dc_dr]: cat /etc/hosts
+  [bash_root_dc_dr]: ```bash cat /etc/hosts```
+  
   127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
   ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
   # Host-only
