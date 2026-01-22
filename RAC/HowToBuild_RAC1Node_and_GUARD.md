@@ -5,13 +5,13 @@ Step 1: Configuration hostname
 Step 2: Configuration IP
   [bash_root]: nmcli con show
   [bash_root]: vi /etc/sysconfig/network-scripts/ifcfg-...
-  ----------------------------------------------------------------------
+  
   |  STT  |     NAME     |          DC          |          DR          |
-  ----------------------------------------------------------------------
+  | :--   | : --         | :--                  | :--                  |
   |   1   |   Host Only  |   192.168.58.11      |   192.168.58.12      |
   |   2   |   Internal   |   192.168.59.11      |   192.168.59.12      |
   |   3   |   NAT        |                      |                      |
-  ----------------------------------------------------------------------
+
 
 Step 3: Configure /etc/hosts
   [bash_root_dc_dr]: cat /etc/hosts
