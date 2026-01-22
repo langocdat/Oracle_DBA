@@ -250,5 +250,22 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 	cd /u01/app/oracle/product/19c/dbhome_1
 	./runInstaller
 	```
+<img width="999" height="266" alt="image" src="https://github.com/user-attachments/assets/d3efee06-e474-47f5-9517-5c4720c57f1e" />
+
+<img width="999" height="223" alt="image" src="https://github.com/user-attachments/assets/63e230d8-9666-4500-afe9-5c3d6e8a3dfb" />
+
+<img width="999" height="221" alt="image" src="https://github.com/user-attachments/assets/26f00ea1-ebc8-4c91-9e8d-5111d8d325ed" />
+
+<img width="999" height="296" alt="image" src="https://github.com/user-attachments/assets/fc073559-1564-4c16-a135-69d3df50bfaa" />
+
+<img width="999" height="292" alt="image" src="https://github.com/user-attachments/assets/914bcc52-a4a6-4d09-8b12-dbf865a11953" />
+
+<img width="999" height="400" alt="image" src="https://github.com/user-attachments/assets/e071bf4f-7c08-4f8c-96c6-44451dfa8ebd" />
+
+
+
+
+
+
 
   
