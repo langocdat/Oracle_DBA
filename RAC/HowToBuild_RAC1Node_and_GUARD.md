@@ -182,6 +182,11 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 	udevadm control --reload-rules && udevadm trigger
 	ls -ln /dev/ASM*
 	```
+ 	```text
+  	[root@srvdc rules.d]# ls -ln /dev/ASM*
+	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_DATA -> sdb
+	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_FRA -> sdc
+  	```
 
    
 
