@@ -188,7 +188,42 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_FRA -> sdc
   	```
 
-   
+## Step 3: Install GRID
+[bash_grid]: ```cd /u01/app/19c/grid```
+[bash_grid]: ```export DISPLAY=192.168.58.1:0.0```
+[bash_grid]: ```./gridSetup.sh```
+
+<img width="1001" height="345" alt="image" src="https://github.com/user-attachments/assets/9256e97e-6d2e-4aae-982d-c2b2c27db9e3" />
+
+<img width="1001" height="462" alt="image" src="https://github.com/user-attachments/assets/4e36bfb6-3304-4c4a-9d03-f18fe3a2dd41" />
+
+<img width="1001" height="329" alt="image" src="https://github.com/user-attachments/assets/fdf541a4-cdb0-4654-b48e-6db7b3506d13" />
+
+<img width="1001" height="266" alt="image" src="https://github.com/user-attachments/assets/e5ff0797-3efd-4b79-b166-c3a33788b73d" />
+
+<img width="1001" height="350" alt="image" src="https://github.com/user-attachments/assets/23c43ff3-439b-40b1-b766-058f7043c98e" />
+
+<img width="1001" height="339" alt="image" src="https://github.com/user-attachments/assets/d27272e9-90ad-49cd-b105-a207c314abdd" />
+
+<img width="1001" height="367" alt="image" src="https://github.com/user-attachments/assets/33cd3d56-748a-4ec1-acc0-43cb04fdb1f7" />
+
+<img width="1001" height="551" alt="image" src="https://github.com/user-attachments/assets/68826fd7-dd94-405a-bdee-ea1839f8e450" />
+
+<img width="1001" height="369" alt="image" src="https://github.com/user-attachments/assets/42a37427-2919-434c-a984-4f5dd8499b82" />
+
+<img width="1001" height="426" alt="image" src="https://github.com/user-attachments/assets/e3f9a9db-d212-4750-bd5a-2f6bb86267c4" />
+
+<img width="1001" height="469" alt="image" src="https://github.com/user-attachments/assets/4ab56f36-6c1a-44b2-9da3-c681f1fc040a" />
+
+<img width="1001" height="499" alt="image" src="https://github.com/user-attachments/assets/9aed8bcc-7ecc-4d6c-ba2c-ac9d61eaabf2" />
+
+<img width="1001" height="534" alt="image" src="https://github.com/user-attachments/assets/7e6461bd-dd09-4e12-916e-2b1f9e2cb046" />
+
+<img width="1001" height="559" alt="image" src="https://github.com/user-attachments/assets/f679e949-fc31-4a1e-8330-08c1962f79f8" />
+
+<img width="1001" height="753" alt="image" src="https://github.com/user-attachments/assets/e0223fdb-6a31-4245-a895-0e7f16f8cb2b" />
+
+<img width="1001" height="216" alt="image" src="https://github.com/user-attachments/assets/50310490-ceca-4024-9ae7-2349f0b99fee" />
 
 
 
