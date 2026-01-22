@@ -155,7 +155,8 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ### Use Udev
 1. Create file .rules
 - Path: /etc/udev/rules.d/
-- Example: [bash_root]: ```vi 99-oracle-asm.rules```
+- Example:
+  [bash_root]: ```vi 99-oracle-asm.rules```
 - Contents:
 ```
 KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf5b28eeb-d612bbec", \
@@ -164,17 +165,11 @@ KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
 	SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
 ```
 2. Query:
-
 [bash_root]: ```lsblk```
-
 [bash_root]: ```fdisk -l```
-
 [bash_root]: ```udevadm info --query=all --name=/dev/sde```
-
 3. Reload
-
 [bash_root]: ```udevadm control --reload-rules && udevadm trigger```
-
 [bash_root]: ```ls -ln /dev/ASM*```
 
 
