@@ -143,8 +143,33 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 ---
 
 # ***INSTALL GRID AND ORACLE SOFTWARE***
-
-
+## Step 1: Tải bộ cài đặt grid và oracle cho DC và DR
+```
+Đường dẫn chứa bộ cài đặt grid: /home/grid/
+--> giải nén (dùng user grid): unzip /u01/app/19c/grid
+Đường dẫn chứa bộ cài đặt oracle: /home/oracle
+--> giải nén (dùng user oracle): unzip /u01/app/oracle/product/19c/dbhome_1
+```
+## Step 2: Configure ASM
+- Thực hiện trên cả DC và DR
+### 1. Use Udev
+1. Create file .rules
+- Path: /etc/udev/rules.d/
+- Example: [bash_root]: ```vi 99-oracle-asm.rules```
+- Contents:
+```
+KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf5b28eeb-d612bbec", \
+	SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
+	SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+```
+2. Query:
+[bash_root]: ```lsblk```
+[bash_root]: ```fdisk -l```
+[bash_root]: ```udevadm info --query=all --name=/dev/sde```
+3. Reload
+[bash_root]: ```udevadm control --reload-rules && udevadm trigger```
+[bash_root]: ```ls -ln /dev/ASM*```
 
 
 
