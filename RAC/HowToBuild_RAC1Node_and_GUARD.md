@@ -20,7 +20,7 @@
 
 ## Step 3: Configure /etc/hosts
 
-  [bash_root_dc_dr]: ```html 
+  [bash_root_dc_dr]: ```txt 
     cat /etc/hosts```
   
   127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
