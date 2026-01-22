@@ -1,3 +1,4 @@
+# *INSTALL GRID*
 <img width="1012" height="399" alt="image" src="https://github.com/user-attachments/assets/41026de4-c5c7-48b3-9bd4-43127fe0d4a2" />
 
 <img width="1006" height="473" alt="image" src="https://github.com/user-attachments/assets/612803bc-ea2a-472c-a3c2-0ab602db188e" />
@@ -32,9 +33,10 @@
 
 <img width="759" height="494" alt="image" src="https://github.com/user-attachments/assets/b9f38b7b-b2f8-4349-b7cd-2319045c21d2" />
 
-=============================================================================
+---
 
-Cai software
+# *INSTALL ORACLE SOFTWARE*
+
 <img width="1004" height="386" alt="image" src="https://github.com/user-attachments/assets/1a78b74b-dbde-41c2-ad72-be36472e7046" />
 
 <img width="998" height="283" alt="image" src="https://github.com/user-attachments/assets/3a7a7739-f912-42ae-aae9-0f670ff04c9c" />
@@ -47,8 +49,9 @@ Cai software
 
 <img width="1004" height="419" alt="image" src="https://github.com/user-attachments/assets/63a90736-0748-44ec-bed4-6d206b7d01c1" />
 
+---
 
-=============================================================================
+# *CREATE DISKGROUP IN ASM*
 
 <img width="622" height="284" alt="image" src="https://github.com/user-attachments/assets/7efd02dc-222a-4851-89a9-b78a9a00b0e8" />
 
@@ -58,9 +61,9 @@ Cai software
 
 <img width="1184" height="266" alt="image" src="https://github.com/user-attachments/assets/0d10a6e2-2fd1-4559-85c7-d49cf3bfa9c3" />
 
-=============================================================================
+---
 
-Create database
+# *CREATE DATABASE*
 
 <img width="629" height="400" alt="image" src="https://github.com/user-attachments/assets/5390b046-002f-486e-aa31-3cb9ae1fece6" />
 
