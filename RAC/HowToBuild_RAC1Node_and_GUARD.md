@@ -170,18 +170,18 @@ KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
 	SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
 ```
 2. Query
-   [bash_root]:
-   ```
-   lsblk
-   fdisk -l
-   udevadm info --query=all --name=/dev/sdb
-   ```  
+	[bash_root]:
+	```
+	lsblk
+	fdisk -l
+	udevadm info --query=all --name=/dev/sdb
+	```  
 3. Reload
- [bash_root]:
-```
-udevadm control --reload-rules && udevadm trigger
-ls -ln /dev/ASM*
-```
+	[bash_root]:
+	```
+	udevadm control --reload-rules && udevadm trigger
+	ls -ln /dev/ASM*
+	```
 
    
 
