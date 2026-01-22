@@ -154,7 +154,7 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 - Thực hiện trên cả DC và DR
 ### Use Udev
 
-1. Create file .rules
+1.Create file .rules
 
 - Path: /etc/udev/rules.d/
   
@@ -169,7 +169,7 @@ KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf5b28eeb-d612bbec", \
 KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
 	SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
 ```
-2. Query:
+2.Query:
    
 [bash_root]: ```lsblk```
 
@@ -177,7 +177,7 @@ KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd15e4846-3269ed1b", \
 
 [bash_root]: ```udevadm info --query=all --name=/dev/sde```
 
-3. Reload
+3.Reload
    
 [bash_root]: ```udevadm control --reload-rules && udevadm trigger```
 
