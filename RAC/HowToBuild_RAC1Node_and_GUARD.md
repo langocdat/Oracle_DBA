@@ -21,7 +21,7 @@
 ## Step 3: Configure /etc/hosts
 
   [bash_root_dc_dr]: ```vi /etc/hosts```
-  
+  ```
   127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
   ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
   # Host-only
@@ -43,7 +43,7 @@
   # DNS
   192.168.58.21 dnsss1.localdomain dnsss1
   192.168.58.22 dnsss2.localdomain dnsss2
-
+```
 Step 4: Install package
   [bash_root_dc_dr]: yum update -y
   [bash_root_dc_dr]: yum list | grep 19c -i
