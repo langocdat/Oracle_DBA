@@ -138,6 +138,9 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 
 1. Shutdown machine
 2. Add disk
+3. Start machine
+
+
 
 
 
