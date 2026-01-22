@@ -99,10 +99,13 @@
   useradd -g oinstall -G asmadmin,asmdba,asmoper,dba grid
   passwd grid
   -->> double fill password
+
   usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba oracle
   usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba grid
+
   ==>> Check nhóm quyền của user: id <user>. Ex: id grid
   ==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
+
   chown -R grid:oinstall /u01
   chown -R oracle:oinstll /u01/app/oracle
 ```
