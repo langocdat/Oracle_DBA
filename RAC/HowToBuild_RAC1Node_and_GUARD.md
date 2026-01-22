@@ -12,12 +12,6 @@
   
   [bash_root]: ```vi /etc/sysconfig/network-scripts/ifcfg-...```
   
-  |  STT  |     NAME     |          DC          |          DR          |
-  | :--   | : --         | :--                  | :--                  |
-  |   1   |   Host Only  |   192.168.58.11      |   192.168.58.12      |
-  |   2   |   Internal   |   192.168.59.11      |   192.168.59.12      |
-  |   3   |   NAT        |                      |                      |
-
   | STT | NAME | DC | DR |
   | :-- | :-- | :-- | :--|
   | 1 | Host Only | 192.168.58.11 | 192.168.58.12 |
