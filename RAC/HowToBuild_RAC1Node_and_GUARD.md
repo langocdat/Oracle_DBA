@@ -190,10 +190,12 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 
 ## Step 3: Install GRID
 
-- [bash_grid]: ```cd /u01/app/19c/grid```
-- [bash_grid]: ```export DISPLAY=192.168.58.1:0.0```
-- [bash_grid]: ```./gridSetup.sh```
-
+- [bash_grid]:
+  ```
+  cd /u01/app/19c/grid
+  export DISPLAY=192.168.58.1:0.0
+  ./gridSetup.sh
+  ```
 
 <img width="1001" height="345" alt="image" src="https://github.com/user-attachments/assets/9256e97e-6d2e-4aae-982d-c2b2c27db9e3" />
 
