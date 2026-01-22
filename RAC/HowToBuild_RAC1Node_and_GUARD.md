@@ -70,41 +70,55 @@
   chronyc -a 'burst 4/4'
   chronyc -a makestep
 ```
-Step 6: Create path
-  [bash_root_dc_dr]: mkdir -p /u01/app/oracle/product/19c/dbhome_1
-  [bash_root_dc_dr]: mkdir -p /u01/app/19c/grid
-  [bash_root_dc_dr]: mkdir -p /u01/app/grid
 
-Step 7: Create group
-  [bash_root_dc_dr]: groupadd asmdba
-  [bash_root_dc_dr]: groupadd asmoper
-  [bash_root_dc_dr]: groupadd asmadmin
+## Step 6: Create path
+
+  [bash_root_dc_dr]: 
+  ```
+  mkdir -p /u01/app/oracle/product/19c/dbhome_1
+  mkdir -p /u01/app/19c/grid
+  mkdir -p /u01/app/grid
+```
+## Step 7: Create group
+
+  [bash_root_dc_dr]: 
+```
+  groupadd asmdba
+  groupadd asmoper
+  groupadd asmadmin
+
   ==>> Đổi tên asmopers thành asmoper: groupmod -n asmoper asmopers
   ==>> Check các group hiện có: cat /etc/group hoặc getent group
+```
+## Step 8: Create User grid + oracle
 
-Step 8: Create User grid + oracle
-  [bash_root_dc_dr]: passwd oracle
+  [bash_root_dc_dr]: 
+  ```
+  passwd oracle
   -->> double fill password
-  [bash_root_dc_dr]: useradd -g oinstall -G asmadmin,asmdba,asmoper,dba grid
-  [bash_root_dc_dr]: passwd grid
+  useradd -g oinstall -G asmadmin,asmdba,asmoper,dba grid
+  passwd grid
   -->> double fill password
-  [bash_root_dc_dr]: usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba oracle
-  [bash_root_dc_dr]: usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba grid
+  usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba oracle
+  usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba grid
   ==>> Check nhóm quyền của user: id <user>. Ex: id grid
   ==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
-  [bash_root_dc_dr]: chown -R grid:oinstall /u01
-  [bash_root_dc_dr]: chown -R oracle:oinstll /u01/app/oracle
+  chown -R grid:oinstall /u01
+  chown -R oracle:oinstll /u01/app/oracle
+```
+## Step 9: Create enviroment profile
 
-Step 9: Create enviroment profile
-  [bash_grid_dc_dr]: vi .bash_profile
+  [bash_grid_dc_dr]: ```vi .bash_profile```
+```  
 export ORACLE_SID=+ASM
 export ORACLE_HOME=/u01/app/19c/grid
 export BASE_PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
 export PATH=$ORACLE_HOME/bin:$BASE_PATH
 export LD_LIBRARY_PATH=$ORACLE_SID/lib:/lib:/usr/lib
 export CLASSPATH=$ORACLE_SID/JRE:$ORACLE_SID/jlib:$ORACLE_SID/rdbms/jlib
-
-  [bash_oracle_dc_dr]: vi .bash_profile
+```
+  [bash_oracle_dc_dr]: ```vi .bash_profile```
+```  
 export TMP=/tmp
 export TMPDIR=$TMP
 export ORACLE_BASE=/u01/app/oracle
@@ -116,6 +130,7 @@ export BASE_PATH=/usr/sbin:$PATH
 export PATH=$ORACLE_HOME/bin:$BASE_PATH
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
 export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+```
 
 
 
