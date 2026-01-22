@@ -8,9 +8,9 @@
   
 ## Step 2: Configuration IP
 
-  [bash_root]: ```nmcli con show```
+  [bash_root_dc_dr]: ```nmcli con show```
   
-  [bash_root]: ```vi /etc/sysconfig/network-scripts/ifcfg-...```
+  [bash_root_dc_dr]: ```vi /etc/sysconfig/network-scripts/ifcfg-...```
   
   | STT | NAME | DC | DR |
   | :-- | :-- | :-- | :--|
@@ -44,13 +44,17 @@
   192.168.58.21 dnsss1.localdomain dnsss1
   192.168.58.22 dnsss2.localdomain dnsss2
 ```
-Step 4: Install package
-  [bash_root_dc_dr]: yum update -y
-  [bash_root_dc_dr]: yum list | grep 19c -i
-  [bash_root_dc_dr]: yum install oracle-database-preinstall-19c.x86_64 -y
-  [bash_root_dc_dr]: yum list | grep oracleasm -i
-  [bash_root_dc_dr]: yum install oracleasm-support.x86_64 -y
 
+## Step 4: Install package
+
+  [bash_root_dc_dr]: 
+```
+  yum update -y  
+  yum list | grep 19c -i
+  yum install oracle-database-preinstall-19c.x86_64 -y
+  yum list | grep oracleasm -i
+  yum install oracleasm-support.x86_64 -y
+```
 Step 5: Off firewall and enable chrony
   [bash_root_dc_dr]: systemctl stop firewalld.service
   [bash_root_dc_dr]: systemctl disable firewalld.service
