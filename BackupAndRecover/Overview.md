@@ -56,6 +56,7 @@
        
       <img width="337" height="79" alt="image" src="https://github.com/user-attachments/assets/1423ced3-9a0e-4e83-8784-9258a686a92d" />
 
-   - Step 2: Validate bằng BackupSet Key
+   - Step 3: Validate bằng BackupSet Key
      + (RMAN): VALIDATE BACKUPSET 123;
+     <img width="1188" height="429" alt="image" src="https://github.com/user-attachments/assets/b23fc8dc-48dc-4089-b32a-2495527b8422" />
      + (RMAN): RESTORE DATABASE PREVIEW;
