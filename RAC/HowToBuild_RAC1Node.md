@@ -187,7 +187,8 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_DATA -> sdb
 	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_FRA -> sdc
   	```
-
+### Use ORACLEASM
+Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2Node.txt
 ## Step 3: Install GRID
 
 - [bash_grid]:
