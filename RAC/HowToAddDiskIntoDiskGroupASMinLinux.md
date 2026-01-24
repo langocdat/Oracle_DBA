@@ -4,9 +4,9 @@
 4. Kiểm tra trạng thái rebalance.
 5. Kiểm tra đĩa mới trong ASM Diskgroup
 
-=====================================================
+---
 
-(Dùng oracleasm)
+# Dùng oracleasm
 
 Step 1: Add disk thô vào máy chủ
 
@@ -71,36 +71,36 @@ Step 5: add disk và diskgroup
 - Check:
   + (sqlplus_asm):
     
-    (bash_grid): sqlplus / as sysasm
-    
-    * set lines 9999;
-    * col diskgroup for a15
-    * col diskgroup for a15
-    * col path for a35
-    * select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status from v$asm_disk b, v$asm_diskgroup a where a.group_number (+) =b.group_number order by b.group_number,b.name;
-      
+    (bash_grid): ```sqlplus / as sysasm```
+    ```
+    set lines 9999;
+    col diskgroup for a15
+    col diskgroup for a15
+    col path for a35
+    select a.name DiskGroup,b.name DiskName, b.total_mb, (b.total_mb-b.free_mb) Used_MB, b.free_mb,b.path,b.header_status from v$asm_disk b, v$asm_diskgroup a where a.group_number (+) =b.group_number order by b.group_number,b.name;
+    ```  
     <img width="1219" height="176" alt="image" src="https://github.com/user-attachments/assets/16ba240c-2cbb-4f7f-974f-fa0b43bb593d" />
 
-  + (bash_grid): asmcmd lsdg
+  + (bash_grid): ```asmcmd lsdg```
     
     <img width="1532" height="118" alt="image" src="https://github.com/user-attachments/assets/5f8ae4b8-fdd5-4e31-905c-9ec3abeb8759" />
 
 
-=======================================
+---
 
-  Dùng mpath, udev
-=======================================
+# Dùng mpath, udev
+
 1. Check disk:
    
-    (bash_root): lsblk
+    (bash_root): ```lsblk```
    
    <img width="531" height="262" alt="image" src="https://github.com/user-attachments/assets/a247333d-b05b-4454-93d6-65e55f7540ac" />
 
 2. Add disk vao file 99-asm
    
-   (bash_root): cd /etc/udev/rules.d/
+   (bash_root): ```cd /etc/udev/rules.d/```
    
-   (bash_root): vi 99-asm.rules(....)
+   (bash_root): ```vi 99-asm.rules(....)```
    
    -->> Add:
    
@@ -117,9 +117,9 @@ Step 5: add disk và diskgroup
 
 1. create file .rules
 - Path: /etc/udev/rules.d/
-- Example: vi 99-oracle-asm.rules
+- Example: ```vi 99-oracle-asm.rules```
 - Contents:
-
+```
 KERNEL=="sdb", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBdc3019df-654420f3", \
 	SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
 KERNEL=="sdc", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBd41081cb-546d752b", \
@@ -128,21 +128,18 @@ KERNEL=="sdd", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB34fd1593-f259e982", \
 	SYMLINK+="ASM_OCR", OWNER="grid", GROUP="asmadmin", MODE="0660"
 KERNEL=="sde", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB0f2183cb-95c9acf8", \
 	SYMLINK+="ASM_DATA2", OWNER="grid", GROUP="asmadmin", MODE="0660"
-	
+```	
 - Query:
-  
+  	```
 	lsblk
-
 	fdisk -l
-
 	udevadm info --query=all --name=/dev/sde
-
+	```
 - Reload:
-  
+	```  
 	udevadm control --reload-rules && udevadm trigger
-
 	ls -ln /dev/ASM*
-
+	```
 
 
 
