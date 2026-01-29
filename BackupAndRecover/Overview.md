@@ -2,7 +2,8 @@
    - Exprired: các file backup, archivelog chỉ tồn tại trên RMAN và đã bị xóa trên OS (tức xóa tay).
    - Obsolete: các file backup, archivelog tồn tại trên cả RMAN và OS. Nhưng chúng được RMAN xác định không còn phù hợp theo Policy -> lỗi thời.
    - Lệnh tạo archivelog để test:
-     + (sqlplus): alter system switch logfile;
+     + (sqlplus): ```alter system switch logfile;```
+     + (sqlplus): ```alter system archive log current;```
 3. Retention policy
    - Check policy
      + (RMAN): show all;
