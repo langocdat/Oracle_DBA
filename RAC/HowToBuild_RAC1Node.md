@@ -181,6 +181,9 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 	```
 	udevadm control --reload-rules && udevadm trigger
 	ls -ln /dev/ASM*
+ 	udevadm info --query=all --name=/dev/ASM_OCR | grep ID_SERIAL
+	udevadm info --query=all --name=/dev/ASM_DATA | grep ID_SERIAL
+	udevadm info --query=all --name=/dev/ASM_FRA | grep ID_SERIAL
 	```
  	```text
   	[root@srvdc rules.d]# ls -ln /dev/ASM*
