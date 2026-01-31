@@ -76,7 +76,7 @@
   allocate channel d5 device type disk;
   SET NEWNAME FOR DATABASE TO '/u01/app/oracle/oradata/ORCL/%b'; 
   SET NEWNAME FOR tempfile 1 TO '/u01/app/oracle/oradata/ORCL/%b';
-  SET UNTIL SEQUENCE 8; ---rman: LIST BACKUP OF ARCHIVELOG ALL;
+  SET UNTIL SEQUENCE 8; ---rman: LIST BACKUP OF ARCHIVELOG ALL; max(sequence) + 1
   restore database;
   switch datafile all;
   switch tempfile all;
