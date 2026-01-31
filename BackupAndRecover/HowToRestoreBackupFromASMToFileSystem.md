@@ -92,10 +92,11 @@
   }
   ```
 ### How to Check max sequence archivelog 
+
+  RMAN> ```LIST BACKUP OF ARCHIVELOG ALL;``` -> max sequence + 1
+  
   <img width="1004" height="378" alt="image" src="https://github.com/user-attachments/assets/d997c686-1711-44d9-94fc-805dd767d218" />
   
-  max sequence + 1
-
 ## Step 9: Open database with mode resetlogs
 
   RMAN,SQL> ```alter database open resetlogs;```
