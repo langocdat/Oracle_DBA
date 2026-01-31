@@ -81,8 +81,9 @@
   switch datafile all;
   switch tempfile all;
   RECOVER DATABASE;
+  }
   ```
 
 ## Step 9: Open database with mode resetlogs
 
-  RMAN,SQL> ```alter database open resetlogs```
+  RMAN,SQL> ```alter database open resetlogs;```
