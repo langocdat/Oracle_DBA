@@ -1,5 +1,6 @@
 # Prepare 
 1. Install software
+2. Prepare bash_profile
 ## Step 1: Prepare path
   ```
   mkdir -p /u01/app/oracle/fast_recovery_area
@@ -51,7 +52,7 @@
   SQL> ```create spfile from pfile;```
 
 ## Step 4: Restart with spfile
-
+  SQL> ```shutdown immediate;```
   SQL> ```startup nomount;```
 
 ## Step 5: Restore controlfile
