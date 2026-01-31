@@ -67,6 +67,12 @@
   RMAN> ```catalog start with '/home/oracle/backup';```
 
 ## Step 8: Run scripts restore
+
+  (bash_oracle):
+  ```
+  rman target / checksyntax @'/home/oracle/scripts_restore_and_recovery.rman'
+  nohup rman target / @'/home/oracle/scripts_restore_and_recovery.rman' log='/home/oracle/scripts_restore_and_recovery.log' &
+  ```
   ```
   run {
   allocate channel d1 device type disk;
