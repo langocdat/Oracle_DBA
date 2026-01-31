@@ -44,5 +44,45 @@
   *.sga_target=1796m
   orcl.undo_tablespace='UNDOTBS1'
   ```
+## Step 3: Start nomount with pfile and create spfile
 
+  SQL> ```startup nomount pfile = '/u01/app/oracle/product/19c/dbhome_1/dbs/initORCL.ora';```
 
+  SQL> ```create spfile from pfile;```
+
+## Step 4: Restart with spfile
+
+  SQL> ```startup nomount;```
+
+## Step 5: Restore controlfile
+
+  RMAN> ```restore controlfile from '/home/oracle/backup/ctl.bk';```
+
+## Step 6: Mount database
+
+  RMAN> ```alter database mount;```
+
+## Step 7: Catalog backup
+
+  RMAN> ```catalog start with '/home/oracle/backup';```
+
+## Step 8: Run scripts restore
+  ```
+  run {
+  allocate channel d1 device type disk;
+  allocate channel d2 device type disk;
+  allocate channel d3 device type disk;
+  allocate channel d4 device type disk;
+  allocate channel d5 device type disk;
+  SET NEWNAME FOR DATABASE TO '/u01/app/oracle/oradata/ORCL/%b'; 
+  SET NEWNAME FOR tempfile 1 TO '/u01/app/oracle/oradata/ORCL/%b';
+  SET UNTIL SEQUENCE 8; ---rman: LIST BACKUP OF ARCHIVELOG ALL;
+  restore database;
+  switch datafile all;
+  switch tempfile all;
+  RECOVER DATABASE;
+  ```
+
+## Step 9: Open database with mode resetlogs
+
+  RMAN,SQL> ```alter database open resetlogs```
