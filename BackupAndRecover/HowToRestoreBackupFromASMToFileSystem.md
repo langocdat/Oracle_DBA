@@ -53,6 +53,7 @@
 
 ## Step 4: Restart with spfile
   SQL> ```shutdown immediate;```
+
   SQL> ```startup nomount;```
 
 ## Step 5: Restore controlfile
