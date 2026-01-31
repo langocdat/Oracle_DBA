@@ -10,7 +10,7 @@ TODAYDATE=$(date +"%Y%m%d")
 DATETIME=$(date +"%Y%m%d_%H%M")
 BASEDIR="backup/$TODAYDATE"
 BKDIR="/home/oracle/$BASEDIR/BK_DB_LV0_$TODAYDATE"
-BKLOG="/home/oracle/$BASEDIR/BK_DB_LV0_$TODAYDATE"
+BKLOG="/home/oracle/LogBK/$TODAYDATE/BK_DB_LV0_$TODAYDATE"
 mkdir -p "$BKDIR"
 mkdir -p "$BKLOG"
 
