@@ -12,7 +12,7 @@
   <img width="569" height="498" alt="image" src="https://github.com/user-attachments/assets/71340071-4bf9-4a7b-b603-89e0d77e66b9" />
 
 ## Step 3: Check Session:
-  ```
+  `
   set linesize 200;
   col spid format a10;
   col PROGRAM format a50;
@@ -28,6 +28,6 @@
   JOIN    v$process p ON p.addr = s.paddr
   WHERE   s.status = 'ACTIVE' 
   AND     s.username IS NOT NULL;
-  ```
+  `
 
 
