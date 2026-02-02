@@ -1,6 +1,6 @@
 # 1.Check Tablespace
 SQL> ```select TABLESPACE_NAME, STATUS from dba_tablespaces;```
-    ```
+    `
     TABLESPACE_NAME                STATUS
     ------------------------------ ---------
     SYSTEM                         ONLINE
@@ -10,7 +10,7 @@ SQL> ```select TABLESPACE_NAME, STATUS from dba_tablespaces;```
     USERS                          ONLINE
     UNDOTBS2                       ONLINE
     6 rows selected.
-    ```
+    `
     
 SQL>
     ```
@@ -81,5 +81,6 @@ SQL> ```SELECT owner, segment_type, segment_name, tablespace_name, ROUND(SUM(byt
     -------------------- ------------------ -------------------- ------------------------------ ----------
     SYS                  TABLE              EMPLOYEE             SYSTEM                                 34
     ```
+
 
 
