@@ -33,8 +33,6 @@
   *.db_recovery_file_dest_size=3900m
   *.diagnostic_dest='/u01/app/oracle'
   *.dispatchers='(PROTOCOL=TCP) (SERVICE=orclXDB)'
-  family:dw_helper.instance_mode='read-only'
-  *.local_listener='-oraagent-dummy-'
   *.log_archive_format='%t_%s_%r.dbf'
   *.nls_language='AMERICAN'
   *.nls_territory='AMERICA'
@@ -67,6 +65,16 @@
 ## Step 7: Catalog backup
 
   RMAN> ```catalog start with '/home/oracle/backup';```
+
+  RMAN> 
+  ```
+    crosscheck copy;
+    crosscheck backup;
+    crosscheck archivelog all;
+    delete noprompt expired archivelog all;
+    delete noprompt expired backup;
+    delete noprompt obsolete;
+  ```
 
 ## Step 8: Run scripts restore
 
