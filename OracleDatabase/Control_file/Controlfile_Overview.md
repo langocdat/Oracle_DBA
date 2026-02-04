@@ -26,3 +26,9 @@ SQL>
   Show parameter control_files;
   Select * from v$controlfile;
   ```
+# How to remove controlfile
+
+> Step 1: Alter system
+> Step 2: Shutdown database
+> Step 3: Remove controlfile
+> Step 4: Start database
