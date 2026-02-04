@@ -40,7 +40,6 @@
     > Linh hoạt: Segment cho phép dữ liệu của một bảng có thể nhảy sang file thứ hai (data02.dbf) nếu file thứ nhất hết chỗ, mà người dùng vẫn thấy nó là một bảng duy nhất.
 
 ## 3. How to check Table belong to Tablespace and Segment
-  
   SQL> 
   ```
   set linesize 200;
