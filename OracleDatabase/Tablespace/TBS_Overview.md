@@ -34,6 +34,9 @@
     > Partition_2024: Nằm trên Tablespace FAST_DATA (ổ đĩa SSD tốc độ cao).
 
     > Tuy nhiên, về mặt logic, người dùng vẫn chỉ thấy đó là một cái tên bảng duy nhất.
+    > Tiết kiệm tài nguyên: Nếu hệ thống có 10.000 bảng mà tạo 10.000 file thì OS sẽ "sập tiệm" vì không quản lý nổi danh sách mở tệp (File descriptors).
+
+    > Linh hoạt: Segment cho phép dữ liệu của một bảng có thể nhảy sang file thứ hai (data02.dbf) nếu file thứ nhất hết chỗ, mà người dùng vẫn thấy nó là một bảng duy nhất.
   
   
 
