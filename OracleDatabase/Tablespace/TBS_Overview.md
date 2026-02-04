@@ -45,7 +45,8 @@
   set linesize 200;
   col OWNER format a20;
   col segment_name format a30;
-  SELECT owner, segment_name, segment_type, tablespace_name, bytes / 1024 / 1024 AS size_mb, extents FROM dba_segments WHERE segment_name = 'EMPLOYEE';
+  SELECT owner, segment_name, segment_type, tablespace_name, bytes / 1024 / 1024 AS size_mb, extents
+  FROM dba_segments WHERE segment_name = 'EMPLOYEE';
   ```
   
 
