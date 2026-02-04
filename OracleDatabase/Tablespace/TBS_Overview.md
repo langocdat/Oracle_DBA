@@ -48,7 +48,10 @@
   SELECT owner, segment_name, segment_type, tablespace_name, bytes / 1024 / 1024 AS size_mb, extents
   FROM dba_segments WHERE segment_name = 'EMPLOYEE';
   ```
-  
+> OWNER                SEGMENT_NAME                   SEGMENT_TYPE       TABLESPACE_NAME                   SIZE_MB    EXTENTS
+> -------------------- ------------------------------ ------------------ ------------------------------ ---------- ----------
+> SYS                  EMPLOYEE                       TABLE              SYSTEM                              .0625          1
+
 
   
 
