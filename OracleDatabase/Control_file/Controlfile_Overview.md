@@ -28,7 +28,10 @@ SQL>
   ```
 # How to remove controlfile
 
-> Step 1: Alter system
-> Step 2: Shutdown database
-> Step 3: Remove controlfile
-> Step 4: Start database
+  > Step 1: Alter system
+
+  > Step 2: Shutdown database
+
+  > Step 3: Remove controlfile
+
+  > Step 4: Start database
