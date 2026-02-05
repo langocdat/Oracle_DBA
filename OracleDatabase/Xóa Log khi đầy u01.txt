@@ -26,6 +26,7 @@ Attension: chỉ xóa các file chứa ký tự số, không được xóa file 
 (bash): rm -rf *_*
 	- Thực hiện xóa file, giữ lại 15 ngày gần nhất
 	(bash): find . -type f -name "*_*.xml" -mtime +15 -exec rm -f {} \;
+	(bash): find . -type f -name "*_*.trc" -mtime +15 -print -exec rm -f {} \;		
 
 3. Xóa Archive log
 	(rman): crosscheck archivelog all;
@@ -40,5 +41,6 @@ Hoặc có thể zip file
 
 -r (recursive): xóa thư mục và toàn bộ file con bên trong (nếu chỉ rm sẽ không xóa được thư mục).
 -f (force): ép xóa, không hỏi y/n, bỏ qua lỗi (vd: file không tồn tại).
+
 
 
