@@ -62,3 +62,6 @@
      <img width="1188" height="429" alt="image" src="https://github.com/user-attachments/assets/b23fc8dc-48dc-4089-b32a-2495527b8422" />
      
      + (RMAN):```RESTORE DATABASE PREVIEW;```
+
+7. How to check folder in OS
+   - OS: ```ls -tr | xargs du -sh```
