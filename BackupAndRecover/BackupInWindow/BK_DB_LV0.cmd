@@ -44,6 +44,7 @@ echo     incremental level 0 database
 echo     format '%BKDIR%\datafile_LV0_%%d_%%T_%%U.bkp'
 echo     tag='DB_LV0_%TODAYDATE%';
 echo.
+echo   sql  'alter system archive log current';
 echo   backup as compressed backupset
 echo     archivelog all
 echo     format '%BKDIR%\arch_LV0_%%d_%%T_%%U.bkp'
@@ -69,5 +70,6 @@ rman target / cmdfile="%RMANSCRIPT%" log="%LOGFILE%"
 
 echo Ending Backup >> "%LOGFILE%"
 echo %DATE% %TIME% >> "%LOGFILE%"
+
 
 
