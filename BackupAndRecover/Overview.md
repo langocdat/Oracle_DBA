@@ -12,7 +12,7 @@
        <img width="520" height="360" alt="image" src="https://github.com/user-attachments/assets/f46577b2-3ba6-490c-ab79-4512681689bf" />
        
    - Recovery Window: giữ backup, archivelog đủ để Point in time trong vòng n ngày (có thể configure số ngày lâu hơn).
-     + (RMAN): ```Configure Retention policy to recovery window 7 days;```
+     + (RMAN): ```Configure Retention policy to recovery window of 7 days;```
        -> giữ backup, archivelog trong vòng 7 ngày.
    - Redundancy: giữ số lượng backup full (level 0) mới nhất.
      + (RMAN): ```Configure Retention policy to redundancy 2;```
