@@ -23,7 +23,12 @@
        -> Mỗi backup level 0 sẽ đi kèm các backup level 1. Do vậy, khi backup level 0 của CN bị RMAN đánh dấu là obsolete nên backup level 1 của CN cũng bị RMAN đánh dấu là obsolete.
 4. Kiểm tra và xóa backup, archivelog obsolete
    - Check backup và archivelog obsolete theo policy:
-     + (RMAN): ```report obsolete;```
+     + (RMAN):
+       ```
+       report obsolete;
+       list backup of controlfile;
+       list backup of spfile;
+       ```
    - Delete backup và archivelog obsolete theo policy:
      + (RMAN): ```delete noprompt obsolete;```
    - Check backup expired:
