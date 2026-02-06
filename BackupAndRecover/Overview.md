@@ -29,6 +29,7 @@
    - Check backup expired:
      + (RMAN): ```crosscheck backup;```
      + (RMAN): ```list backup summary;```
+     + (RMAN): ```list expired backup;```
    - Delete backup expired:
      + (RMAN): ```delete noprompt expired backup;```
    - Check archivelog expired:
