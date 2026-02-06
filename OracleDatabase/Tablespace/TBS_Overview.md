@@ -54,6 +54,21 @@
   SYS                  EMPLOYEE                       TABLE              SYSTEM                              .0625          1
   ```
 
+## 4. Max size of datafile in Tablespace
+
+- Max size của datafile phụ thuộc vào 2 yếu tố chính
+
+  > Loại tablespace (smallfile hay bigfile)
+  
+  > Kích htước block của datafile
+
+  | Block size | Max size datafile |
+  | :- | :- |
+  | 2KB | 8GB |
+  | 4KB | 16GB |
+  | 8KB | 32GB |
+  | 16KB | 64 GB |
+  | 32KB | 128GB |
 
   
 
