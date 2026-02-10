@@ -13,7 +13,7 @@
 
 ---DROP===================================================
     --- Drop redo log group
-    (Sql): ALTER DATABASE DROP LOGFILE 4;
+    (Sql): ALTER DATABASE DROP LOGFILE group 4;
     Attension: group phải ở trạng thái INACTIVE với result: SELECT GROUP#, STATUS FROM V$LOG;
     --- Drop member
     (Sql): ALTER DATABASE DROP LOGFILE MEMBER 'path';
