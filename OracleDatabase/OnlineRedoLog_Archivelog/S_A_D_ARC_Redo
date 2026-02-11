@@ -1,0 +1,36 @@
+---SHOW===================================================
+    (Sql): archive log list -- kiểm tra hệ thống bật archivelog mode 
+    (sql): SELECT l.GROUP#, l.STATUS, lf.MEMBER, lf.TYPE FROM V$LOG l JOIN V$LOGFILE lf ON l.GROUP# = lf.GROUP#; -- list current redo log file
+    (sql): Select group#, member, status from v$logfile order by group#;
+    (sql): Select group#, status from v$log;
+
+---ADD====================================================
+    --- Add member log file to group
+    (Sql): ALTER DATABASE ADD LOGFILE MEMBER '+DATA' TO GROUP 1; 
+    --- ADD redo log group 
+    (Sql): ALTER DATABASE ADD LOGFILE GROUP 4 ('+DATA1','+DATA2') SIZE 200M;
+          Ex: ALTER DATABASE ADD LOGFILE GROUP 2 ('/u02/app/oracle/oradata/ORCL/redolog02b.log', '/u01/app/oracle/oradata/ORCL/redolog02a.log') SIZE 200M;
+
+---DROP===================================================
+    --- Drop redo log group
+    (Sql): ALTER DATABASE DROP LOGFILE group 4;
+    Attension: group phải ở trạng thái INACTIVE với result: SELECT GROUP#, STATUS FROM V$LOG;
+    --- Drop member
+    (Sql): ALTER DATABASE DROP LOGFILE MEMBER 'path';
+    Attension: Không thể xóa member nếu member đó là member cuối cùng trong group. Và group đó đang ở ACTIVE or CURRENT
+
+=======================================================================================================
+|          RAC              |
+=======================================================================================================
+    --- Kiểm tra Instance đang quản lý thread nào
+    (Sql): select thread#, groups, instance from GV$THREAD
+    --- ADD member vào group 
+    (Sql): ALTER DATABASE ADD LOGFILE THREAD <thread_number> GROUP <group_number> ('/path/to/log1.log', '/path/to/log2.log') SIZE <size>M;
+        Ex: ALTER DATABASE ADD LOGFILE THREAD 2
+        GROUP 5 ('+DATA/racdb/onlinelog/group5_1.log', '+DATA/racdb/onlinelog/group5_2.log') SIZE 200M;
+
+=======================================================================================================
+(sql): ALTER SYSTEM ARCHIVE LOG CURRENT; archive process write redo entries to archivelog file from redo log file.
+(sql): ALTER DATABASE CLEAR LOGFILE GROUP 2; -- Xóa redo entries trong group
+(sql): ALTER DATABASE CLEAR UNARCHIVED LOGFILE GROUP 2; -- Xóa redo entries trong group ngay cả khi chưa chuyển thành archived
+(sql): ALTER SYSTEM ARCHIVE LOG CURRENT; -- DBA tác động archive process copy data to Archivelog file from online group redo log file.
