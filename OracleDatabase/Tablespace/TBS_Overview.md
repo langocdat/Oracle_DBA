@@ -91,3 +91,6 @@ WHERE A.TABLESPACE_NAME = B.TABLESPACE_NAME(+) UNION ALL
     ORDER BY USED_PCT_OF_MAX DESC;
 ```
 
+<img width="1034" height="228" alt="image" src="https://github.com/user-attachments/assets/dc81b34d-cd7e-4b10-94b0-da76593ef4a4" />
+
+
