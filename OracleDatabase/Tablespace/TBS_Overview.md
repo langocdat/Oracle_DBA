@@ -106,5 +106,7 @@ select TABLESPACE_NAME, FILE_NAME, bytes/1024/1024 AS size_mb, autoextensible, S
 
 <img width="1076" height="153" alt="image" src="https://github.com/user-attachments/assets/94dd28ef-bf6e-47f6-bf93-c8579530a71a" />
 
-
+> Trong trường hợp `USED_PCT_OF_MAX` có % cao -> cần kiểm tra
+ - Các datafile của tbs có được autoextend không
+ - Nếu size của các datafile đã đạt max hết 32GB -> Cần add thêm datafile cho tbs -> Để add được datafile mới -> Cần check OS còn space không -> Nếu OS không còn space -> add space
 
