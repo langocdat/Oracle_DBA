@@ -93,4 +93,17 @@ WHERE A.TABLESPACE_NAME = B.TABLESPACE_NAME(+) UNION ALL
 
 <img width="1034" height="228" alt="image" src="https://github.com/user-attachments/assets/dc81b34d-cd7e-4b10-94b0-da76593ef4a4" />
 
+> Tablespaces được cấu thành từ các datafile, do vậy từ đây, nếu muốn thay đổi kích thước của tablespace, ta cần resize của những datafile thuộc tablespaces đó
+
+SQL>
+```
+set pagesize 300;
+set linesize 200;
+col TABLESPACE_NAME format a30;
+col FILE_NAME format a50;
+select TABLESPACE_NAME, FILE_NAME, bytes/1024/1024 AS size_mb, autoextensible, STATUS from dba_data_files ORDER BY tablespace_name;
+```
+
+<img width="1112" height="156" alt="image" src="https://github.com/user-attachments/assets/48952210-6f16-43ca-975e-8167c7409570" />
+
 
