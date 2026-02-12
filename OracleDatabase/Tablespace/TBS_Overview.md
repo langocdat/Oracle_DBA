@@ -104,6 +104,7 @@ col FILE_NAME format a50;
 select TABLESPACE_NAME, FILE_NAME, bytes/1024/1024 AS size_mb, autoextensible, STATUS from dba_data_files ORDER BY tablespace_name;
 ```
 
-<img width="1112" height="156" alt="image" src="https://github.com/user-attachments/assets/48952210-6f16-43ca-975e-8167c7409570" />
+<img width="1076" height="153" alt="image" src="https://github.com/user-attachments/assets/94dd28ef-bf6e-47f6-bf93-c8579530a71a" />
+
 
 
