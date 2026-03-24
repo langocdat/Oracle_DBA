@@ -19,3 +19,9 @@
 ## 3.4. OJVM Patch
   - Patch cho Oracle Java Virtual Machine
     
+# 4. Check Patch SQL
+SQL> ```col ACTION_TIME format a30;
+col ACTION format a10;
+col status format a10;
+set linesize 200;
+select action_time, action, status, description from dba_registry_sqlpatch order by action_time;```
