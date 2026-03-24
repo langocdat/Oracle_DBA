@@ -19,7 +19,7 @@
 ## 3.4. OJVM Patch
   - Patch cho Oracle Java Virtual Machine
     
-# 4. Check Patch SQL
+# 4. Check Patch version SQL
 
 SQL>
 ```
