@@ -4,4 +4,9 @@
 
 <img width="568" height="940" alt="image" src="https://github.com/user-attachments/assets/1f96167d-ecf2-4ca2-9ea8-5b8130fa1bf6" />
 
+# 2. Phân loại
+## GIRU (Grid Infrastructure Release Update)
+  -  Áp dụng cho GRID
+## DBRU (Database Release Update)
+  - Áp dụng cho DB
 
