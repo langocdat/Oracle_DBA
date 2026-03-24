@@ -1,4 +1,4 @@
-#1. How to Search and Download Patch
+# 1. How to Search and Download Patch
 
 <img width="661" height="581" alt="image" src="https://github.com/user-attachments/assets/c0c0eeed-f0fa-4a7a-88a5-a11f922f96b4" />
 
