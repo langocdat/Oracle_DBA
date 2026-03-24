@@ -10,3 +10,12 @@
 ## DBRU (Database Release Update)
   - Áp dụng cho DB
 
+# 3. Các loại Patch chính
+## 3.1. RU (Release Update)
+  - Patch định kỳ hàng quý
+## 3.2. RUR (Release Update Revision)
+  - Patch nhỏ hơn RU
+  - Chỉ fix thêm bug trên RU trước đó
+## 3.4. OJVM Patch
+  - Patch cho Oracle Java Virtual Machine
+    
