@@ -107,7 +107,7 @@
   ==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
 
   chown -R grid:oinstall /u01
-  chown -R oracle:oinstll /u01/app/oracle
+  chown -R oracle:oinstall /u01/app/oracle
 ```
 ## Step 9: Create enviroment profile
 
