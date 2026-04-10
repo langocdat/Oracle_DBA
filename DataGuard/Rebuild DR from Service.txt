@@ -71,6 +71,26 @@ switch tempfile all;
 recover database from service PROCBS;
 }
 
+Step 7.1
+ RMAN: restore database from service ....
+-> Nếu bị đứt đoạn, thực hiện restore từng datafile : restore datafile 1,2,3,4,5.... from service...;
+Check các datafile nào cần restore: set lines 250
+	col file_name format a90
+	col con_name   format a25
+	
+	SELECT d.file#, d.name AS file_name
+	FROM   v$datafile d
+	WHERE  NOT EXISTS ( SELECT 1 FROM   v$datafile_copy c WHERE  c.file#   = d.file# AND    c.status  = 'A' AND    c.deleted = 'NO')
+	ORDER BY d.file#;
+
+Step 7.2:
+ RMAN: switch database to copy;
+  ->> hoặc dùng switch datafile 1,2,3,4... to copy;
+
+Step 8: Thực hiện recover
+ RMAN: recover database from service .....;
+->> Nhưng khuyến nghị cấu hình broker hoặc log_archive_dest để truyền arc trước khi restore datafile -> khi đó chỉ cần dùng recover database;
+
 Step 8: clear log file
 
 	(SQL)> set lines 200 pages 200
