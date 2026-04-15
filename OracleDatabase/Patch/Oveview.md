@@ -29,3 +29,6 @@ col status format a10;
 set linesize 200;
 select action_time, action, status, description from dba_registry_sqlpatch order by action_time;
 ```
+
+# 5. Run datapatch
+[Oracle]: ```./datapatch -verbose```
