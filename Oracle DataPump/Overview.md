@@ -2,8 +2,11 @@
 1. Đường dẫn chứa file dump
 
 OS> ```mkdir -p exp_dump```
+
 SQL> `sqlplus / as sysdba -> Tạo directory object`
+
 scripts name: ls.sql
+
 ```
 set linesize 150;
 set pagesize 200;
