@@ -24,6 +24,7 @@ alter system set SGA_max_size=21G scope=spfile sid='*'; => restart instance
 ```
 
 SQL> (11G)
+<p>Set memory theo kiểu 11G không hỗ trợ huge page. Muốn sử dụng huge page cần sử dụng memory theo kiểu 10G </p>
 ```
 show parameter memory;
 ```
