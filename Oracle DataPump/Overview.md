@@ -1,6 +1,6 @@
 # Prerequire
-1. Đường dẫn chứa file dump
-
+## 1. Đường dẫn chứa file dump
+### Check các directory đang tồn tại
 OS> ```mkdir -p exp_dump```
 
 SQL> `sqlplus / as sysdba -> Tạo directory object`
@@ -26,6 +26,11 @@ col directory_name format a25;
 col directory_path format a75;
 select owner, directory_name, directory_path from dba_directories where directory_name order by 2;
 ```
-
+### Tạo directory mới
+SQL>
+```
+create directory <directory_name> as '<đường dẫn ngoài OS>';
+create directory exp_demo as '/home/oracle/exp_demo';
+```
 3. User dump
 4. 
