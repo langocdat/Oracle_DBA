@@ -24,6 +24,9 @@ alter system set SGA_max_size=21G scope=spfile sid='*'; => restart instance
 ```
 
 SQL> (11G)
+```
+show parameter memory;
+```
 
 ```
 alter system set MEMORY_MAX_TARGET = 100G scope=spfile sid='*'; -> restart instance
