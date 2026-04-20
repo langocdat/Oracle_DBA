@@ -18,6 +18,14 @@ define vname='&1'
 select owner, directory_name, directory_path from dba_directories where directory_name like upper('%&vname%') order by 2
 /
 ```
+```
+set linesize 150;
+set pagesize 200;
+col owner format a10;
+col directory_name format a25;
+col directory_path format a75;
+select owner, directory_name, directory_path from dba_directories where directory_name order by 2;
+```
 
 3. User dump
 4. 
