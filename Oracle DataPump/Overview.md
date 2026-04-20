@@ -40,11 +40,11 @@ create directory exp_demo as '/home/oracle/exp_demo';
 ```
 Một câu lệnh expdp thường gồm:
 
-Kết nối database
-Directory (bắt buộc)
-Dumpfile + Logfile
-Phạm vi export (FULL / SCHEMA / TABLE / TABLESPACE)
-Tùy chọn bổ sung (lọc, nén, parallel, version…)
+- Kết nối database
+- Directory (bắt buộc)
+- Dumpfile + Logfile
+- Phạm vi export (FULL / SCHEMA / TABLE / TABLESPACE)
+- Tùy chọn bổ sung (lọc, nén, parallel, version…)
 ```
 
 OS> 
