@@ -11,7 +11,7 @@
 
 # RESIZE
 
-SQL> 
+SQL> (10G)
 
 ```
 show parameter sga
@@ -21,4 +21,12 @@ show parameter pga
 alter system set pga_aggregate_target=100M scope=both sid='*';
 alter system set sga_target=20G scope=both sid='*'; => Note: sga_target <= SGA_max_size
 alter system set SGA_max_size=21G scope=spfile sid='*'; => restart instance
+```
+
+SQL> (11G)
+
+```
+alter system set MEMORY_MAX_TARGET = 100G scope=spfile sid='*'; -> restart instance
+alter system set MEMORY_TARGET = 90G scope=both sid='*';
+Note: MEMORY_TARGET <= MEMORY_MAX_TARGET
 ```
