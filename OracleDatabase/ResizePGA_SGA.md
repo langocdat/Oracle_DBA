@@ -8,4 +8,17 @@
 # Oracle Database 11G
 1. MEMORY_MAX_TARGET
 2. MEMORY_TARGET
-   
+
+# RESIZE
+
+SQL> 
+
+```
+show parameter sga
+show parameter pga
+```
+```
+alter system set pga_aggregate_target=100M scope=both sid='*';
+alter system set sga_target=20G scope=both sid='*'; => Note: sga_target <= SGA_max_size
+alter system set SGA_max_size=21G scope=spfile sid='*'; => restart instance
+```
