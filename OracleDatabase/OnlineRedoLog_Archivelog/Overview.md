@@ -33,8 +33,22 @@ SQL> ```SELECT l.GROUP#, l.STATUS, lf.MEMBER, lf.TYPE FROM V$STANDBY_LOG l JOIN 
         10 UNASSIGNED +FRA/ORCL/ONLINELOG/group_10.279.1224845853                            STANDBY
         11 UNASSIGNED +FRA/ORCL/ONLINELOG/group_11.280.1224845855                            STANDBY
 ```
+# HOW TO CHECK
+```
+set lines 200 pages 200
+col member for a85
+select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$log l, v$logfile f where l.group#=f.group# order by f.type, l.group#; 
+select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+```
 # HOW TO ADD GROUP
 ## 1. ONLINE REDO LOG
+
+SQL>
+```
+ALTER DATABASE ADD LOGFILE MEMBER '+FRA' TO GROUP 1;
+ALTER DATABASE ADD LOGFILE MEMBER '+FRA' TO GROUP 2;
+```
+
 ## 2. STANDBY REDO LOG
 
 SQL> 
