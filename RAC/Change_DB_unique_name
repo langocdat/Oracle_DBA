@@ -8,8 +8,8 @@ Password file: +DATA/VCTR/PASSWORD/pwdvctr.258.1111226869
 
 -Check status, config database SRVCTL
 
-srvctl status database -d [database_name]
-srvctl config database -d [database_name]
+srvctl status database -d [db_unique_name]
+srvctl config database -d [db_unique_name]
 
 -Create PFILE
 
