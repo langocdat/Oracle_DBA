@@ -1,0 +1,24 @@
+#File_name: delete_arc.sh
+#!/bin/bash
+export ORACLE_HOME=/u01/app/oracle/product/12.2.0.1/dbhome_1
+export ORACLE_SID=congtdtt1
+export PATH=$ORACLE_HOME/bin:$PATH
+export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
+
+TODAYDATE=$(date +"%Y%m%d")
+DATETIME=$(date +"%Y%m%d_%H%M")
+BKLOG="/home/oracle/Log_Delete_ARC/$TODAYDATE"
+mkdir -p "$BKLOG"
+LOGFILE="$BKLOG/ARC_delete_log_$DATETIME.log"
+echo "--- Start delete archivelog: $(date) ---" >> "$LOGFILE"
+$ORACLE_HOME/bin/rman target / log="$LOGFILE" <<EOF
+
+RUN {
+    CROSSCHECK ARCHIVELOG ALL;
+    DELETE NOPROMPT EXPIRED ARCHIVELOG ALL;
+	DELETE NOPROMPT ARCHIVELOG UNTIL TIME 'SYSDATE-1' BACKED UP 1 TIMES TO DISK;
+}
+EXIT;
+EOF
+
+echo "--- End delete archivelog: $(date) ---" >> "$LOGFILE"
