@@ -1,0 +1,34 @@
+--->>> Xác định session đang hoạt động
+SET LINESIZE 300
+SET PAGESIZE 200
+
+COLUMN sid        FORMAT 999999
+COLUMN serial#    FORMAT 999999
+COLUMN username   FORMAT A15
+COLUMN status     FORMAT A10
+COLUMN program    FORMAT A35
+COLUMN machine    FORMAT A30
+COLUMN logon_time FORMAT A20
+
+SELECT sid, serial#, username, status, program, machine, logon_time FROM v$session ORDER BY logon_time;
+
+
+--->>> Cái gì đang chạy trong sid này
+
+SELECT s.sid, s.serial#, q.sql_id, q.sql_text FROM v$session s JOIN v$sql q ON s.sql_id = q.sql_id WHERE s.sid IN (5,996,66);
+
+SELECT sid, serial#, opname, sofar, totalwork,
+       ROUND(sofar/totalwork*100,2) AS pct_done,
+       elapsed_seconds
+FROM   v$session_longops
+WHERE  sid IN (5, 996, 66)
+AND    totalwork > 0;
+
+
+-----------------------------------------------
+
+col ACTION_TIME format a30;
+col ACTION format a10;
+col status format a10;
+set linesize 200;
+select action_time, action, status, description from dba_registry_sqlpatch order by action_time;
