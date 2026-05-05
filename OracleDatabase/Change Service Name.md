@@ -18,4 +18,4 @@ alter system register;
 ```
 
 # Check
-[oracle]$ lsnrctl status | grep '<newname>' 
+[oracle]$ lsnrctl status | grep 'newname' 
