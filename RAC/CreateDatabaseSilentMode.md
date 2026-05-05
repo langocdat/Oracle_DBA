@@ -31,4 +31,6 @@ systemPassword=oracle4U
 # Step 2: Tạo database
 [oracle]$
 
-```/u01/app/oracle/product/19c/dbhome_1/bin/dbca -silent -debug -createDatabase -responseFile /u01/app/oracle/product/19c/dbhome_1/assistants/dbca/dbca_silent.rsp```
+```
+/u01/app/oracle/product/19c/dbhome_1/bin/dbca -silent -debug -createDatabase -responseFile /u01/app/oracle/product/19c/dbhome_1/assistants/dbca/dbca_silent.rsp
+```
