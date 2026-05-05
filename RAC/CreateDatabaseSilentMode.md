@@ -1,5 +1,5 @@
 # Step 1: tạo file dbca.rsp
--- File name: dbca_silent.rsp
+ File name: dbca_silent.rsp
 ```
 responseFileVersion=/oracle/assistants/rspfmt_dbca_response_schema_v12.2.0
 gdbName=mobiledb
@@ -30,4 +30,5 @@ systemPassword=oracle4U
 
 # Step 2: Tạo database
 [oracle]$
+
 ```/u01/app/oracle/product/19c/dbhome_1/bin/dbca -silent -debug -createDatabase -responseFile /u01/app/oracle/product/19c/dbhome_1/assistants/dbca/dbca_silent.rsp```
