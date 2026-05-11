@@ -57,6 +57,7 @@ Một câu lệnh expdp thường gồm:
 OS> 
 ```
 expdp \" / as sysdba \" directory=<directory_name>
+expdp \" / as sysdba \" directory=EXP_DB dumpfile=schema.dmp logfile=schema.log SCHEMAS=SAVAPP,APPMANAGER,SAV_UAT,SAV_DEV COMPRESSION=ALL
 ```
 4. 
 5. 
