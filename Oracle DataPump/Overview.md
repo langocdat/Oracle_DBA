@@ -52,6 +52,7 @@ Một câu lệnh expdp thường gồm:
 - Dumpfile + Logfile
 - Phạm vi export (FULL / SCHEMA / TABLE / TABLESPACE)
 - Tùy chọn bổ sung (lọc, nén, parallel, version…)
+- COMPRESSION=ALL
 ```
 
 OS> 
