@@ -42,7 +42,7 @@ drop directory <directory_name>
 ## 2. User dump
 
 - Có thể sử dụng quyền user sysdba
-
+# PERFORM
 ## 3. Thực hiện export
 ```
 Một câu lệnh expdp thường gồm:
