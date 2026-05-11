@@ -32,6 +32,13 @@ SQL>
 create directory <directory_name> as '<đường dẫn ngoài OS>';
 create directory exp_demo as '/home/oracle/exp_demo';
 ```
+
+### Drop directory
+SQL>
+```
+drop directory <directory_name>
+```
+
 ## 2. User dump
 
 - Có thể sử dụng quyền user sysdba
