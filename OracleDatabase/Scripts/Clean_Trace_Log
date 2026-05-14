@@ -1,0 +1,32 @@
+#File_name: clean_adr.sh
+
+#!/bin/bash
+
+export ORACLE_SID=CONGTDTT
+export ORACLE_HOME=/u01/app/oracle/product/12c/dbhome_1
+export PATH=$ORACLE_HOME/bin:$PATH
+
+today=`date "+%Y%m%d"`
+
+LOG_DIR=/home/oracle/log/CONGTDTT
+LOG_FILE=$LOG_DIR/adr_clean_$today.log
+
+echo "===== START ADR CLEAN `date` =====" >> $LOG_FILE
+
+adrci exec="
+set home diag/rdbms/congtdttoda/CONGTDTT;
+purge -age 10080 -type TRACE;
+purge -age 86400 -type ALERT;
+purge -age 10080 -type INCIDENT;
+
+" >> $LOG_FILE 2>&1
+
+echo "===== END ADR CLEAN `date` =====" >> $LOG_FILE
+
+echo "===== START AUDIT CLEAN `date` =====" >> $LOG_FILE
+find /u01/app/oracle/admin/CONGTDTTODA/ -name "*.aud" -mtime +15 -delete
+echo "===== END AUDIT CLEAN `date` =====" >> $LOG_FILE
+
+echo "===== START Cleanup old log `date` =====" >> $LOG_FILE
+find $LOG_DIR -type f -name "*.log" -mtime +15 -delete
+echo "===== END Cleanup old log `date` =====" >> $LOG_FILE
