@@ -1,0 +1,26 @@
+#mkdir /home/oracle/log/qlhdktdb
+#File_name: del_archive_DMDCCDB.sh
+#!/bin/bash
+
+export ORACLE_SID=qlhdktdb1
+export ORACLE_HOME=/u01/app/oracle/product/12.2.0.1/dbhome_1
+export PATH=$ORACLE_HOME/bin:$PATH
+
+today=$(date "+%Y%m%d")
+
+LOG_DIR=/home/oracle/log/qlhdktdb
+LOG_FILE=$LOG_DIR/archive_clean_$today.log
+
+mkdir -p $LOG_DIR
+
+rman target / log=$LOG_FILE << EOF
+run {
+    crosscheck archivelog all;
+    delete noprompt expired archivelog all;
+    delete noprompt archivelog until time 'sysdate-5';
+}
+EOF
+
+echo "===== START Cleanup old log `date` =====" >> $LOG_FILE
+find $LOG_DIR -type f -name "*.log" -mtime +15 -delete
+echo "===== END Cleanup old log `date` =====" >> $LOG_FILE
