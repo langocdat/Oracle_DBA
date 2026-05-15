@@ -17,6 +17,10 @@
   oracle.install.db.OSRACDBA_GROUP=dba
   ```
 # Step 2: Run command
+
 [oracle]$ cd /home/oracle/database <Đường dẫn tới thư mục chứa bộ cài đặt oracle database>
+
 [oracle]$ ```/home/oracle/database/./runInstaller -silent -responseFile /home/oracle/db_install.rsp```
+
 [root]$ ```/u01/app/oracle/product/12c/dbhome_1/root.sh```
+
