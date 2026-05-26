@@ -128,30 +128,33 @@ Expect Result
 Step 1: Prepare scripts run nohup
 
 (bash_oracle): vi create_index.sh
-	```
-	export ORACLE_SID=orcl1
-	export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
-	export PATH=$ORACLE_HOME/bin:$PATH
-	sqlplus / as sysdba << EOF
-	spool /home/oracle/create_index_output.txt
-	SET TIMING ON;
-	DROP INDEX idx_employee_id;
-	create index idx_employee_id on EMPLOYEE(ID);
-	exit;
-	EOF
-	```
+
+```
+export ORACLE_SID=orcl1
+export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
+export PATH=$ORACLE_HOME/bin:$PATH
+sqlplus / as sysdba << EOF
+spool /home/oracle/create_index_output.txt
+SET TIMING ON;
+DROP INDEX idx_employee_id;
+create index idx_employee_id on EMPLOYEE(ID);
+exit;
+EOF
+```
+	
 Step 2: permission
 
-	(bash): chmod +x create_index.sh 
+(bash): ```chmod +x create_index.sh```
 	
 Step 3: run scipts in backgroud	
 
-	(bash): nohup ./create_index.sh > /home/oracle/create_index.log 2>&1 &
+(bash): ```nohup ./create_index.sh > /home/oracle/create_index.log 2>&1 &```
 	
 # Check index
 
 SQL>
-
-	col index_name format A30;
-	col status format A20;
-	select index_name, status from user_indexes where index_name = 'IDX_EMPLOYEE_ID';
+```
+col index_name format A30;
+col status format A20;
+select index_name, status from user_indexes where index_name = 'IDX_EMPLOYEE_ID';
+```
