@@ -156,5 +156,5 @@ SQL>
 ```
 col index_name format A30;
 col status format A20;
-select index_name, status from user_indexes where index_name = 'IDX_EMPLOYEE_ID';
+select index_name, status from user_indexes where index_name = 'HMS_EXAM_HMS_ROOMLIST_FK1_IDX';
 ```
