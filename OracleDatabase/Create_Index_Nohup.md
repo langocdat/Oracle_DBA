@@ -137,7 +137,7 @@ sqlplus / as sysdba << EOF
 spool /home/oracle/create_index_output.txt
 SET TIMING ON;
 DROP INDEX idx_employee_id;
-create index idx_employee_id on EMPLOYEE(ID);
+CREATE INDEX VIMES.HMS_EXAM_HMS_ROOMLIST_FK1_IDX ON VIMES.HMS_EXAM(HE_DEPTID,HE_ROOMID) TABLESPACE DBVIMES ;
 exit;
 EOF
 ```
