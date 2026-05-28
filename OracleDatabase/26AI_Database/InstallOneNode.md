@@ -8,7 +8,7 @@
 
 Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-downloads.html 
 
-# 2. Install LINUX 8.10
+# 2. Install LINUX 8.10, chuẩn bị môi trường
 ## 2.1 Configure hostname
 [root]$ ```hostnamectl set-hostname srv26AI.localdomain```
 
@@ -30,15 +30,14 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   yum list | grep oracleasm -i
   yum install kmod-redhat-oracleasm.x86_64 -y
   ```
-# 3. Install GRID
-## 3.1 Create path
+## 2.4 Create path
 [root]$ 
   ```
   mkdir -p /u01/app/oracle/product/26AI/dbhome_1
   mkdir -p /u01/app/26AI/grid
   mkdir -p /u01/app/grid
   ```
-## Step 3.2: Create group
+## Step 2.5: Create group
 [root]$ 
   ```
   groupadd asmdba
@@ -48,7 +47,7 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   ==>> Đổi tên asmopers thành asmoper: groupmod -n asmoper asmopers
   ==>> Check các group hiện có: cat /etc/group hoặc getent group
   ```
-## Step 3.3: Create User grid + oracle
+## Step 2.6: Create User grid + oracle
   [bash_root]$ 
   ```
   passwd oracle
@@ -66,7 +65,7 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   chown -R grid:oinstall /u01
   chown -R oracle:oinstall /u01/app/oracle
   ```
-## Step 3.4: Create enviroment profile
+## Step 2.7: Create enviroment profile
 
   [bash_grid]$ ```vi .bash_profile```
   ```  
@@ -94,6 +93,15 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
   export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
   ```
+## Step 2.7: Shutdown machine and add disk
+
+1. Shutdown machine
+2. Add disk
+3. Start machine
+
+---
+
+# 3. Install GRID
 # 4. Install Database
 # 5. Install AI to Database
 Tổng quát:
