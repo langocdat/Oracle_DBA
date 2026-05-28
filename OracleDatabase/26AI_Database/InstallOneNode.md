@@ -142,12 +142,12 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 	udevadm info --query=all --name=/dev/ASM_DATA | grep ID_SERIAL
 	udevadm info --query=all --name=/dev/ASM_FRA | grep ID_SERIAL
 	```
- 
-  ```
-  [root@srvdc rules.d]# ls -ln /dev/ASM*
-  lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_DATA -> sdb
-  lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_FRA -> sdc
-  ```
+	 
+	```
+	[root@srvdc rules.d]# ls -ln /dev/ASM*
+	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_DATA -> sdb
+	lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_FRA -> sdc
+	```
 ### Use ORACLEASM
 Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2Node.txt
 
