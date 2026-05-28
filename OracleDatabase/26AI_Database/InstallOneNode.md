@@ -17,6 +17,10 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 
 [root]$ ```vi /etc/sysconfig/network-scripts/ifcfg-...```
 
+| STT | NAME | IP | 
+| :-- | :-- | :-- |
+| 1 | Host Only | 192.168.58.60
+
 ## 2.3 Install Package
 [root]$ 
   ```
@@ -27,11 +31,6 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   yum install oracleasm-support.x86_64 -y
   ```
 
-
-
-| STT | NAME | IP | 
-| :-- | :-- | :-- |
-| 1 | Host Only | 192.168.58.60
 
 # 3. Install GRID
 # 4. Install Database
