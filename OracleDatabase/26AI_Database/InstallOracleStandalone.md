@@ -187,7 +187,7 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
 
 
 ## 3.4: Create DISKGROUP
-- [bash_grid]:
+- [bash_grid]$
 	```
 	cd /u01/app/26AI/grid
 	export DISPLAY=192.168.58.1:0.0
@@ -195,15 +195,25 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
 	```
  	<img width="948" height="273" alt="image" src="https://github.com/user-attachments/assets/b8b80df5-885e-42f5-83a6-6b9e399b437b" />
 
-	
+# 4. Install Database
+- [bash_oracle]$
+  ```
+  cd /u01/app/oracle/product/26AI/dbhome_1
+  export DISPLAY=192.168.58.1:0.0
+  ./runInstaller
+  ```
+  <img width="800" height="216" alt="image" src="https://github.com/user-attachments/assets/58686bab-4162-4664-8986-96378da6ca00" />
+
+  <img width="800" height="236" alt="image" src="https://github.com/user-attachments/assets/3802a893-cd5c-4bf9-b20c-d4f021c56efc" />
+
+  <img width="800" height="249" alt="image" src="https://github.com/user-attachments/assets/487b65be-2d52-4ea9-a0d9-159d3c184311" />
+
+  <img width="797" height="335" alt="image" src="https://github.com/user-attachments/assets/d6493359-cee8-41c2-9a7c-90c29bbf2c23" />
+
+
+
 
   
-
-
-
-
-
-# 4. Install Database
 # 5. Install AI to Database
 Tổng quát:
 - Cài đặt Python
