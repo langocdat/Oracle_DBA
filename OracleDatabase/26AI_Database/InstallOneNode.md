@@ -30,9 +30,70 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   yum list | grep oracleasm -i
   yum install kmod-redhat-oracleasm.x86_64 -y
   ```
-
-
 # 3. Install GRID
+## 3.1 Create path
+[root]$ 
+  ```
+  mkdir -p /u01/app/oracle/product/26AI/dbhome_1
+  mkdir -p /u01/app/26AI/grid
+  mkdir -p /u01/app/grid
+  ```
+## Step 3.2: Create group
+[root]$ 
+  ```
+  groupadd asmdba
+  groupadd asmoper
+  groupadd asmadmin
+
+  ==>> Đổi tên asmopers thành asmoper: groupmod -n asmoper asmopers
+  ==>> Check các group hiện có: cat /etc/group hoặc getent group
+  ```
+## Step 3.3: Create User grid + oracle
+  [bash_root]$ 
+  ```
+  passwd oracle
+  -->> double fill password
+  useradd -g oinstall -G asmadmin,asmdba,asmoper,dba grid
+  passwd grid
+  -->> double fill password
+
+  usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba oracle
+  usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba grid
+
+  ==>> Check nhóm quyền của user: id <user>. Ex: id grid
+  ==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
+
+  chown -R grid:oinstall /u01
+  chown -R oracle:oinstall /u01/app/oracle
+  ```
+## Step 3.4: Create enviroment profile
+
+  [bash_grid]$ ```vi .bash_profile```
+  ```  
+  export ORACLE_SID=+ASM
+  export ORACLE_HOME=/u01/app/26AI/grid
+  export BASE_PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin
+  export PATH=$ORACLE_HOME/bin:$BASE_PATH
+  export LD_LIBRARY_PATH=$ORACLE_SID/lib:/lib:/usr/lib
+  export CLASSPATH=$ORACLE_SID/JRE:$ORACLE_SID/jlib:$ORACLE_SID/rdbms/jlib
+  ```
+
+  [bash_oracle]$ ```vi .bash_profile```
+  ```  
+  export TMP=/tmp
+  export TMPDIR=$TMP
+  export ORACLE_BASE=/u01/app/oracle
+  export DB_HOME=$ORACLE_BASE/product/26AI/dbhome_1
+  export ORACLE_HOME=$DB_HOME
+  export ORACLE_SID=orcl
+  export ORACLE_TERM=xterm
+  export BASE_PATH=/usr/sbin:$PATH
+  export PYTHONHOME=/home/oracle/python
+  export PATH=$PYTHONHOME/bin:$ORACLE_HOME/bin:$BASE_PATH
+  export LD_LIBRARY_PATH=$PYTHONHOME/lib:$ORACLE_HOME/lib:/lib:/usr/lib
+  export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+  export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
+  ```
 # 4. Install Database
 # 5. Install AI to Database
 Tổng quát:
