@@ -9,7 +9,7 @@
 Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-downloads.html 
 
 # 2. Install LINUX 8.10
-2.1 Configure hostname
+## 2.1 Configure hostname
 [root]$ hostnamectl set-hostname srv26AI.localdomain
 # 3. Install GRID
 # 4. Install Database
