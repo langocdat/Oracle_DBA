@@ -102,6 +102,14 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 ---
 
 # 3. Install GRID
+## 3.1: Tải bộ cài đặt grid và oracle
+```
+Đường dẫn chứa bộ cài đặt grid: /home/grid/
+--> giải nén (dùng user grid): unzip /u01/app/26AI/grid
+Đường dẫn chứa bộ cài đặt oracle: /home/oracle
+--> giải nén (dùng user oracle): unzip /u01/app/oracle/product/26AI/dbhome_1
+```
+
 # 4. Install Database
 # 5. Install AI to Database
 Tổng quát:
