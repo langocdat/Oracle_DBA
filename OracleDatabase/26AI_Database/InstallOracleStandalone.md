@@ -13,16 +13,16 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 [root]$ ```hostnamectl set-hostname srv26AI.localdomain```
 
 [root]$ vi /etc/hosts
-	```
-	# Host-only
-	192.168.58.60 srv26AI.localdomain srv26AI
-	# Private
-	192.168.58.60 srv26AI-priv.localdomain srv26AI-priv
-	# Virtual IP
-	192.168.58.60 srv26AI-vip.localdomain srv26AI-vip
-	# SCAN
-	192.168.58.60 srv26AI-scan.localdomain srv26AI-scan
-	```
+```
+# Host-only
+192.168.58.60 srv26AI.localdomain srv26AI
+# Private
+192.168.58.60 srv26AI-priv.localdomain srv26AI-priv
+# Virtual IP
+192.168.58.60 srv26AI-vip.localdomain srv26AI-vip
+# SCAN
+192.168.58.60 srv26AI-scan.localdomain srv26AI-scan
+```
 
 ## 2.2 Configure IP
 [root]$ ```nmcli con show```
