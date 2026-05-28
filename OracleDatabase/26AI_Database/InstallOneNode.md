@@ -122,9 +122,9 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   
 - Contents:
 	```
-	SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB5e9d7b3d-3af39317", \
+	SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBc3e93220-8251670d", \
 		SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
-	SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf434ef6f-43e0a9c7", \
+	SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB6288da08-f952843a", \
 		SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
 	```
 2. Query
@@ -158,6 +158,27 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
   export DISPLAY=192.168.58.1:0.0
   ./gridSetup.sh
   ```
+  
+  <img width="800" height="281" alt="image" src="https://github.com/user-attachments/assets/a542696e-b0b3-4209-a6d1-018036f1b1c6" />
+
+  <img width="804" height="333" alt="image" src="https://github.com/user-attachments/assets/2c7f74db-e393-46e9-b907-cdf3418dfb89" />
+
+  <img width="790" height="267" alt="image" src="https://github.com/user-attachments/assets/1fde8423-cbf6-4042-a911-ea50828f4587" />
+
+  <img width="789" height="199" alt="image" src="https://github.com/user-attachments/assets/f23a1d8f-c502-43f4-bc44-590e45dd6226" />
+
+  <img width="796" height="242" alt="image" src="https://github.com/user-attachments/assets/c5687e0e-b66b-409a-9de9-d9c536d65eed" />
+
+  <img width="799" height="257" alt="image" src="https://github.com/user-attachments/assets/7f5a6b5e-e30b-4211-a080-d783b1f5f50b" />
+
+
+
+
+
+  
+
+
+
 
 
 # 4. Install Database
