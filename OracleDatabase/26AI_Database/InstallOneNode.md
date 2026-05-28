@@ -109,6 +109,56 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 Đường dẫn chứa bộ cài đặt oracle: /home/oracle
 --> giải nén (dùng user oracle): unzip /u01/app/oracle/product/26AI/dbhome_1
 ```
+## 3.2: Configure ASM
+### Use Udev
+
+1. Create file .rules
+
+- Path: /etc/udev/rules.d/
+  
+- Example:
+  
+  [bash_root]: ```vi 99-oracle-asm.rules```
+  
+- Contents:
+	```
+	SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="VBOX_HARDDISK_VB5e9d7b3d-3af39317", \
+		SYMLINK+="ASM_DATA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+	SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_SERIAL}=="VBOX_HARDDISK_VBf434ef6f-43e0a9c7", \
+		SYMLINK+="ASM_FRA", OWNER="grid", GROUP="asmadmin", MODE="0660"
+	```
+2. Query
+	[bash_root]:
+	```
+	lsblk
+	fdisk -l
+	udevadm info --query=all --name=/dev/sdb
+	```  
+3. Reload
+	[bash_root]:
+	```
+	udevadm control --reload-rules && udevadm trigger
+	ls -ln /dev/ASM*
+	udevadm info --query=all --name=/dev/ASM_DATA | grep ID_SERIAL
+	udevadm info --query=all --name=/dev/ASM_FRA | grep ID_SERIAL
+	```
+ 
+  ```
+  [root@srvdc rules.d]# ls -ln /dev/ASM*
+  lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_DATA -> sdb
+  lrwxrwxrwx. 1 0 0 3 Jan 22 21:59 /dev/ASM_FRA -> sdc
+  ```
+### Use ORACLEASM
+Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2Node.txt
+
+## 3.3: Install GRID
+- [bash_grid]:
+  ```
+  cd /u01/app/26AI/grid
+  export DISPLAY=192.168.58.1:0.0
+  ./gridSetup.sh
+  ```
+
 
 # 4. Install Database
 # 5. Install AI to Database
