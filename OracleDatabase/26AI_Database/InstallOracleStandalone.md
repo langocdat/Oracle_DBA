@@ -171,6 +171,9 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
 
   <img width="799" height="257" alt="image" src="https://github.com/user-attachments/assets/7f5a6b5e-e30b-4211-a080-d783b1f5f50b" />
 
+  <img width="801" height="441" alt="image" src="https://github.com/user-attachments/assets/ba2ff581-1446-4d0f-bb19-6f12107c9e26" />
+
+
 
 
 
