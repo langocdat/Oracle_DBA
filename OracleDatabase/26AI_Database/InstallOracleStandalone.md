@@ -193,7 +193,8 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
 	export DISPLAY=192.168.58.1:0.0
 	asmca
 	```
- 	
+ 	<img width="948" height="273" alt="image" src="https://github.com/user-attachments/assets/b8b80df5-885e-42f5-83a6-6b9e399b437b" />
+
 	
 
   
