@@ -25,10 +25,10 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 [root]$ 
   ```
   yum update -y  
-  yum list | grep 19c -i
-  yum install oracle-database-preinstall-19c.x86_64 -y
+  yum list | grep 26ai -i
+  yum install oracle-ai-database-preinstall-26ai.x86_64 -y
   yum list | grep oracleasm -i
-  yum install oracleasm-support.x86_64 -y
+  yum install kmod-redhat-oracleasm.x86_64 -y
   ```
 
 
