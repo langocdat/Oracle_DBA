@@ -7,3 +7,13 @@
   ```https://download.oracle.com/otn/linux/oracle26ai/2326100/LINUX.X64_2326100_db_home.zip```
 
 Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-downloads.html 
+
+# 2. Install LINUX 8.10
+# 3. Install GRID
+# 4. Install Database
+# 5. Install AI to Database
+Tổng quát:
+- Cài đặt Python
+- Get mô hình AI dạng Text Embedding
+- Đóng gói thành file ONNX
+- Import file ONNX vào Database
