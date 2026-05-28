@@ -13,9 +13,21 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
 [root]$ ```hostnamectl set-hostname srv26AI.localdomain```
 
 ## 2.2 Configure IP
-[root]: ```nmcli con show```
+[root]$ ```nmcli con show```
 
-[root]: ```vi /etc/sysconfig/network-scripts/ifcfg-...```
+[root]$ ```vi /etc/sysconfig/network-scripts/ifcfg-...```
+
+## 2.3 Install Package
+[root]$ 
+  ```
+  yum update -y  
+  yum list | grep 19c -i
+  yum install oracle-database-preinstall-19c.x86_64 -y
+  yum list | grep oracleasm -i
+  yum install oracleasm-support.x86_64 -y
+  ```
+
+
 
 | STT | NAME | IP | 
 | :-- | :-- | :-- |
