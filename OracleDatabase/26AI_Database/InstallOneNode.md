@@ -9,10 +9,10 @@
 Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-downloads.html 
 
 # 2. Install LINUX 8.10
-### 2.1 Configure hostname
+## 2.1 Configure hostname
 [root]$ ```hostnamectl set-hostname srv26AI.localdomain```
 
-### 2.2 Configure IP
+## 2.2 Configure IP
 [root]$ ```nmcli con show```
 
 [root]$ ```vi /etc/sysconfig/network-scripts/ifcfg-...```
