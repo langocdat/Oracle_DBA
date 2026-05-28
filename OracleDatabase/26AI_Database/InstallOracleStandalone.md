@@ -174,9 +174,15 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
   <img width="801" height="441" alt="image" src="https://github.com/user-attachments/assets/ba2ff581-1446-4d0f-bb19-6f12107c9e26" />
 
 
-
-
-
+## 3.4: Create DISKGROUP
+- [bash_grid]:
+	```
+	cd /u01/app/26AI/grid
+	export DISPLAY=192.168.58.1:0.0
+	asmca
+	```
+ 	
+	
 
   
 
