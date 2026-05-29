@@ -7,4 +7,5 @@
 ## 1. Chuẩn bị môi trường
 SQL> 
   ```ALTER SYSTEM SET vector_memory_size=1G SCOPE=SPFILE;```
+  
 Note: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARGET hiện tại để chuyển sang cho vector_memory_size
