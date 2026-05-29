@@ -11,9 +11,6 @@ SQL>
   startup force;
   ```
   ```
-  SELECT CON_ID, POOL, 
-       ALLOC_BYTES/1024/1024 as ALLOC_BYTES_MB, 
-       USED_BYTES/1024/1024 as USED_BYTES_MB 
-  FROM V$VECTOR_MEMORY_POOL ORDER BY 1,2;
+  SELECT CON_ID, POOL, ALLOC_BYTES/1024/1024 as ALLOC_BYTES_MB, USED_BYTES/1024/1024 as USED_BYTES_MB FROM V$VECTOR_MEMORY_POOL ORDER BY 1,2;
   ```
 Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARGET hiện tại để chuyển sang cho vector_memory_size
