@@ -170,12 +170,12 @@ EOF
 
 ## 7. Import mô hình AI vào Database
 ### 7.1. Configure auto open PDBS
-  SQL>
+SQL>
   ```
   alter pluggable database <PDBS_NAME> open read write;
   alter pluggable database <PDBS_NAME> save state;
   ```
-### 7.2. Create TABLESPACE and USER in PDBS
+### 7.2. Create tablespace, user, and grant privileges in PDBS
 SQL>
   ```
   CREATE TABLESPACE VECTORDEMO DATAFILE '+DATA' SIZE 1G AUTOEXTEND ON  EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
@@ -190,6 +190,29 @@ SQL>
   
   grant read, write on directory AITEST_VEC_DUMP to AITEST;
   ```
+### 7.3. Load embedding model into Database
+SQL> sqlplus AITEST/welcome1@//localhost:1521/ORCLPDB1
+ ```
+  exec dbms_vector.drop_onnx_model(model_name => '<MODEL_NAME>', force => true);
   
+  EXECUTE dbms_vector.load_onnx_model('<FOLDER_NAME>', '<FILE_AI_NAME>.onnx', 
+                    '<MODEL_NAME>', 
+                    JSON('{"function" : "embedding", "embeddingOutput" : "embedding" , "input": {"input": ["DATA"]}}')); 
+  
+  ```
+
+  ```
+  connect AITEST/welcome1
+  
+  exec dbms_vector.drop_onnx_model(model_name => 'AIDEMO_DOC_MODEL', force => true);
+  
+  EXECUTE dbms_vector.load_onnx_model('AITEST_VEC_DUMP', 'all-MiniLM-L6-v2.onnx', 
+                    'AIDEMO_DOC_MODEL', 
+                    JSON('{"function" : "embedding", "embeddingOutput" : "embedding" , "input": {"input": ["DATA"]}}')); 
+  
+  ```
+
+
+
 
   
