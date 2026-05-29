@@ -24,7 +24,7 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 
 [/home/oracle]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python``` -> Giải nén file cài đặt vào python home
 
-[/home/oracle$ ```/home/oracle/python/configure --enable-shared --prefix=/home/oracle/python``` -> Chỉ định file thực thi, thư viện python
+[/home/oracle]$ ```/home/oracle/python/configure --enable-shared --prefix=/home/oracle/python``` -> Chỉ định file thực thi, thư viện python
 
 [/home/oracle/python]$ ```make clean``` -> Dọn dẹp các file rác cũ (nếu có)
 
@@ -50,4 +50,16 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
   export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
   ```
 ## 3. Tạo liên kết symlink
+  [/home/oracle]$ 
+  ```
+  cd /home/oracle/python/bin
+  ln -sf python3.13 python3
+  ln -sf pip3.13 pip3
+  ```
+
+  Kiểm tra kết quẳ
+  [/home/oracle]$ which python3
+  ```/home/oracle/python/bin/python3```
+  [/home/oracle]$ python3 --version
+  ```Python 3.13.5```
 ## 4. 
