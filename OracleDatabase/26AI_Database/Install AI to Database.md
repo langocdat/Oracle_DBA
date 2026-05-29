@@ -192,25 +192,23 @@ SQL>
   ```
 ### 7.3. Load embedding model into Database
 SQL> sqlplus AITEST/welcome1@//localhost:1521/ORCLPDB1
- ```
-  exec dbms_vector.drop_onnx_model(model_name => '<MODEL_NAME>', force => true);
-  
-  EXECUTE dbms_vector.load_onnx_model('<FOLDER_NAME>', '<FILE_AI_NAME>.onnx', 
-                    '<MODEL_NAME>', 
-                    JSON('{"function" : "embedding", "embeddingOutput" : "embedding" , "input": {"input": ["DATA"]}}')); 
-  
-  ```
+```
+exec dbms_vector.drop_onnx_model(model_name => '<MODEL_NAME>', force => true);
 
-  ```
-  connect AITEST/welcome1
-  
-  exec dbms_vector.drop_onnx_model(model_name => 'AIDEMO_DOC_MODEL', force => true);
-  
-  EXECUTE dbms_vector.load_onnx_model('AITEST_VEC_DUMP', 'all-MiniLM-L6-v2.onnx', 
-                    'AIDEMO_DOC_MODEL', 
-                    JSON('{"function" : "embedding", "embeddingOutput" : "embedding" , "input": {"input": ["DATA"]}}')); 
-  
-  ```
+EXECUTE dbms_vector.load_onnx_model('<FOLDER_NAME>', '<FILE_AI_NAME>.onnx', 
+                  '<MODEL_NAME>', 
+                  JSON('{"function" : "embedding", "embeddingOutput" : "embedding" , "input": {"input": ["DATA"]}}')); 
+
+```
+
+```
+exec dbms_vector.drop_onnx_model(model_name => 'AIDEMO_DOC_MODEL', force => true);
+
+EXECUTE dbms_vector.load_onnx_model('AITEST_VEC_DUMP', 'all-MiniLM-L6-v2.onnx', 
+                  'AIDEMO_DOC_MODEL', 
+                  JSON('{"function" : "embedding", "embeddingOutput" : "embedding" , "input": {"input": ["DATA"]}}')); 
+
+```
 
 
 
