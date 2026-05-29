@@ -30,7 +30,7 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 
 [/home/oracle/python]$ ```make``` -> Biên dịch mã nguồn thành file chạy
 
-[/home/oracle/python]$ ```make altinstall``` Cài đặt
+[/home/oracle/python]$ ```make altinstall``` -> Cài đặt
 
 ## 2. Configure biến môi trường
 ## 3. Tạo liên kết symlink
