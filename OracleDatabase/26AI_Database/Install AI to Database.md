@@ -67,4 +67,25 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
   
   ```Python 3.13.5```
   
-## 4. 
+## 4. Tạo file requirements.txt chứa thư viện python
+[/home/oracle]$
+```
+cat << 'EOF' > /home/oracle/requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cpu
+pandas==2.2.3
+setuptools==80.8.0
+scipy==1.14.1
+matplotlib==3.10.0
+oracledb==3.3.0
+scikit-learn==1.6.1
+numpy==2.1.0
+pyarrow==19.0.0
+onnxruntime==1.20.0
+onnxruntime-extensions==0.14.0
+onnx==1.18.0
+torch==2.9.0
+transformers==4.56.1
+sentencepiece==0.2.1
+EOF
+```
+
