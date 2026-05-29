@@ -168,7 +168,22 @@ EOF
 
   <img width="1595" height="392" alt="image" src="https://github.com/user-attachments/assets/2754178c-debe-4e43-a565-083408f3ab15" />
 
-
+## 7. Import mô hình AI vào Database
+### 7.1. Create TABLESPACE and USER
+SQL>
+  ```
+  CREATE TABLESPACE VECTORDEMO DATAFILE '+DATA' SIZE 1G AUTOEXTEND ON  EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+  
+  create user AITEST identified by welcome1 
+  DEFAULT TABLESPACE VECTORDEMO 
+  quota unlimited on VECTORDEMO;
+  
+  grant DB_DEVELOPER_ROLE to AITEST;
+  
+  create or replace directory AITEST_VEC_DUMP as '/home/oracle/models';
+  
+  grant read, write on directory AITEST_VEC_DUMP to AITEST;
+  ```
   
 
   
