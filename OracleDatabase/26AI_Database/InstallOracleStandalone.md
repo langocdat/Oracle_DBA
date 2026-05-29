@@ -213,12 +213,3 @@ Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2
   <img width="797" height="335" alt="image" src="https://github.com/user-attachments/assets/d6493359-cee8-41c2-9a7c-90c29bbf2c23" />
 
 
-
-
-  
-# 5. Install AI to Database
-Tổng quát:
-- Cài đặt Python
-- Get mô hình AI dạng Text Embedding
-- Đóng gói thành file ONNX
-- Import file ONNX vào Database
