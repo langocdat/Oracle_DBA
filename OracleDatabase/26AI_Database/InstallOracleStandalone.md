@@ -48,6 +48,8 @@ Link download: https://www.oracle.com/database/technologies/oracle26ai-linux-dow
   mkdir -p /u01/app/oracle/product/26AI/dbhome_1
   mkdir -p /u01/app/26AI/grid
   mkdir -p /u01/app/grid
+  chown -R grid:oinstall /u01
+  chown -R oracle:oinstall /u01/app/oracle
   ```
 ## Step 2.5: Create group
 [root]$ 
