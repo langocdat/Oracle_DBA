@@ -91,9 +91,26 @@ EOF
 - Nâng cấp gói
   [/home/oracle]$ ```pip3 install --upgrade pip```
 
-<img width="773" height="243" alt="image" src="https://github.com/user-attachments/assets/952bdbd2-ca0e-44dd-bbfa-1720e298438d" />
+  <img width="773" height="243" alt="image" src="https://github.com/user-attachments/assets/952bdbd2-ca0e-44dd-bbfa-1720e298438d" />
 
 - Cài đặt thư viện
   [/home/oracle]$ ```pip3 install -r /home/oracle/requirements.txt```
 
-<img width="1157" height="326" alt="image" src="https://github.com/user-attachments/assets/c414c193-043d-4d04-87e2-405ae4e29555" />
+  <img width="1157" height="326" alt="image" src="https://github.com/user-attachments/assets/c414c193-043d-4d04-87e2-405ae4e29555" />
+
+## 5. Cài đặt OML4Py Client của Oracle
+- Link download: https://www.oracle.com/database/technologies/oml4py-downloads.html
+
+  <img width="1192" height="367" alt="image" src="https://github.com/user-attachments/assets/69faa2f7-8fe6-46a9-9d85-b57af8ab66a2" />
+
+  <img width="737" height="147" alt="image" src="https://github.com/user-attachments/assets/8014a087-d57f-4d2f-b84e-e8c5c459404e" />
+
+  [/home/oracle]$
+  ```
+  cd /home/oracle
+  unzip oml4py-client-linux-x86_64-2.1.1.zip
+  pip3 install client/oml-2.1.1-cp313-cp313-linux_x86_64.whl
+  ```
+
+  <img width="580" height="139" alt="image" src="https://github.com/user-attachments/assets/1c126d9b-7e05-42d1-85c5-fb208225c243" />
+
