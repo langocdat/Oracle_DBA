@@ -98,6 +98,20 @@ EOF
 
   <img width="1157" height="326" alt="image" src="https://github.com/user-attachments/assets/c414c193-043d-4d04-87e2-405ae4e29555" />
 
+- Trường hợp cài thiếu thư viện:
+  [root]: ```yum install -y libffi-devel```
+
+  Biên dịch lại
+
+  [oracle]$
+  ```
+  cd /home/oracle/python
+  ./configure --enable-shared --prefix=/home/oracle/python
+  make clean
+  make
+  make altinstall
+  ```
+
 ## 5. Cài đặt OML4Py Client của Oracle
 - Link download: https://www.oracle.com/database/technologies/oml4py-downloads.html
 
