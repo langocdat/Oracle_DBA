@@ -140,4 +140,15 @@ EOF
 
   <img width="1416" height="524" alt="image" src="https://github.com/user-attachments/assets/a38e685d-33b4-49af-a76e-b4c1f2ba7e4b" />
 
-## 6. 
+## 6. Tải mô hình AI và xuất thành file ONNX
+### 6.1. List AI support
+
+[orace]$ 
+  ```
+  python3
+  from oml.utils import ONNXPipelineConfig
+  ONNXPipelineConfig.show_preconfigured()
+  ```
+
+<img width="1609" height="313" alt="image" src="https://github.com/user-attachments/assets/5c49da7c-7bad-40d7-a5e0-780cc628e133" />
+
