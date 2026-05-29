@@ -58,8 +58,13 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
   ```
 
   Kiểm tra kết quẳ
+  
   [/home/oracle]$ which python3
+  
   ```/home/oracle/python/bin/python3```
+  
   [/home/oracle]$ python3 --version
+  
   ```Python 3.13.5```
+  
 ## 4. 
