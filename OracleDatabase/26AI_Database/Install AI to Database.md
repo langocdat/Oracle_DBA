@@ -20,7 +20,7 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 ## 1. Cài đặt python 3.13.5
 [bash_oracle]$ ```mkdir -p /home/oracle/python``` -> Đường dẫn python home
 
-[/home/oracle]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz``` -> Tải python
+[root]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz``` -> Tải python
 
 [/home/oracle]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python``` -> Giải nén file cài đặt vào python home
 
@@ -113,4 +113,6 @@ EOF
   ```
 
   <img width="580" height="139" alt="image" src="https://github.com/user-attachments/assets/1c126d9b-7e05-42d1-85c5-fb208225c243" />
+
+  <img width="1416" height="524" alt="image" src="https://github.com/user-attachments/assets/a38e685d-33b4-49af-a76e-b4c1f2ba7e4b" />
 
