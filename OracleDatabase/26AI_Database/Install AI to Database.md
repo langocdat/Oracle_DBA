@@ -109,16 +109,13 @@ EOF
 
 - Trường hợp cài thiếu thư viện:
   
-  [root]: ```yum install -y libffi-devel```
-
-  Biên dịch lại
+  Cài đặt thư viện còn thiếu -> Biên dịch lại
 
   [oracle]$
   ```
   cd /home/oracle/python
   ./configure --enable-shared --prefix=/home/oracle/python
-  make clean
-  make
+  make clean; make
   make altinstall
   ```
 
