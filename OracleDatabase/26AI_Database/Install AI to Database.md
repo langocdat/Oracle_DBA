@@ -169,7 +169,13 @@ EOF
   <img width="1595" height="392" alt="image" src="https://github.com/user-attachments/assets/2754178c-debe-4e43-a565-083408f3ab15" />
 
 ## 7. Import mô hình AI vào Database
-### 7.1. Create TABLESPACE and USER
+### 7.1. Configure auto open PDBS
+  SQL>
+  ```
+  alter pluggable database <PDBS_NAME> open read write;
+  alter pluggable database <PDBS_NAME> save state;
+  ```
+### 7.2. Create TABLESPACE and USER in PDBS
 SQL>
   ```
   CREATE TABLESPACE VECTORDEMO DATAFILE '+DATA' SIZE 1G AUTOEXTEND ON  EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
