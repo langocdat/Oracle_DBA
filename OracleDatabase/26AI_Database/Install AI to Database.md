@@ -33,5 +33,21 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 [/home/oracle/python]$ ```make altinstall``` -> Cài đặt
 
 ## 2. Configure biến môi trường
+  [/home/oracle/python]$ ```vi .bash_profile```
+  ```
+  export TMP=/tmp
+  export TMPDIR=$TMP
+  export ORACLE_BASE=/u01/app/oracle
+  export DB_HOME=$ORACLE_BASE/product/26AI/dbhome_1
+  export ORACLE_HOME=$DB_HOME
+  export ORACLE_SID=orcl
+  export ORACLE_TERM=xterm
+  export BASE_PATH=/usr/sbin:$PATH
+  export PYTHONHOME=/home/oracle/python
+  export PATH=$PYTHONHOME/bin:$ORACLE_HOME/bin:$BASE_PATH
+  export LD_LIBRARY_PATH=$PYTHONHOME/lib:$ORACLE_HOME/lib:/lib:/usr/lib
+  export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+  export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
+  ```
 ## 3. Tạo liên kết symlink
 ## 4. 
