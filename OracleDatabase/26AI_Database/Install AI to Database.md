@@ -15,3 +15,14 @@ SQL>
     FROM V$VECTOR_MEMORY_POOL ORDER BY 1,2;
   ```
 Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARGET hiện tại để chuyển sang cho vector_memory_size
+
+# Giai đoạn 1: Chuẩn bị môi trường
+## 1. Cài đặt python 3.13.5
+[bash_oracle]$ ```mkdir -p /home/oracle/python``` -> Đường dẫn python home
+
+[bash_oracle]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz```
+
+[bash_oracle]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python```
+## 2. Configure biến môi trường
+## 3. Tạo liên kết symlink
+## 4. 
