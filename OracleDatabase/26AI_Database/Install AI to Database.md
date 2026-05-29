@@ -20,14 +20,14 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 ## 1. Cài đặt python 3.13.5
 [bash_oracle]$ ```mkdir -p /home/oracle/python``` -> Đường dẫn python home
 
-[root]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz``` -> Tải python
-
 [root]$ 
-      ```
-      sudo yum install libffi-devel openssl openssl-devel tk-devel xz-devel \
-      zlib-devel bzip2-devel readline-devel libuuid-devel \
-      ncurses-devel libaio tcl-devel openblas
-      ```
+```
+sudo yum install libffi-devel openssl openssl-devel tk-devel xz-devel \
+zlib-devel bzip2-devel readline-devel libuuid-devel \
+ncurses-devel libaio tcl-devel openblas
+```
+
+[root]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz``` -> Tải python
 
 [root]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python``` -> Giải nén file cài đặt vào python home
 
