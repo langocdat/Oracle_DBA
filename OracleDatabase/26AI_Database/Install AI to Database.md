@@ -23,6 +23,9 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 [bash_oracle]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz```
 
 [bash_oracle]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python```
+
+[bash_oracle]$ ```/home/oracle/python/configure --enable-shared --prefix=/home/oracle/python```
+
 ## 2. Configure biến môi trường
 ## 3. Tạo liên kết symlink
 ## 4. 
