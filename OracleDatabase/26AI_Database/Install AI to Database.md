@@ -20,17 +20,17 @@ Attention: Oracle sẽ tự động cắt 1GB từ tổng dung lượng SGA_TARG
 ## 1. Cài đặt python 3.13.5
 [bash_oracle]$ ```mkdir -p /home/oracle/python``` -> Đường dẫn python home
 
-[bash_oracle]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz``` -> Tải python
+[/home/oracle]$ ```wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz``` -> Tải python
 
-[bash_oracle]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python``` -> Giải nén file cài đặt vào python home
+[/home/oracle]$ ```tar -xvzf Python-3.13.5.tgz --strip-components=1 -C /home/oracle/python``` -> Giải nén file cài đặt vào python home
 
-[bash_oracle]$ ```/home/oracle/python/configure --enable-shared --prefix=/home/oracle/python``` -> Chỉ định file thực thi, thư viện python
+[/home/oracle$ ```/home/oracle/python/configure --enable-shared --prefix=/home/oracle/python``` -> Chỉ định file thực thi, thư viện python
 
-[bash_oracle]$ ```make clean``` -> Dọn dẹp các file rác cũ (nếu có)
+[/home/oracle/python]$ ```make clean``` -> Dọn dẹp các file rác cũ (nếu có)
 
-[bash_oracle]$ ```make``` -> Biên dịch mã nguồn thành file chạy
+[/home/oracle/python]$ ```make``` -> Biên dịch mã nguồn thành file chạy
 
-[bash_oracle]$ ```make altinstall``` Cài đặt
+[/home/oracle/python]$ ```make altinstall``` Cài đặt
 
 ## 2. Configure biến môi trường
 ## 3. Tạo liên kết symlink
