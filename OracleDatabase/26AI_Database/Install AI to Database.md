@@ -89,9 +89,11 @@ sentencepiece==0.2.1
 EOF
 ```
 - Nâng cấp gói
+  
 [/home/oracle]$ ```pip3 install --upgrade pip```
 <img width="773" height="243" alt="image" src="https://github.com/user-attachments/assets/952bdbd2-ca0e-44dd-bbfa-1720e298438d" />
 
 - Cài đặt thư viện
+  
 [/home/oracle]$ ```pip3 install -r /home/oracle/requirements.txt```
 <img width="1157" height="326" alt="image" src="https://github.com/user-attachments/assets/c414c193-043d-4d04-87e2-405ae4e29555" />
