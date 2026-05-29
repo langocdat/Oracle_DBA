@@ -99,6 +99,7 @@ EOF
   <img width="1157" height="326" alt="image" src="https://github.com/user-attachments/assets/c414c193-043d-4d04-87e2-405ae4e29555" />
 
 - Trường hợp cài thiếu thư viện:
+  
   [root]: ```yum install -y libffi-devel```
 
   Biên dịch lại
@@ -130,3 +131,4 @@ EOF
 
   <img width="1416" height="524" alt="image" src="https://github.com/user-attachments/assets/a38e685d-33b4-49af-a76e-b4c1f2ba7e4b" />
 
+## 6. 
