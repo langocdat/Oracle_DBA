@@ -149,3 +149,26 @@ EOF
 
 <img width="1609" height="313" alt="image" src="https://github.com/user-attachments/assets/5c49da7c-7bad-40d7-a5e0-780cc628e133" />
 
+### 6.2. Tải mô hình AI
+- Ví dụ sử dụng mô hình sentence-transformers/all-MiniLM-L6-v2 để thực hành xuất ra file .onnx
+- Create folder chứa file onnx
+  
+  [oracle]$  ```mkdir -p /home/oracle/models```
+
+- Vào Python
+  
+  [oracle]$  ```python3```
+
+- Xuất mô hình AI thành file ONNX
+  ```
+  from oml.utils import ONNXPipeline, ONNXPipelineConfig
+  pipeline = ONNXPipeline(model_name="sentence-transformers/all-MiniLM-L6-v2")
+  pipeline.export2file("all-MiniLM-L6-v2", output_dir="/home/oracle/models")
+  ```
+
+  <img width="1595" height="392" alt="image" src="https://github.com/user-attachments/assets/2754178c-debe-4e43-a565-083408f3ab15" />
+
+
+  
+
+  
