@@ -191,6 +191,9 @@ SQL>
   grant read, write on directory AITEST_VEC_DUMP to AITEST;
   ```
 ### 7.3. Load embedding model into Database
+
+[oracle]$ chmod 775 /home/oracle
+
 SQL> sqlplus AITEST/welcome1@//localhost:1521/ORCLPDB1
 ```
 exec dbms_vector.drop_onnx_model(model_name => '<MODEL_NAME>', force => true);
