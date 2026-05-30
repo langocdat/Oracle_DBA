@@ -210,6 +210,7 @@ EXECUTE dbms_vector.load_onnx_model('AITEST_VEC_DUMP', 'all-MiniLM-L6-v2.onnx',
 
 ```
 
+<img width="953" height="233" alt="image" src="https://github.com/user-attachments/assets/8175490d-5e08-4a78-b847-e8f57d78441f" />
 
 
 
