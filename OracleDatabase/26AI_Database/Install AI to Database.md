@@ -215,6 +215,13 @@ EXECUTE dbms_vector.load_onnx_model('AITEST_VEC_DUMP', 'all-MiniLM-L6-v2.onnx',
 
 <img width="953" height="233" alt="image" src="https://github.com/user-attachments/assets/8175490d-5e08-4a78-b847-e8f57d78441f" />
 
-
-
+#### Check again
+SQL> 
+  ```
+  set lines 200;
+  col model_name format a30;
+  col mining_function format a30;
+  col algorithm format a30;
+  SELECT model_name, mining_function, algorithm,CREATION_DATE FROM user_mining_models WHERE model_name = 'AIDEMO_DOC_MODEL';
+  ```
   
