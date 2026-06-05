@@ -71,3 +71,20 @@
 
 7. How to check folder in OS
    - OS: ```ls -tr | xargs du -sh```
+
+8. How to check % done
+   
+SQL>
+```
+set lines 200;
+COLUMN opname           FORMAT A35
+COLUMN pct_done         FORMAT A8
+COLUMN elapsed_time     FORMAT A8
+COLUMN remain_time      FORMAT A8
+COLUMN estimated_finish FORMAT A20
+
+SELECT sid, serial#, opname, TO_CHAR(ROUND(sofar/totalwork*100,2), '990.99') || '%' AS pct_done, LPAD(FLOOR(elapsed_seconds/3600),2,'0') || ':' ||
+    LPAD(FLOOR(MOD(elapsed_seconds,3600)/60),2,'0') AS elapsed_time, LPAD(FLOOR(time_remaining/3600),2,'0') || ':' || LPAD(FLOOR(MOD(time_remaining,3600)/60),2,'0') AS remain_time,
+    TO_CHAR(SYSDATE + time_remaining/86400,'DD-MON HH24:MI:SS') AS estimated_finish
+FROM v$session_longops WHERE opname LIKE 'RMAN%' AND totalwork > 0 AND sofar < totalwork;
+```
