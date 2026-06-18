@@ -14,7 +14,7 @@ col ARCHIVED format a10;
 col APPLIED format a10;
 col DELETED format a10;
 col STATUS format a10;
-select SEQUENCE#, ARCHIVED, APPLIED, DELETED, STATUS from v$archived_log order by SEQUENCE#;
+select thread#, SEQUENCE#, ARCHIVED, APPLIED, DELETED, STATUS from v$archived_log order by SEQUENCE#;
 ```
 # Step 2: Check error in DC
 SQL>
