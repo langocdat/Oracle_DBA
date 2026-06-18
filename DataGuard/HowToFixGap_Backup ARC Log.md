@@ -6,6 +6,16 @@ select thread#, sequence#, archived, applied from v$archived_log;
 select process,status,sequence# from v$managed_standby;
 select thread#, max(sequence#) from gv$archived_log where applied='YES' group by thread# order by 1;
 ```
+```
+set lines 200;
+set pages 9999;
+col SEQUENCE# format 9999;
+col ARCHIVED format a10;
+col APPLIED format a10;
+col DELETED format a10;
+col STATUS format a10;
+select SEQUENCE#, ARCHIVED, APPLIED, DELETED, STATUS from v$archived_log order by SEQUENCE#;
+```
 # Step 2: Check error in DC
 SQL>
 ```
