@@ -88,5 +88,9 @@ Command:
 For example:
 	sed -i 's/node02/node01/g' *.dat
 
+===========================================================================================
+Đổi tên file từ .lst -> .html
+$path = "E:\MPS_Company\HealthCheck_Report\MTBANK\"
+Get-ChildItem -Path $path -Filter "awrrpt_*.lst" | Rename-Item -NewName { $_.Name -replace '\.lst$','.html' }
 
 
