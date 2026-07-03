@@ -13,6 +13,7 @@ Attention: Tắt Instance trên NODE cần patch
 ## 1.2 Unzip file patch và OPatch
 - Đảm bảo toàn bộ file OPatch trong GRID HOME và ORACLE HOME được thay thế bằng phiên bản mới
 - Backup và giải nén OPATCH
+
 [root]:
 ```
 mv OPatch OPatch.bkp
@@ -29,4 +30,18 @@ tar -pcvf grid_backup.tar grid
 cd /u01/app
 tar -pcvf oraInventory.tar oraInventory
 ```
+
+## 1.4 Chạy OPatch Check Conflict
+```
+[oracle@misdb01 ~]$ . grid
+[oracle@misdb01 ~]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /u01/software/36233126/36233263
+[oracle@misdb01 ~]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /u01/software/36233126/36240578
+[oracle@misdb01 ~]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /u01/software/36233126/36233343
+[oracle@misdb01 ~]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /u01/software/36233126/36460248
+[oracle@misdb01 ~]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /u01/software/36233126/36383196
+
+[oracle@misdb01 ~]$ cd /u01/software/36195566
+[oracle@misdb01 36195566]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -ph ./
+```
+
 
