@@ -26,11 +26,19 @@ mv OPatch OPatch.bkp
 [root@misdb01 ~]# srvctl stop filesystem -d <volume device path> -n misdb01
 ```
 
-## 1.3 Backup GRID_HOME và oraInventory
+## 1.3 Backup GRID_HOME, DB_HOME và oraInventory
 [root]:
 ```
 cd /u01/app/19.0.0.0
 tar -pcvf grid_backup.tar grid
+```
+
+```
+[root@misdb01 ~]# cd /u01/app/oracle/product/19.0.0.0
+[root@misdb01 19.0.0.0]# tar -pcvf dbhome_1_backup.tar dbhome_1
+
+[root@misdb01 ~]# cd /u01/app
+[root@misdb01 app]# tar -pcvf oraInventory.tar oraInventory
 ```
 
 [root]:
