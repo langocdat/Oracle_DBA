@@ -44,4 +44,46 @@ tar -pcvf oraInventory.tar oraInventory
 [oracle@misdb01 36195566]$ $ORACLE_HOME/OPatch/opatch prereq CheckConflictAgainstOHWithDetail -ph ./
 ```
 
+## 1.5 Chạy System Space Check
+```
+[oracle@misdb01 ~]$ . grid
+[oracle@misdb01 ~]$ vi /tmp/patch_list_gihome.txt
+/u01/software/36233126/36233263
+/u01/software/36233126/36240578
+/u01/software/36233126/36233343
+/u01/software/36233126/36460248
+/u01/software/36233126/36383196
+
+[oracle@misdb01 ~]$ $ORACLE_HOME/OPatch/opatch prereq CheckSystemSpace -phBaseFile /tmp/patch_list_gihome.txt
+```
+
+## 1.6 Chạy kiểm tra phân tích tiến trình Patch
+```
+[root@misdb01 ~]# export PATH=$PATH:/u01/app/19.0.0.0/grid/OPatch:$PATH
+[root@misdb01 ~]# cd /u01/software
+[root@misdb01 software]# cd /u01/software
+[root@misdb01 software]# /u01/app/19.0.0.0/grid/OPatch/opatchauto apply /u01/software/36233126 -analyze
+[oracle@misdb01 ~]$ . grid
+[oracle@misdb01 ~]$ cluvfy stage -pre patch
+```
+
+# 2. Thực hiện Patch
+## 2.1 Patch GRID_HOME
+```
+[root@misdb01 ~]# export PATH=$PATH:/u01/app/19.0.0.0/grid/OPatch:$PATH
+[root@misdb01 ~]# opatchauto apply /u01/software/36233126 -oh /u01/app/19.0.0.0/grid
+```
+
+## 2.2 Patch DB_HOME
+
+- Đổi quyền thư mục /u01/software về oracle:oinstall
+```
+[root]: chown -R oracle:oinstall /u01/software
+```
+
+```
+[root@misdb01 ~]# export PATH=$PATH:/u01/app/oracle/product/19c/dbhome_1/OPatch:$PATH
+[root@misdb01 ~]# opatchauto apply /u01/software/36233126 -oh /u01/app/oracle/product/19c/dbhome_1
+```
+
 
