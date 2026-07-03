@@ -18,6 +18,14 @@ Attention: Tắt Instance trên NODE cần patch
 ```
 mv OPatch OPatch.bkp
 ```
+
+- Unmount ACFS trên node thực hiện
+```
+[root@misdb01 ~]# export PATH=$PATH:/u01/app/19.0.0.0/grid/bin
+[root@misdb01 ~]# crsctl stat res -w "TYPE = ora.acfs.type" -p | grep VOLUME
+[root@misdb01 ~]# srvctl stop filesystem -d <volume device path> -n misdb01
+```
+
 ## 1.3 Backup GRID_HOME và oraInventory
 [root]:
 ```
@@ -86,4 +94,38 @@ tar -pcvf oraInventory.tar oraInventory
 [root@misdb01 ~]# opatchauto apply /u01/software/36233126 -oh /u01/app/oracle/product/19c/dbhome_1
 ```
 
+# 3. ROLLBACK
+```
+[root@misdb01 ~]# export PATH=$PATH:/u01/app/19.0.0.0/grid/OPatch:$PATH
+[root@misdb01 ~]# opatchauto rollback /u01/software/36233126 -oh /u01/app/19.0.0.0/grid
+```
 
+# 4. PATCH JDK GRID (nếu có)
+```
+[oracle@misdb01 ~]$ . grid
+[oracle@misdb01 ~]$ chmod -R 755 $ORACLE_HOME/jdk
+
+[root@misdb01 ~]# /u01/app/19.0.0.0/grid/OPatch/opatchauto apply /u01/software/36195566 -oh /u01/app/19.0.0.0/grid
+```
+
+# 5. MOUNT lại ACFS sau khi PATCH (nếu có)
+```
+[root@misdb01 ~]# export PATH=$PATH:/u01/app/19.0.0.0/grid/bin
+[root@misdb01 ~]# crsctl stat res -w "TYPE = ora.acfs.type" -p | grep VOLUME
+[root@misdb01 ~]# srvctl start filesystem -d <volume device path> -n misdb01
+```
+
+# 6. Chạy Datapatch (chỉ áp dụng khi PATCH DB HOME)
+- Thực hiện khi Patch Instance cuối cùng và bật toàn bộ Instance
+```
+[oracle@misdb03 ~]$ . oracle
+[oracle@misdb03 ~]$ cd $ORACLE_HOME/OPatch
+[oracle@misdb03 OPatch]$ ./datapatch -verbose -db ...
+```
+
+# 7. Phương án ROLLBACK và thay thế HOME bằng bản backup
+```
+[root@misdb01 ~]$ cd /u01/app/oracle/product/19.0.0.0
+[root@misdb01 19.0.0.0]$ mv dbhome_1 dbhome_1_bk
+[root@misdb01 19.0.0.0]$ tar -pxvf dbhome_1_backup.tar
+```
