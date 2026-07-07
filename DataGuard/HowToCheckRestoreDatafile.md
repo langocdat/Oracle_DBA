@@ -26,7 +26,7 @@ TOTAL_FILES RESTORED_FILES
 ```
 
 # 3. Show datafile need to restore
-SQL
+SQL>
   ```
   set lines 200;
   set pages 999;
