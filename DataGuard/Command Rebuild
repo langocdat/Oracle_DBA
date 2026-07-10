@@ -1,0 +1,142 @@
+alter system set standby_file_management = manual scope=both;
+
+set lines 200 pages 200
+col member for a85
+select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$log l, v$logfile f where l.group#=f.group# order by f.type, l.group#; 
+select l.group#, l.thread#, l.bytes, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+
+
+SQL> alter system set db_create_online_log_dest_2='+FRA' scope=both;
+
+System altered.
+
+SQL> show parameter db_create_file_dest;
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+create_bitmap_area_size              integer     8388608
+create_stored_outlines               string
+db_create_file_dest                  string      +DATA
+db_create_online_log_dest_1          string      +DATA
+db_create_online_log_dest_2          string      +FRA
+
+
+select distinct 'alter database clear logfile group '||group#||';' from v$logfile;
+
+alter database clear logfile group 1;
+alter database clear logfile group 2;
+alter database clear logfile group 3;
+alter database clear logfile group 4;
+alter database clear logfile group 11;
+alter database clear logfile group 12;
+alter database clear logfile group 13;
+alter database clear logfile group 14;
+alter database clear logfile group 15;
+alter database clear logfile group 16;
+
+alter database DROP logfile group 1;
+alter database DROP logfile group 2;
+alter database DROP logfile group 3;
+alter database DROP logfile group 4;
+alter database DROP logfile group 5;
+alter database DROP logfile group 6;
+alter database DROP logfile group 7;
+
+
+ALTER DATABASE ADD LOGFILE MEMBER '+RECOC1' TO GROUP 1;
+ALTER DATABASE ADD LOGFILE MEMBER '+RECOC1' TO GROUP 2;
+ALTER DATABASE ADD LOGFILE MEMBER '+RECOC1' TO GROUP 3;
+ALTER DATABASE ADD LOGFILE MEMBER '+RECOC1' TO GROUP 4;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+RECOC1' TO GROUP 11;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+RECOC1' TO GROUP 12;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+RECOC1' TO GROUP 13;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+RECOC1' TO GROUP 21;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+RECOC1' TO GROUP 22;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+RECOC1' TO GROUP 23;
+
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+FRA' TO GROUP 5;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+FRA' TO GROUP 6;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+FRA' TO GROUP 7;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+FRA' TO GROUP 8;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+FRA' TO GROUP 9;
+ALTER DATABASE ADD STANDBY LOGFILE MEMBER '+FRA' TO GROUP 10;
+
+ALTER DATABASE ADD LOGFILE THREAD 1 GROUP 1 ('+DATAC1', '+RECOC1') SIZE 200M;
+ALTER DATABASE ADD LOGFILE THREAD 1 GROUP 2 ('+DATAC1', '+RECOC1') SIZE 200M;
+ALTER DATABASE ADD LOGFILE THREAD 2 GROUP 3 ('+DATAC1', '+RECOC1') SIZE 200M;
+ALTER DATABASE ADD LOGFILE THREAD 2 GROUP 4 ('+DATAC1', '+RECOC1') SIZE 200M;
+
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 11 ('+DATA', '+RECO') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 12 ('+DATA', '+RECO') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 13 ('+DATA', '+RECO') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 2 GROUP 14 ('+DATA', '+RECO') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 2 GROUP 15 ('+DATA', '+RECO') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 2 GROUP 16 ('+DATA', '+RECO') SIZE 200M;
+
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 11 ('+DATA', '+FRA') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 12 ('+DATA', '+FRA') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 13 ('+DATA', '+FRA') SIZE 200M;
+ALTER DATABASE ADD STANDBY LOGFILE THREAD 1 GROUP 14 ('+DATA', '+FRA') SIZE 200M;
+
+alter system set standby_file_management = auto scope=both;
+
+ALTER SYSTEM SET LOCAL_LISTENER='(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.58.21)(PORT=1521))' SCOPE=BOTH;
+
+ALTER SYSTEM SET log_file_name_convert='E:\APP\ADMINQLHT\VIRTUAL\ORADATA\KTDOCSDR\ONLINELOG\','+DATAC1/KTDOCSDBX11/ONLINELOG/' SCOPE=SPFILE;
+ALTER SYSTEM SET db_file_name_convert='E:\APP\ADMINQLHT\VIRTUAL\ORADATA\KTDOCSDR\','+DATAC1/KTDOCSDBX11/' SCOPE=SPFILE;
+
+create configuration 'DG_MOBILEDB' as primary database is 'MOBILEDB' connect identifier is 'MOBILEDB';
+add database 'MOBILEDBDR' as connect identifier is 'MOBILEDBDR' maintained as physical;
+
+run {
+allocate channel c1 device type disk;
+allocate channel c2 device type disk;
+allocate channel c3 device type disk;
+allocate channel c4 device type disk;
+allocate channel c5 device type disk;
+allocate channel c6 device type disk;
+allocate channel c7 device type disk;
+allocate channel c8 device type disk;
+allocate channel c9 device type disk;
+allocate channel c10 device type disk;
+allocate channel c11 device type disk;
+allocate channel c12 device type disk;
+allocate channel c13 device type disk;
+allocate channel c14 device type disk;
+allocate channel c15 device type disk;
+allocate channel c16 device type disk;
+set newname for database to '+DATA';
+restore database from service ORCL;
+}
+
+switch database to copy;
+
+find . -type f -name "*_*.trc" -mtime +1 -print -exec rm -f {} \;
+
+run {
+allocate channel c1 device type disk;
+allocate channel c2 device type disk;
+allocate channel c3 device type disk;
+allocate channel c4 device type disk;
+allocate channel c5 device type disk;
+allocate channel c6 device type disk;
+allocate channel c7 device type disk;
+allocate channel c8 device type disk;
+allocate channel c9 device type disk;
+allocate channel c10 device type disk;
+allocate channel c11 device type disk;
+allocate channel c12 device type disk;
+allocate channel c13 device type disk;
+allocate channel c14 device type disk;
+allocate channel c15 device type disk;
+allocate channel c16 device type disk;
+recover database from service ORCL;
+}
+
+
+
+SELECT thread#, sequence#, applied, completion_time FROM v$archived_log ORDER BY sequence# asc;
+
+ LOCATION=USE_DB_RECOVERY_FILE_DEST VALID_FOR=(ALL_LOGFILES,ALL_ROLES)
+ 
+SELECT SUM(bytes)/1024/1024/1024 AS GB_size FROM dba_data_files;
