@@ -31,14 +31,6 @@ echo   allocate channel d2 device type disk;
 echo   allocate channel d3 device type disk;
 echo   allocate channel d4 device type disk;
 echo.
-echo   backup current controlfile
-echo     format '%BKDIR%\controlfile_LV0_%%d_%%T_%%U.bkp'
-echo     tag='CTL_LV0_%TODAYDATE%';
-echo.
-echo   backup spfile
-echo     format '%BKDIR%\spfile_LV0_%%d_%%T_%%U.bkp'
-echo     tag='SPFILE_LV0_%TODAYDATE%';
-echo.
 echo   backup as compressed backupset
 echo     incremental level 0 database
 echo     format '%BKDIR%\datafile_LV0_%%d_%%T_%%U.bkp'
@@ -50,16 +42,18 @@ echo     archivelog all
 echo     format '%BKDIR%\arch_LV0_%%d_%%T_%%U.bkp'
 echo     tag='ARC_LV0_%TODAYDATE%';
 echo.
+echo   backup current controlfile
+echo     format '%BKDIR%\controlfile_LV0_%%d_%%T_%%U.bkp'
+echo     tag='CTL_LV0_%TODAYDATE%';
+echo.
+echo   backup spfile
+echo     format '%BKDIR%\spfile_LV0_%%d_%%T_%%U.bkp'
+echo     tag='SPFILE_LV0_%TODAYDATE%';
+echo.
 echo   release channel d1;
 echo   release channel d2;
 echo   release channel d3;
 echo   release channel d4;
-echo.
-echo   crosscheck backup;
-echo   crosscheck archivelog all;
-echo   delete noprompt expired backup;
-echo   delete noprompt expired archivelog all;
-echo   delete noprompt obsolete;
 echo.
 echo }
 ) > "%RMANSCRIPT%"
