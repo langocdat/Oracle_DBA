@@ -1,0 +1,23 @@
+oracle@dc-db-rac02:~$ cat clearlogtrace.sh
+#!/bin/bash
+echo "=== START: $(date '+%Y-%m-%d %H:%M:%S') ==="
+echo "[INFO] Checking cdmp dirs..."
+cdmp_count=$(find /u01/app/oracle/diag/rdbms/db108dc/db1082/trace -type d -name "cdmp_*" -mtime +5 | wc -l)
+echo "[INFO] Found $cdmp_count cdmp dirs"
+if [ "$cdmp_count" -gt 0 ]; then
+    cd /u01/app/oracle/diag/rdbms/db108dc/db1082/trace && find . -type d -name "cdmp_*" -mtime +5 -print -exec \rm -rf {} \;
+fi
+echo "[INFO] Checking trc files..."
+trc_count=$(find /u01/app/oracle/diag/rdbms/db108dc/db1082/trace -type f -name "db1082_*.trc" -mtime +5 | wc -l)
+echo "[INFO] Found $trc_count trc files"
+if [ "$trc_count" -gt 0 ]; then
+    cd /u01/app/oracle/diag/rdbms/db108dc/db1082/trace && find . -type f -name "db1082_*.trc" -mtime +5 -print -exec \rm -f {} \;
+fi
+echo "[INFO] Checking trm files..."
+trm_count=$(find /u01/app/oracle/diag/rdbms/db108dc/db1082/trace -type f -name "db1082_*.trm" -mtime +5 | wc -l)
+echo "[INFO] Found $trm_count trc files"
+if [ "$trm_count" -gt 0 ]; then
+    cd /u01/app/oracle/diag/rdbms/db108dc/db1082/trace && find . -type f -name "db1082_*.trm" -mtime +5 -print -exec \rm -f {} \;
+fi
+echo "=== END: $(date '+%Y-%m-%d %H:%M:%S') ==="
+
