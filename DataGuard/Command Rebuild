@@ -134,7 +134,8 @@ allocate channel c16 device type disk;
 recover database from service ORCL;
 }
 
-
+recover managed standby database cancel;
+recover managed standby database nodelay disconnect;
 
 SELECT thread#, sequence#, applied, completion_time FROM v$archived_log ORDER BY sequence# asc;
 
