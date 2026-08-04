@@ -19,6 +19,9 @@ System SET altered.
 <img width="878" height="196" alt="image" src="https://github.com/user-attachments/assets/de76cbdc-d9be-40c5-aa14-3de9f0d4e856" />
 
 ## 2. Configure Standby Redo Log
+
+ - *Attention: Standby Redo Log = Online Redo log + 1*
+
 ```
 SQL> alter system set db_create_online_log_dest_1='+DATA' scope=both sid='*';
 System SET altered.
