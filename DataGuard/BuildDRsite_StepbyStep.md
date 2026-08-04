@@ -54,3 +54,16 @@ Database altered.
 SQL> alter database add standby logfile thread 1 group 12 ('+DATA', '+FRA') SIZE 200M;
 Database altered.
 ```
+
+# II. The DR site
+## 1. Copy Password file from DC site to DR site
+## 2. Add Instance DR to SRVCTL
+```
+srvctl add database \
+  -d orcldr \
+  -o /u01/app/oracle/product/19c/dbhome_1 \
+  -p +DATA/ORCLDR/PARAMETERFILE/spfileorcldr.ora \
+  -r PHYSICAL_STANDBY \
+  -s OPEN \
+  -pwfile +DATA/ORCL/PASSWORDFILE/orapworcl
+```
