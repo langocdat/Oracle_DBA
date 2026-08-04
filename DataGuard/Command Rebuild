@@ -46,8 +46,11 @@ Step 5: Copy password file from file system to ASM
  oracle> srvctl modify database -d orcl -pwfile +DATA/ORCL/PASSWORD/orapworcl
 
 select * from v$passwordfile_info;
+
 =======================================================================================
+
 alter system set standby_file_management = manual scope=both;
+
 show parameter db_create_online
 
 set lines 200 pages 200
