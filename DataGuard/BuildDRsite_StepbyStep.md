@@ -181,8 +181,9 @@ ALTER SYSTEM SET LOCAL_LISTENER='(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.58.21)(POR
 ALTER SYSTEM SET log_file_name_convert='E:\APP\ADMINQLHT\VIRTUAL\ORADATA\KTDOCSDR\ONLINELOG\','+DATAC1/KTDOCSDBX11/ONLINELOG/' SCOPE=SPFILE;
 ALTER SYSTEM SET db_file_name_convert='E:\APP\ADMINQLHT\VIRTUAL\ORADATA\KTDOCSDR\','+DATAC1/KTDOCSDBX11/' SCOPE=SPFILE;
 
-create configuration 'DG_MOBILEDB' as primary database is 'MOBILEDB' connect identifier is 'MOBILEDB';
-add database 'MOBILEDBDR' as connect identifier is 'MOBILEDBDR' maintained as physical;
+DGMGRL> create configuration 'DG_MOBILEDB' as primary database is 'MOBILEDB' connect identifier is 'MOBILEDB';
+DGMGRL> add database 'MOBILEDBDR' as connect identifier is 'MOBILEDBDR' maintained as physical;
+DGMGRL> enable configuration;
 
 run {
 allocate channel c1 device type disk;
