@@ -89,7 +89,7 @@ srvctl add database \
 ```show parameter spfile;```
 
 ## 3. Copy and modify parameter file
-## 4.
+## 4. Common Command
 
 alter system set standby_file_management = manual scope=both;
 
