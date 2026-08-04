@@ -57,6 +57,12 @@ Database altered.
 
 # II. The DR site
 ## 1. Copy Password file from DC site to DR site
+```
+ASMCMD [+DATA/ORCLDR/PASSWORDFILE] > pwcopy --dbuniquename orcldr /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcl +DATA/ORCLDR/PASSWORDFILE/orapworcl
+copying /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcl -> +DATA/ORCLDR/PASSWORDFILE/orapworcl
+ASMCMD [+DATA/ORCLDR/PASSWORDFILE] > ls
+orapworcl
+```
 ## 2. Add Instance DR to SRVCTL
 ```
 srvctl add database \
