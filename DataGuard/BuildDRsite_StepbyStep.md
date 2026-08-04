@@ -79,11 +79,21 @@ srvctl add database \
   -p +DATA/ORCLDR/PARAMETERFILE/spfileorcldr.ora \
   -r PHYSICAL_STANDBY \
   -s OPEN \
-  -pwfile +DATA/ORCL/PASSWORDFILE/orapworcl
+  -pwfile +DATA/ORCLDR/PASSWORD/orapworcl
 ```
+
+- *Check password file*
+```select * from v$passwordfile_info;```
+
+- *Check parameter file*
+```show parameter spfile;```
+
 ## 3. Copy and modify parameter file
 ## 4. 
 ### 4.1 Startup nomount
+ SQL ```startup nomount```
 ### 4.2 Restore standby control file
-
+ RMAN ```restore standby controlfile from service orcl;```
+### 4.3 Restore standby control file
+ RMAN ```alter database mount;```
 
