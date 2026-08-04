@@ -31,3 +31,26 @@ System SET altered.
 ```
 
 <img width="428" height="130" alt="image" src="https://github.com/user-attachments/assets/b5c9c062-7fa7-4be5-bee4-dc8f1a51dfc3" />
+
+- *Online Redo log number*
+```
+set lines 200 pages 200
+col member for a85
+select l.group#, l.thread#, l.bytes/1024/1024 as MB_size, f.type, f.member, l.status from v$log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+```
+
+<img width="1593" height="309" alt="image" src="https://github.com/user-attachments/assets/e0830581-218a-4846-b9d8-08cb1c6c6290" />
+
+- *Standby Redo log number*
+```
+set lines 200 pages 200
+col member for a85
+select l.group#, l.thread#, l.bytes/1024/1024 as MB_size, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
+```
+```
+SQL> alter database add standby logfile thread 1 group 11 size 200M;
+Database altered.
+
+SQL> alter database add standby logfile thread 1 group 12 ('+DATA', '+FRA') SIZE 200M;
+Database altered.
+```
