@@ -56,10 +56,18 @@ Database altered.
 ```
 
 # II. The DR site
+
 ## 1. Copy Password file from DC site to DR site
 ```
-ASMCMD [+DATA/ORCLDR/PASSWORDFILE] > pwcopy --dbuniquename orcldr /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcl +DATA/ORCLDR/PASSWORDFILE/orapworcl
-copying /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcl -> +DATA/ORCLDR/PASSWORDFILE/orapworcl
+ASMCMD [+DATA/ORCLDR] > mkdir PARAMETERFILE
+ASMCMD [+DATA/ORCLDR] > mkdir PASSWORD
+ASMCMD [+DATA/ORCLDR] > mkdir CONTROLFILE
+ASMCMD [+FRA/ORCLDR] > mkdir CONTROLFILE
+```
+
+```
+ASMCMD [+DATA/ORCLDR/PASSWORDFILE] > pwcopy --dbuniquename orcldr /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcl +DATA/ORCLDR/PASSWORD/orapworcl
+copying /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcl -> +DATA/ORCLDR/PASSWORD/orapworcl
 ASMCMD [+DATA/ORCLDR/PASSWORDFILE] > ls
 orapworcl
 ```
@@ -73,3 +81,9 @@ srvctl add database \
   -s OPEN \
   -pwfile +DATA/ORCL/PASSWORDFILE/orapworcl
 ```
+## 3. Copy and modify parameter file
+## 4. 
+### 4.1 Startup nomount
+### 4.2 Restore standby control file
+
+
