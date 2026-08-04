@@ -1,3 +1,52 @@
+Step 1:
+
+RUN {
+  SET NEWNAME FOR DATABASE TO '+DATA';
+  RESTORE DATABASE;
+  SWITCH DATAFILE ALL;
+  RECOVER DATABASE;
+}
+
+Step 2: Add database to srvctl 
+srvctl add database \
+  -d orcldr \
+  -o /u01/app/oracle/product/19c/dbhome_1 \
+  -p +DATA/ORCLDR/PARAMETERFILE/spfileorcldr.ora \
+  -r PHYSICAL_STANDBY \
+  -s MOUNT
+  
+  srvctl add instance -d orcldr -i orcldr -n orcldr
+  srvctl modify database -d congtdttoda -i CONGTDTT
+  
+Step 3: Create spfile in ASM
+ - Create path in ASM: 
+ ASMCMD [+DATA/ORCLDC] > mkdir PARAMETERFILE
+ ASMCMD [+DATA/ORCLDC/PARAMETERFILE] > pwd
+	+DATA/ORCLDC/PARAMETERFILE
+ - Create spfile in path +DATA/ORCLDC/PARAMETERFILE
+ SQL> create spfile='+DATA/ORCLDC/PARAMETERFILE/spfileorcldc.ora' from pfile;
+ File created.
+ 
+ -->>> restart instance để nhận spfile mới và srvctl có hiệu lực
+ SQL> shutdown immediate;
+
+Step 4: How to move control_files to ASM
+ - Precheck:
+ SQL> show parameter control_files;
+ SQL> Shutdown immediate;
+ SQL> Startup nomount;
+ - Move control_files to ASM
+ RMAN> restore controlfile to '+DATA/ORCLDC/CONTROLFILE/control01.ctl' from '/u01/app/oracle/product/19c/dbhome_1/dbs/cntrlorcldc.dbf';
+ RMAN> restore controlfile to '+FRA/ORCLDC/CONTROLFILE/control02.ctl' from '/u01/app/oracle/product/19c/dbhome_1/dbs/cntrlorcldc.dbf';
+ SQL> ALTER SYSTEM SET control_files='+DATA/ORCLDC/CONTROLFILE/control01.ctl','+FRA/ORCLDC/CONTROLFILE/control02.ctl' SCOPE=SPFILE;
+ SQL> shutdown immediate;
+ 
+Step 5: Copy password file from file system to ASM
+ ASMCMD [+] > pwcopy /u01/app/oracle/product/19c/dbhome_1/dbs/orapworcldc +DATA/ORCLDC/PASSWORDFILE/orapworcldc
+ oracle> srvctl modify database -d orcl -pwfile +DATA/ORCL/PASSWORD/orapworcl
+
+select * from v$passwordfile_info;
+=======================================================================================
 alter system set standby_file_management = manual scope=both;
 show parameter db_create_online
 
