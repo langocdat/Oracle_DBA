@@ -90,7 +90,7 @@ srvctl add database \
 
 ## 3. Copy and modify parameter file
 ## 4. Common Command
-
+```
 alter system set standby_file_management = manual scope=both;
 
 set lines 200 pages 200
@@ -225,15 +225,12 @@ allocate channel c16 device type disk;
 recover database from service QLHDKTDBX11;
 }
 
-
-
 alter database recover managed standby database cancel;
 alter database recover managed standby database nodelay disconnect;
 
 
 SELECT thread#, sequence#, applied, completion_time FROM v$archived_log ORDER BY sequence# asc;
 
-LOCATION=USE_DB_RECOVERY_FILE_DEST VALID_FOR=(ALL_LOGFILES,ALL_ROLES)
  
 SELECT SUM(bytes)/1024/1024/1024 AS GB_size FROM dba_data_files;
-
+```
