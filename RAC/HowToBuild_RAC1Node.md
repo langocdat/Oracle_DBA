@@ -194,6 +194,11 @@ export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
   	```
 ### Use ORACLEASM
 Tham khảo https://github.com/langocdat/Oracle_DBA/blob/main/RAC/ConfigureRAC_2Node.txt
+
+Configure SSH with tool sshUserSetup.sh trong grid setup (Đường dẫn $ORACLE_HOME/deinstall/sshUserSetup.sh)
+```./sshUserSetup.sh -user grid -hosts "srv1 srv2" -noPromptPassphrase -confirm -advanced```
+-> copy tool dùng cho user oracle
+
 ## Step 3: Install GRID
 
 - [bash_grid]:
