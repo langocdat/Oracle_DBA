@@ -243,6 +243,11 @@ Step 14: configure SSH 2 node (user grid and user oracle)
 	(bash): ssh-keygen -t rsa
 	2. Copy public key sang node khác
 	(bash): ssh-copy-id -i ~/.ssh/id_rsa.pub oracle@rac2
+
+Hoặc dùng tool sshUserSetup.sh trong grid setup (Đường dẫn $ORACLE_HOME/deinstall/sshUserSetup.sh)
+./sshUserSetup.sh -user grid -hosts "srv1 srv2" -noPromptPassphrase -confirm -advanced
+-> copy tool dùng cho user oracle
+
 	
 	
 =============================================
