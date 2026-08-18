@@ -3,11 +3,14 @@ https://github.com/langocdat/Oracle_DBA/blob/main/HealthCheckDatabase/OSLog.ps1
 1. Create the file "OSLog.ps1" in the C disk
   --->>> Link file https://github.com/langocdat/Oracle_DBA/blob/main/HealthCheckDatabase/OSLog.ps1
 2. Run scripts:
-  (powershell-Adminstrator): .\OSLog.ps1
+
+  (powershell-Adminstrator): ```.\OSLog.ps1```
   --->>> Bypass policy: 
-                      
-                        Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-                        powershell -ExecutionPolicy Bypass -File "C:\OSLog.ps1"
+```           
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+powershell -ExecutionPolicy Bypass -File "C:\OSLog.ps1"
+```
+
 4. Monitor:
   (powershell-Adminstrator): logman query OSLog
   - Để kiểm tra trạng thái: C:\Windows\System32\logman.exe query OSLog
