@@ -5,6 +5,7 @@ https://github.com/langocdat/Oracle_DBA/blob/main/HealthCheckDatabase/OSLog.ps1
 2. Run scripts:
 
   (powershell-Adminstrator): ```.\OSLog.ps1```
+  
   --->>> Bypass policy: 
 ```           
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
