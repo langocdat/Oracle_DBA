@@ -8,6 +8,7 @@
 
 <img width="1660" height="464" alt="image" src="https://github.com/user-attachments/assets/7bfa7861-db0c-43d8-885d-4bc6368a77b9" />
 
+---
 
 [root@vn-evi-srv-db01 ~]# ```watch odacli describe-job -i 433d8a0a-ee9c-455b-801e-9e11e8e7ecd1```
 
