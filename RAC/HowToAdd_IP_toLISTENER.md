@@ -67,4 +67,5 @@ Listening Endpoints Summary...
   (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.58.15)(PORT=1521)))
 ```
 
+<img width="853" height="590" alt="image" src="https://github.com/user-attachments/assets/6d2feeb7-c07c-41c4-9187-721070a28dc2" />
 
