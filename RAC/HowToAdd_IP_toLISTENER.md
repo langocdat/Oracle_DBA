@@ -31,4 +31,37 @@ LISTENER =
   )
 ```
 
+## Step 2.1: Restart listener
+[grid@srv1 grid]$ ```srvctl stop LISTENER```
+[grid@srv1 grid]$ ```srvctl start LISTENER```
+[grid@srv1 grid]$ ```srvctl status LISTENER```
+```
+Listener LISTENER is enabled
+Listener LISTENER is running on node(s): srv1,srv2
+```
+
+[grid@srv1 grid]$ ```lsnrctl status```
+```
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 23-AUG-2026 19:23:17
+
+Copyright (c) 1991, 2025, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.58.11)(PORT=1521)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER
+Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+Start Date                23-AUG-2026 19:23:05
+Uptime                    0 days 0 hr. 0 min. 12 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/19c/grid/network/admin/listener.ora
+Listener Log File         /u01/app/grid/diag/tnslsnr/srv1/listener/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.58.11)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.58.13)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=192.168.58.15)(PORT=1521)))
+```
+
 
