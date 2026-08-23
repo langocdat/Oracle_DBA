@@ -33,12 +33,15 @@ LISTENER =
 
 ## Step 2.1: Restart listener
 [grid@srv1 grid]$ ```srvctl stop LISTENER```
+
 [grid@srv1 grid]$ ```srvctl start LISTENER```
+
 [grid@srv1 grid]$ ```srvctl status LISTENER```
-```
-Listener LISTENER is enabled
-Listener LISTENER is running on node(s): srv1,srv2
-```
+
+    ```
+    Listener LISTENER is enabled
+    Listener LISTENER is running on node(s): srv1,srv2
+    ```
 
 [grid@srv1 grid]$ ```lsnrctl status```
 ```
