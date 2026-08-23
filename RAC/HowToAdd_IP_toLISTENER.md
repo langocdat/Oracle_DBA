@@ -13,5 +13,20 @@
        valid_lft forever preferred_lft forever
 .....
 ```
-*Attension: chỉ add được các địa chỉ IP đang available*
+*Attension: chỉ add được các địa chỉ IP đang available từ kết quả của lệnh ip a*
+
+# Step 2: Modify listener.ora file
+[grid@srv1 admin]$ ```/u01/app/19c/grid/network/admin/listener.ora```
+*- Thêm nội dung dưới đây:*
+```
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.58.11)(PORT = 1521))
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.58.13)(PORT = 1521))
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.58.15)(PORT = 1521))
+    )
+  )
+```
+
 
