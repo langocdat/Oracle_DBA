@@ -17,7 +17,9 @@
 
 # Step 2: Modify listener.ora file
 [grid@srv1 admin]$ ```/u01/app/19c/grid/network/admin/listener.ora```
+
 *- Thêm nội dung dưới đây:*
+
 ```
 LISTENER =
   (DESCRIPTION_LIST =
