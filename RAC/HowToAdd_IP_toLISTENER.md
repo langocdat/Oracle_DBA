@@ -38,10 +38,10 @@ LISTENER =
 
 [grid@srv1 grid]$ ```srvctl status LISTENER```
 
-    ```
-    Listener LISTENER is enabled
-    Listener LISTENER is running on node(s): srv1,srv2
-    ```
+```
+Listener LISTENER is enabled
+Listener LISTENER is running on node(s): srv1,srv2
+```
 
 [grid@srv1 grid]$ ```lsnrctl status```
 ```
