@@ -106,6 +106,8 @@
   ==>> Check nhóm quyền của user: id <user>. Ex: id grid
   ==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
 
+  ==>> Thu hồi quyền: gpasswd -d oracle <tên quyền> Ex: gpasswd -d oracle dba
+
   chown -R grid:oinstall /u01
   chown -R oracle:oinstall /u01/app/oracle
 ```
