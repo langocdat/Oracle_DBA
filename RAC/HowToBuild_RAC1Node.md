@@ -104,7 +104,7 @@
   usermod -g oinstall -G dba,oper,backupdba,dgdba,kmdba,asmdba,asmoper,asmadmin,racdba grid
 
   ==>> Check nhóm quyền của user: id <user>. Ex: id grid
-  ==>> Add theem group cho user: usermod -aG asmadmin,asmdba,asmoper grid
+  ==>> Add thêm quyền cho user: usermod -aG asmadmin,asmdba,asmoper grid
 
   ==>> Thu hồi quyền: gpasswd -d oracle <tên quyền> Ex: gpasswd -d oracle dba
 
