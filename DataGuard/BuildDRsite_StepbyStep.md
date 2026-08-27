@@ -47,6 +47,7 @@ set lines 200 pages 200
 col member for a85
 select l.group#, l.thread#, l.bytes/1024/1024 as MB_size, f.type, f.member, l.status from v$standby_log l, v$logfile f where l.group#=f.group# order by f.type, l.group#;
 ```
+
 ```
 SQL> alter database add standby logfile thread 1 group 11 size 200M;
 Database altered.
