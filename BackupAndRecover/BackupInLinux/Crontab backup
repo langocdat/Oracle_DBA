@@ -1,0 +1,5 @@
+[oracle@vt-evi-prod-sb1 scripts]$ crontab -l
+### Backup level 0 ###
+0 2 * * 0 /bin/bash /u01/backup/scripts/bk_lv0_scripts.sh > /dev/null 2>&1
+### Backup level 1 ###
+0 2 * * 1-6 /bin/bash /u01/backup/scripts/bk_lv1_scripts.sh > /dev/null 2>&1
