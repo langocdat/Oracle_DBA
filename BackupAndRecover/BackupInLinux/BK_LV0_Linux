@@ -60,4 +60,5 @@ SECS=$((DURATION % 60))
 
 echo "--- End Backup: $(date) ---" >> "$LOGFILE"
 
-echo "--- Total Execution Time: %02d hours %02d minutes %02d secs ---\n" $HOURS $MINUTES $SECS >> "$LOGFILE"
+printf -- "--- Total Execution Time: %02d hours %02d minutes %02d secs ---\n" \
+    "$HOURS" "$MINUTES" "$SECS" >> "$LOGFILE"
