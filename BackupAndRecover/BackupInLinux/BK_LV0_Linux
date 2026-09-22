@@ -1,61 +1,63 @@
-#File name: scritps_bk_lv0.sh
 #!/bin/bash
-
-export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
-export ORACLE_SID=orcl1
+export ORACLE_SID=vtevidb1
+export ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1
 export PATH=$ORACLE_HOME/bin:$PATH
 export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
 
 TODAYDATE=$(date +"%Y%m%d")
 DATETIME=$(date +"%Y%m%d_%H%M")
-BASEDIR="backup/$TODAYDATE"
-BKDIR="/home/oracle/$BASEDIR/BK_DB_LV0_$TODAYDATE"
-BKLOG="/home/oracle/LogBK/$TODAYDATE/BK_DB_LV0_$TODAYDATE"
+SECONDS=0
+
+BKDIR="/u01/backup/BK_DB_LV0_$TODAYDATE"
+BKLOG="/u01/backup/Log_BK"
+
 mkdir -p "$BKDIR"
 mkdir -p "$BKLOG"
 
 LOGFILE="$BKLOG/LogBK_DB_LV0_$DATETIME.log"
-RMANSCRIPT="$BKLOG/BK_DB_LV0_$DATETIME.rman"
 
 echo "--- Start Backup: $(date) ---" >> "$LOGFILE"
 
-cat <<EOF > "$RMANSCRIPT"
+$ORACLE_HOME/bin/rman TARGET / LOG="$LOGFILE" <<EOF
 RUN {
     CROSSCHECK BACKUP;
     CROSSCHECK ARCHIVELOG ALL;
     DELETE NOPROMPT EXPIRED BACKUP;
     DELETE NOPROMPT EXPIRED ARCHIVELOG ALL;
     DELETE NOPROMPT OBSOLETE;
-
+    
     ALLOCATE CHANNEL d1 DEVICE TYPE DISK;
     ALLOCATE CHANNEL d2 DEVICE TYPE DISK;
     ALLOCATE CHANNEL d3 DEVICE TYPE DISK;
     ALLOCATE CHANNEL d4 DEVICE TYPE DISK;
-
+    
     BACKUP AS COMPRESSED BACKUPSET INCREMENTAL LEVEL 0 DATABASE FORMAT '$BKDIR/datafile_LV0_%d_%T_%U.bkp' TAG='DB_LV0_$DATETIME';
-
-    sql  'alter system archive log current';
+    sql 'alter system archive log current';
     BACKUP AS COMPRESSED BACKUPSET ARCHIVELOG ALL FORMAT '$BKDIR/arch_LV0_%d_%T_%U.bkp' TAG='ARC_LV0_$DATETIME';
-
-    BACKUP CURRENT CONTROLFILE FORMAT '$BKDIR/controlfile_LV0_%d_%T_%U.bkp' TAG='CTL_LV0_$DATETIME';
-
     BACKUP SPFILE FORMAT '$BKDIR/spfile_LV0_%d_%T_%U.bkp' TAG='SPFILE_LV0_$DATETIME';
-
+	BACKUP CURRENT CONTROLFILE FORMAT '$BKDIR/controlfile_LV0_%d_%T_%U.bkp' TAG='CTL_LV0_$DATETIME';
+    
     RELEASE CHANNEL d1;
     RELEASE CHANNEL d2;
     RELEASE CHANNEL d3;
     RELEASE CHANNEL d4;
-
 }
 EXIT;
 EOF
 
-$ORACLE_HOME/bin/rman TARGET / CMDFILE="$RMANSCRIPT" LOG="$LOGFILE"
-
 echo "--- RMAN completed: $(date) ---" >> "$LOGFILE"
 
-echo "--- Cleaning empty backup directories ---" >> "$LOGFILE"
+# Tự động dọn dẹp thư mục backup trống nếu xảy ra lỗi không có file dữ liệu
+find "$BKDIR" -type d -empty -delete 2>/dev/null
 
-find /home/oracle/backup -type d -empty -print -delete >> "$LOGFILE"
+echo "--- Cleaning up backup logs older than 15 days ---" >> "$LOGFILE"
+find "$BKLOG" -type f -name "LogBK_DB_LV0_*.log" -mtime +15 -exec rm -f {} \;
+
+DURATION=$SECONDS
+HOURS=$((DURATION / 3600))
+MINUTES=$(( (DURATION % 3600) / 60 ))
+SECS=$((DURATION % 60))
 
 echo "--- End Backup: $(date) ---" >> "$LOGFILE"
+
+echo "--- Total Execution Time: %02d hours %02d minutes %02d secs ---\n" $HOURS $MINUTES $SECS >> "$LOGFILE"
