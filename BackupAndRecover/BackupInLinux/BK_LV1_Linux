@@ -7,8 +7,9 @@ export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
 DATETIME=$(date +"%Y%m%d_%H%M")
 SECONDS=0
 
-BKDIR="/u01/backup/BK_DB_LV1_$DATETIME"
-BKLOG="/u01/backup/Log_BK"
+BKBASE="/u01/backup"
+BKDIR="$BKBASE/BK_DB_LV0_$DATETIME"
+BKLOG="$BKBASE/Log_BK"
 
 mkdir -p "$BKDIR"
 mkdir -p "$BKLOG"
@@ -17,7 +18,7 @@ LOGFILE="$BKLOG/LogBK_DB_LV1_$DATETIME.log"
 
 echo "--- Start Backup: $(date) ---" >> "$LOGFILE"
 
-$ORACLE_HOME/bin/rman TARGET / LOG="$LOGFILE" <<EOF
+$ORACLE_HOME/bin/rman TARGET / >> "$LOGFILE" 2>&1 <<EOF
 RUN {
     CROSSCHECK BACKUP;
     CROSSCHECK ARCHIVELOG ALL;
@@ -45,6 +46,8 @@ EXIT;
 EOF
 
 echo "--- RMAN completed: $(date) ---" >> "$LOGFILE"
+
+find "$BKBASE" -type d -empty -delete 2>/dev/null
 
 echo "--- Cleaning up backup logs older than 15 days ---" >> "$LOGFILE"
 find "$BKLOG" -type f -name "LogBK_DB_LV1_*.log" -mtime +15 -exec rm -f {} \;
