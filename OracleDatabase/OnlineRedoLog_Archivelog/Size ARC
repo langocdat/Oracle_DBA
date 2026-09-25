@@ -1,0 +1,3 @@
+SELECT ROUND(SUM(blocks * block_size) / 1024 / 1024 / 1024, 2) AS "Total_Archive_Size_GB"
+FROM v$archived_log
+WHERE deleted = 'NO';
