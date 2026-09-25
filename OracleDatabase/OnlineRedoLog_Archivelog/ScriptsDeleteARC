@@ -1,24 +1,29 @@
-#File_name: delete_arc.sh
 #!/bin/bash
-export ORACLE_HOME=/u01/app/oracle/product/12.2.0.1/dbhome_1
-export ORACLE_SID=congtdtt1
+# File_name: delete_arc.sh
+export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+export ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1
+export ORACLE_SID=MFTBDATADR
 export PATH=$ORACLE_HOME/bin:$PATH
 export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
 
 TODAYDATE=$(date +"%Y%m%d")
-DATETIME=$(date +"%Y%m%d_%H%M")
-BKLOG="/home/oracle/Log_Delete_ARC/$TODAYDATE"
-mkdir -p "$BKLOG"
-LOGFILE="$BKLOG/ARC_delete_log_$DATETIME.log"
-echo "--- Start delete archivelog: $(date) ---" >> "$LOGFILE"
-$ORACLE_HOME/bin/rman target / log="$LOGFILE" <<EOF
+DELLOG="/home/oracle/del_archivelog/LOG"
+mkdir -p "$DELLOG"
+LOGFILE="$DELLOG/ARC_delete_$TODAYDATE.log"
 
+echo "--- Start delete archivelog: $(date) ---" >> "$LOGFILE"
+$ORACLE_HOME/bin/rman target / append log="$LOGFILE" <<EOF
 RUN {
+    ALLOCATE CHANNEL ch1 DEVICE TYPE DISK;
     CROSSCHECK ARCHIVELOG ALL;
     DELETE NOPROMPT EXPIRED ARCHIVELOG ALL;
-	DELETE NOPROMPT ARCHIVELOG UNTIL TIME 'SYSDATE-1' BACKED UP 1 TIMES TO DISK;
+    DELETE NOPROMPT ARCHIVELOG UNTIL TIME 'SYSDATE-15';
+    RELEASE CHANNEL ch1;
 }
 EXIT;
 EOF
 
 echo "--- End delete archivelog: $(date) ---" >> "$LOGFILE"
+
+echo "--- Cleaning up logs older than 15 days ---" >> "$LOGFILE"
+find "$DELLOG" -type f -name "ARC_delete_*.log" -mtime +15 -exec rm -f {} \;
