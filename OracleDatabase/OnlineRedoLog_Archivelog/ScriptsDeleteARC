@@ -2,11 +2,11 @@
 # File_name: delete_arc.sh
 export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin
 export ORACLE_HOME=/u01/app/oracle/product/19.0.0.0/dbhome_1
-export ORACLE_SID=MFTBDATADR
+export ORACLE_SID=mftbdata
 export PATH=$ORACLE_HOME/bin:$PATH
 export NLS_DATE_FORMAT="YYYY-MM-DD HH24:MI:SS"
 
-TODAYDATE=$(date +"%Y%m%d")
+TODAYDATE=$(date +"%Y%m%d_%H%M")
 DELLOG="/home/oracle/del_archivelog/LOG"
 mkdir -p "$DELLOG"
 LOGFILE="$DELLOG/ARC_delete_$TODAYDATE.log"
@@ -17,7 +17,7 @@ RUN {
     ALLOCATE CHANNEL ch1 DEVICE TYPE DISK;
     CROSSCHECK ARCHIVELOG ALL;
     DELETE NOPROMPT EXPIRED ARCHIVELOG ALL;
-    DELETE NOPROMPT ARCHIVELOG UNTIL TIME 'SYSDATE-15';
+    DELETE NOPROMPT ARCHIVELOG UNTIL TIME 'SYSDATE-60';
     RELEASE CHANNEL ch1;
 }
 EXIT;
@@ -25,5 +25,12 @@ EOF
 
 echo "--- End delete archivelog: $(date) ---" >> "$LOGFILE"
 
-echo "--- Cleaning up logs older than 15 days ---" >> "$LOGFILE"
-find "$DELLOG" -type f -name "ARC_delete_*.log" -mtime +15 -exec rm -f {} \;
+echo "--- Cleaning up logs older than 60 days ---" >> "$LOGFILE"
+find "$DELLOG" -type f -name "ARC_delete_*.log" -mtime +60 -exec rm -f {} \;
+
+### DEL ARCHIVE LOG ###
+0 3 * * * /bin/bash /home/oracle/del_archivelog/scritps_del_arc.sh > /dev/null 2>&1
+
+SELECT ROUND(SUM(blocks * block_size) / 1024 / 1024 / 1024, 2) AS "Total_Archive_Size_GB"
+FROM v$archived_log
+WHERE deleted = 'NO';
