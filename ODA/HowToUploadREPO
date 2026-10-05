@@ -1,0 +1,31 @@
+Step 1: Tải all file lên /root
+
+Step 2: 
+[root]$ mkdir -p /mnt/iso
+[root]$ mount -o loop /root/OracleLinux-R8-U10-x86_64-dvd.iso /mnt/iso
+
+[root]$ vi /etc/yum.repos.d/local.repo
+[local-baseos]
+name=Oracle Linux 8.10 Local BaseOS
+baseurl=file:///mnt/iso/BaseOS
+gpgcheck=0
+enabled=1
+
+[local-appstream]
+name=Oracle Linux 8.10 Local AppStream
+baseurl=file:///mnt/iso/AppStream
+gpgcheck=0
+enabled=1
+
+Step 3:
+# Xóa toàn bộ cache cũ đang bị lỗi kết nối mạng
+[root]$ dnf clean all
+
+# Quét và kiểm tra danh sách repo mới
+[root]$ dnf repolist
+
+Step 4:
+[root]$ cd /root
+
+[root]$ dnf localinstall -y --disablerepo=* --enablerepo=local-* libbpf-0.6.0-6.el8.x86_64.rpm oracleasm-support-3.1.1-6.el8.x86_64.rpm oracle-database-preinstall-23c-1.0-0.5.el8.x86_64.rpm
+
