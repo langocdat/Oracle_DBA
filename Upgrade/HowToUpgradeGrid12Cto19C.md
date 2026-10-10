@@ -86,6 +86,25 @@ Successfully applied the patch.
 The log can be found at: /u01/app/oraInventory/logs/GridSetupActions2026-06-25_11-53-10AM/installerPatchActions_2026-06-25_11-53-10AM.log
 Launching Oracle Grid Infrastructure Setup Wizard...
 ```
-<img width="695" height="158" alt="image" src="https://github.com/user-attachments/assets/c4ddf9e4-1bf3-487a-a646-c41259c4427f" />
+<img width="1392" height="204" alt="image" src="https://github.com/user-attachments/assets/21b8db0d-d7f4-4345-991d-f94007192026" />
+
+<img width="998" height="387" alt="image" src="https://github.com/user-attachments/assets/2b5d9434-6464-40b1-a3f5-e2145d71b1e7" />
+
+<img width="1002" height="454" alt="image" src="https://github.com/user-attachments/assets/eeb33923-d392-4282-8589-6d7738b00c63" />
+
+<img width="1000" height="413" alt="image" src="https://github.com/user-attachments/assets/80cde290-9078-4ec4-8919-e85ca13c1af2" />
+
+<img width="997" height="393" alt="image" src="https://github.com/user-attachments/assets/9cd62a85-f254-44c7-8730-504f6bbbe26b" />
+
+<img width="1001" height="598" alt="image" src="https://github.com/user-attachments/assets/ffbd4e78-09ad-488f-a697-10caa473ee4e" />
+*How to fix*
+```
+[root@srv2 app]# mkdir -p /u01/app/19c/grid
+[root@srv2 app]# chown -R grid:oinstall /u01/app/19c/grid/
+[root@srv2 app]# chmod -R 775 /u01/app/19c
+```
+
+
+
 
 
