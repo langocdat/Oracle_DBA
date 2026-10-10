@@ -66,3 +66,23 @@ dbhome_1
 [root@srv1 grid]# unzip /u01/software/p6880880_190000_Linux-x86-64.zip
 [root@srv1 grid]# chown -R grid:oinstall /u01/app/19c/grid/OPatch
 ```
+*Install the new OPatch utilities on both node*
+
+## Step 4: Kiểm tra trạng thái nâng cấp bằng tool Cluster Verification Utility (CVU)
+```
+[grid@srv1 ~]$ cd /u01/app/19c/grid
+[grid@srv1 grid]$ ./runcluvfy.sh stage -pre crsinst -upgrade -rolling -src_crshome /u01/app/12c/grid -dest_crshome /u01/app/19c/grid -dest_version 19.0.0.0.0 -fixup -verbose
+```
+<img width="1242" height="636" alt="image" src="https://github.com/user-attachments/assets/6055bd00-9310-48ac-a47c-52b0e6ebb2da" />
+
+# Step 5: Apply patch and Upgrade GI
+```
+[grid@rac1 software]$ cd /u01/app/19c/grid/
+[grid@rac1 software]$ export DISPLAY=192.168.58.1:0.0
+[grid@srv1 grid]$ ./gridSetup.sh -applyRU /u01/software/38629535/
+Preparing the home to patch...
+Applying the patch /u01/software/38629535/...
+Successfully applied the patch.
+The log can be found at: /u01/app/oraInventory/logs/GridSetupActions2026-06-25_11-53-10AM/installerPatchActions_2026-06-25_11-53-10AM.log
+Launching Oracle Grid Infrastructure Setup Wizard...
+```
