@@ -18,8 +18,33 @@ total 6862604
 ## Step 2: Backup in the both node
 *Use the root user*
 - Backup /u01/app/oraInventory
-  
+```
+[root@srv1 app]# cd /u01/app
+[root@srv1 app]# ls
+12c  grid  oracle  oraInventory
+[root@srv1 app]# tar -pcvf oraInventory.tar oraInventory/
+```
 - Backup /u01/app/12c/grid
+```
+[root@srv1 app]# cd 12c/
+[root@srv1 12c]# pwd
+/u01/app/12c
+[root@srv1 12c]# ls
+grid
+[root@srv1 12c]# tar -pcvf grid.tar grid/
+```
 - Backup /u01/app/grid
-
-
+```
+[root@srv1 app]# cd /u01/app
+[root@srv1 app]# ls
+12c  grid  oracle  oraInventory
+[root@srv1 app]# tar -pcvf grid.tar grid/
+```
+- Backup /u01/app/oracle/product/12c/dbhome_1
+```
+[root@srv1 12c]# pwd
+/u01/app/oracle/product/12c
+[root@srv1 12c]# ls
+dbhome_1
+[root@srv1 12c]# tar -pcvf dbhome_1.tar dbhome_1/
+```
