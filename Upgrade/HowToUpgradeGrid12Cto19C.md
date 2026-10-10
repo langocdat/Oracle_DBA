@@ -97,12 +97,14 @@ Launching Oracle Grid Infrastructure Setup Wizard...
 <img width="997" height="393" alt="image" src="https://github.com/user-attachments/assets/9cd62a85-f254-44c7-8730-504f6bbbe26b" />
 
 <img width="1001" height="598" alt="image" src="https://github.com/user-attachments/assets/ffbd4e78-09ad-488f-a697-10caa473ee4e" />
+
 *How to fix*
 ```
 [root@srv2 app]# mkdir -p /u01/app/19c/grid
 [root@srv2 app]# chown -R grid:oinstall /u01/app/19c/grid/
 [root@srv2 app]# chmod -R 775 /u01/app/19c
 ```
+
 
 
 
