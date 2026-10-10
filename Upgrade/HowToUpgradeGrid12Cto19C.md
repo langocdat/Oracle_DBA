@@ -104,6 +104,14 @@ Launching Oracle Grid Infrastructure Setup Wizard...
 [root@srv2 app]# chown -R grid:oinstall /u01/app/19c/grid/
 [root@srv2 app]# chmod -R 775 /u01/app/19c
 ```
+<img width="1001" height="792" alt="image" src="https://github.com/user-attachments/assets/29959b86-0836-413a-a7b9-357a87470f9c" />
+
+<img width="744" height="314" alt="image" src="https://github.com/user-attachments/assets/86e5db78-1af8-4b2f-af38-2be2c6e5c1fe" />
+
+<img width="1575" height="808" alt="image" src="https://github.com/user-attachments/assets/135c2ec7-357e-4768-9c5f-be49ed5bbd9d" />
+
+
+
 
 
 
