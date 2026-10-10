@@ -77,8 +77,8 @@ dbhome_1
 
 # Step 5: Apply patch and Upgrade GI
 ```
-[grid@rac1 software]$ cd /u01/app/19c/grid/
-[grid@rac1 software]$ export DISPLAY=192.168.58.1:0.0
+[grid@srv1 software]$ cd /u01/app/19c/grid/
+[grid@srv1 software]$ export DISPLAY=192.168.58.1:0.0
 [grid@srv1 grid]$ ./gridSetup.sh -applyRU /u01/software/38629535/
 Preparing the home to patch...
 Applying the patch /u01/software/38629535/...
