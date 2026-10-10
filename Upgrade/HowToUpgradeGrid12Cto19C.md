@@ -48,3 +48,21 @@ grid
 dbhome_1
 [root@srv1 12c]# tar -pcvf dbhome_1.tar dbhome_1/
 ```
+
+## Step 3: Create new 19C GI_HOME and unzip software + OPatch ulities
+- Create new 19c GI_HOME
+```
+[root@srv1 ~]# mkdir -p /u01/app/19c/grid
+[root@srv1 ~]# chown -R grid:oinstall /u01/app/19c/grid/
+```
+- Unzip new 19C GI software
+```
+[root@srv1 ~]# cd /u01/app/19c/grid/
+[root@srv1 grid]# pwd
+/u01/app/19c/grid
+[root@srv1 grid]# unzip /u01/software/V982068-01_grid.zip
+[root@srv1 grid]# chown -R grid:oinstall /u01/app/19c/grid/
+[root@srv1 grid]# rm -rf OPatch
+[root@srv1 grid]# unzip /u01/software/p6880880_190000_Linux-x86-64.zip
+[root@srv1 grid]# chown -R grid:oinstall /u01/app/19c/grid/OPatch
+```
