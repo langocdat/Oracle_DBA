@@ -1,0 +1,41 @@
+Step 1: 
+vi sqlnet.ora
+
+WALLET_LOCATION =
+  (SOURCE =
+    (METHOD = FILE)
+    (METHOD_DATA =
+      (DIRECTORY = /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/wallet)
+    )
+  )
+SQLNET.WALLET_OVERRIDE = TRUE
+
+Step 2: 
+mkstore -wrl /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/wallet -create
+
+mkstore -wrl /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/wallet -createCredential VTNIFDB sys "Vm_Admin#123"
+mkstore -wrl /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/wallet -createCredential VTNIFDB_STB sys "Vm_Admin#123"
+
+$ORACLE_HOME/bin/mkstore -wrl /u01/app/oracle/product/23.0.0.0/dbhome_1/network/admin/wallet -listCredential
+
+
+export TNS_ADMIN=$ORACLE_HOME/network/admin
+
+Vm_Admin#123
+
+
+dgmgrl /@EVISA_STB
+START OBSERVER IN BACKGROUND FILE IS '/home/oracle/fsfo/observer.dat' LOGFILE IS '/home/oracle/fsfo/observer.log' CONNECT IDENTIFIER IS VTNIFDB_STB;
+
+
+EDIT DATABASE 'orcl' SET PROPERTY ObserverConnectIdentifier = 'ORCL';
+EDIT DATABASE 'orcldr' SET PROPERTY ObserverConnectIdentifier = 'ORCLDR';
+
+EDIT DATABASE 'orcl' SET PROPERTY  FastStartFailoverTarget = 'orcldr';
+EDIT DATABASE 'orcldr' SET PROPERTY  FastStartFailoverTarget = 'orcl';
+
+DGMGRL> enable fast_start failover;
+Enabled in Potential Data Loss Mode.
+
+
+nohup dgmgrl /@VTNIFDB_STB "START OBSERVER FILE='/home/oracle/fsfo/observer.dat'" > /home/oracle/fsfo/observer.log 2>&1 &
