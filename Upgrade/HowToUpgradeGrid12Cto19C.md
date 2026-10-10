@@ -86,3 +86,6 @@ Successfully applied the patch.
 The log can be found at: /u01/app/oraInventory/logs/GridSetupActions2026-06-25_11-53-10AM/installerPatchActions_2026-06-25_11-53-10AM.log
 Launching Oracle Grid Infrastructure Setup Wizard...
 ```
+<img width="695" height="158" alt="image" src="https://github.com/user-attachments/assets/c4ddf9e4-1bf3-487a-a646-c41259c4427f" />
+
+
