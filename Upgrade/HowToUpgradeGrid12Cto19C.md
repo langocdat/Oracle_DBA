@@ -111,7 +111,21 @@ Launching Oracle Grid Infrastructure Setup Wizard...
 <img width="1575" height="808" alt="image" src="https://github.com/user-attachments/assets/135c2ec7-357e-4768-9c5f-be49ed5bbd9d" />
 
 
+## Step 6: Check after run upgrade completed
 
+```
+[grid@srv1 OPatch]$ crsctl query crs softwareversion -all
+Oracle Clusterware version on node [srv1] is [19.0.0.0.0]
+Oracle Clusterware version on node [srv2] is [19.0.0.0.0]
+```
+```
+[grid@srv1 OPatch]$ ./opatch lspatches
+38729293;TOMCAT RELEASE UPDATE 19.0.0.0.0 (38729293)
+38661284;OCW RELEASE UPDATE 19.30.0.0.0 (38661284)
+38653268;ACFS RELEASE UPDATE 19.30.0.0.0 (38653268)
+38632161;Database Release Update : 19.30.0.0.260120(REL-JAN260130) (38632161)
+36758186;DBWLM RELEASE UPDATE 19.0.0.0.0 (36758186)
+```
 
 
 
