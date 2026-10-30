@@ -23,6 +23,7 @@ SELECT
 <img width="896" height="283" alt="image" src="https://github.com/user-attachments/assets/4741a2bd-efaf-4e09-97fa-1cc3da045f7c" />
 
 
+## 2 Details
 SQL> Details archive log same with (RMAN) crosscheck archive log
 ```
 set lines 200;
