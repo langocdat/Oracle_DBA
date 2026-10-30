@@ -4,7 +4,6 @@ WHERE deleted = 'NO';
 
 SQL>
 ```
-SQL> 
 set lines 200;
 SELECT
      arc.total_files AS "Total_Files",
