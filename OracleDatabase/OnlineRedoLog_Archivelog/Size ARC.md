@@ -21,3 +21,22 @@ SELECT
 ```
 
 <img width="896" height="283" alt="image" src="https://github.com/user-attachments/assets/4741a2bd-efaf-4e09-97fa-1cc3da045f7c" />
+
+
+SQL> Details archive log
+```
+set lines 200;
+col archive_file_name format a50;
+SELECT 
+    thread#, 
+    sequence#, 
+    name AS archive_file_name,
+    ROUND((blocks * block_size) / 1024 / 1024, 2) AS size_mb,
+    TO_CHAR(completion_time, 'YYYY-MM-DD HH24:MI:SS') AS completion_time
+FROM v$archived_log
+WHERE deleted = 'NO'
+  AND status = 'A'
+  AND standby_dest = 'NO'
+  AND name IS NOT NULL
+ORDER BY thread#, sequence#;
+```
