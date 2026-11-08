@@ -1,0 +1,29 @@
+ 
+
+while IFS=: read -r sid home
+
+do
+
+cat > "$sid" <<EOF
+
+export ORACLE_SID=$sid
+
+export ORACLE_HOME=$home
+
+EOF
+
+echo "Created $sid"
+
+done <<EOF
+
+drewallet2:/u01/app/oracle/product/19c/dbhome_4
+
+drftg2:/u01/app/oracle/product/19c/dbhome_1
+
+drebank2:/u01/app/oracle/product/19c/dbhome_2
+
+odsexa2:/u01/app/oracle/product/19c/dbhome_4
+
+EOF
+
+ 
