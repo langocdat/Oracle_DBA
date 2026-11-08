@@ -1,0 +1,101 @@
+=====
+Replace cỡ chữ
+=====
+Sub ThayDoiCoChuBang()
+    Dim tbl As Table
+    For Each tbl In ActiveDocument.Tables
+        tbl.Range.Font.Size = 12
+    Next tbl
+    MsgBox "Đã thay đổi cỡ chữ của tất cả các bảng thành 12!", vbInformation, "Hoàn thành"
+End Sub
+
+
+
+
+=====
+Fix chiều cao cột
+=====
+Sub DatChieuCaoLinhDongVaCongThemKhoangTrong()
+    Dim tbl As Table
+    
+    ' Duyệt qua từng bảng trong toàn bộ tài liệu
+    For Each tbl In ActiveDocument.Tables
+        
+        ' 1. Cài đặt chiều cao tối thiểu cho các hàng
+        With tbl.Rows
+            .HeightRule = wdRowHeightAtLeast ' Chế độ tự phình to khi nhiều chữ
+            .Height = MillimetersToPoints(8) ' Mức sàn tối thiểu là 8mm
+        End With
+        
+        ' 2. Cộng thêm khoảng trống 0.2mm bằng cách chỉnh lề ô (Cell Margins)
+        ' Chia đều lề trên 0.1mm và lề dưới 0.1mm để chữ luôn nằm giữa ô và thoáng đãng
+        With tbl
+            .TopPadding = MillimetersToPoints(0.1)    ' Lề trên ô
+            .BottomPadding = MillimetersToPoints(0.1) ' Lề dưới ô
+        End With
+        
+    Next tbl
+    
+    ' Thông báo hoàn thành
+    MsgBox "Đã đặt chiều cao tối thiểu 8mm và cộng thêm 0.2mm khoảng trống cho tất cả các bảng!", vbInformation, "Hoàn thành"
+End Sub
+
+==========================
+
+Sub FixHeadingSpaceAndAlignment()
+    Dim para As Paragraph
+    Dim count As Long
+    count = 0
+    
+    ' Duyệt qua toàn bộ đoạn văn trong tài liệu
+    For Each para In ActiveDocument.Paragraphs
+        ' Kiểm tra nếu đoạn văn là Level 2 hoặc Level 3
+        If para.OutlineLevel = wdOutlineLevel2 Or para.OutlineLevel = wdOutlineLevel3 Then
+            
+            ' Đưa khoảng cách lề trái và lề thụt dòng về sát đầu (0 mm)
+            para.LeftIndent = MillimetersToPoints(0)
+            para.FirstLineIndent = MillimetersToPoints(0)
+            
+            ' Xóa tất cả các điểm dừng Tab thủ công trên đoạn văn này để tránh chữ bị nhảy
+            para.TabStops.ClearAll
+            
+            ' Nếu đề mục đang nằm trong một danh sách đánh số tự động
+            If para.Range.ListFormat.ListType <> wdListNoNumbering Then
+                With para.Range.ListFormat.ListTemplate.ListLevels(para.OutlineLevel)
+                    ' Căn vị trí số tự động ra sát lề trái (0 mm)
+                    .NumberPosition = MillimetersToPoints(0)
+                    ' Căn vị trí văn bản ra sát lề trái (0 mm)
+                    .TextPosition = MillimetersToPoints(0)
+                    ' QUAN TRỌNG: Đổi ký tự phía sau số từ Tab thành Dấu cách (Space)
+                    .TrailingCharacter = wdTrailingSpace
+                End With
+            End If
+            
+            count = count + 1
+        End If
+    Next para
+    
+    MsgBox "Đã căn lề sát đầu dòng và sửa khoảng cách chữ cho " & count & " đề mục!", vbInformation, "done"
+End Sub
+
+====================================
+
+Sub DoiMauDongHeaderDauTien()
+    Dim tbl As Table
+    
+    ' Vòng lặp chạy qua từng bảng trong toàn bộ file Word
+    For Each tbl In ActiveDocument.Tables
+        On Error Resume Next ' Bỏ qua lỗi nếu bảng có cấu trúc đặc biệt (như ô bị gộp)
+        
+        ' Chỉ tác động vào hàng số 1 (Hàng tiêu đề/Header đầu tiên)
+        ' Bạn hãy thay đổi 3 số trong mã RGB bên dưới để ra màu mong muốn
+        tbl.Rows(1).Cells.Shading.BackgroundPatternColor = RGB(31, 56, 100)
+        
+        ' Tùy chọn: Đổi màu chữ của hàng đầu tiên thành màu Trắng cho dễ đọc
+        tbl.Rows(1).Range.Font.ColorIndex = wdWhite
+        
+        On Error GoTo 0
+    Next tbl
+    
+    MsgBox "Đã đổi màu dòng header đầu tiên thành công!", vbInformation, "Hoàn thành"
+End Sub
