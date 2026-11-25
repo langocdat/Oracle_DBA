@@ -1,4 +1,4 @@
-#Step 1: 
+# Step 1: 
 ```
 [oracle@srvdc dbhome_1]$ ./runInstaller -applyRU /u01/software/40121665/39922757
 Preparing the home to patch...
