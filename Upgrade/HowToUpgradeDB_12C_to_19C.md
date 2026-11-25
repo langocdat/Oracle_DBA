@@ -116,6 +116,7 @@ SQL> SELECT name, guarantee_flashback_database, time FROM v$restore_point;
 
 
 [oracle@srvdc ~]$ /u01/app/oracle/product/19c/dbhome_1/jdk/bin/java -jar /u01/software/autoupgrade.jar -config /home/oracle/autoupgrade/config_19c.cfg -mode deploy
+
 ```
 AutoUpgrade 26.7.2.261111 launched with default internal options
 Processing config file ...
