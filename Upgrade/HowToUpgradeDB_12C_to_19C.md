@@ -24,7 +24,9 @@ build.MOS_LINK https://support.oracle.com/support/?anchorId=&kmContentId=2485457
 ```
 
 # Step 3:
-[oracle@srvdc ~]$ vi config_19c.cf
+*scp autoupgrade.jar to /u01/software*
+[oracle@srvdc ~]$ mkdir -p /home/oracle/autoupgrade/logs
+[oracle@srvdc ~]$ vi config_19c.cfg
 
 ```
 cat << 'EOF' > /home/oracle/autoupgrade/config_19c.cfg
@@ -41,3 +43,6 @@ upg1.timezone_upg=yes
 upg1.target_version=19
 EOF
 ```
+
+
+
