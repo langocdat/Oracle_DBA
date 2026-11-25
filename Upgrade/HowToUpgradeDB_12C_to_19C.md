@@ -131,6 +131,7 @@ Type 'help' to list console commands
 -- List job
 
 upg> ```lsj```
+
 ```
 +----+-------+---------+---------+-------+----------+--------+-----------+
 |Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME| UPDATED|    MESSAGE|
@@ -140,9 +141,11 @@ upg> ```lsj```
 ```
 
 upg> ```status -job 103```
+
 <img width="766" height="790" alt="image" src="https://github.com/user-attachments/assets/ffe255b5-3833-457c-8740-7b4c511485c1" />
 
 upg> ```tasks```
+
 ```
 +--+-------------+-------------+
 |ID|         NAME|         Job#|
