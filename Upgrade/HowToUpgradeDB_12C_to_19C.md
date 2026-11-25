@@ -105,7 +105,7 @@ Please check the summary report at:
 [oracle@srvdc ~]$ /u01/app/oracle/product/19c/dbhome_1/jdk/bin/java -jar /u01/software/autoupgrade.jar -config /home/oracle/autoupgrade/config_19c.cfg -mode fixups
 
 # Step 6: Upgrade
-
+## Step 6.1: Prepare
 -- Create restore point
 
 SQL> CREATE RESTORE POINT before_upg_1932 GUARANTEE FLASHBACK DATABASE;
@@ -114,7 +114,7 @@ SQL> CREATE RESTORE POINT before_upg_1932 GUARANTEE FLASHBACK DATABASE;
 
 SQL> SELECT name, guarantee_flashback_database, time FROM v$restore_point;
 
--- Run upgarde
+## Step 6.2: Run upgrade
 
 [oracle@srvdc ~]$ /u01/app/oracle/product/19c/dbhome_1/jdk/bin/java -jar /u01/software/autoupgrade.jar -config /home/oracle/autoupgrade/config_19c.cfg -mode deploy
 
@@ -128,4 +128,35 @@ Processing config file ...
 Type 'help' to list console commands
 ```
 
+-- List job
+
+upg> ```lsj```
+```
++----+-------+---------+---------+-------+----------+--------+-----------+
+|Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME| UPDATED|    MESSAGE|
++----+-------+---------+---------+-------+----------+--------+-----------+
+| 103|   orcl|DBUPGRADE|EXECUTING|RUNNING|  22:09:55|108s ago|1%Upgraded |
++----+-------+---------+---------+-------+----------+--------+-----------+
+```
+
+upg> ```status -job 103```
+<img width="766" height="790" alt="image" src="https://github.com/user-attachments/assets/ffe255b5-3833-457c-8740-7b4c511485c1" />
+
+upg> ```tasks```
+```
++--+-------------+-------------+
+|ID|         NAME|         Job#|
++--+-------------+-------------+
+| 1|         main|      WAITING|
+|16|   event_loop|TIMED_WAITING|
+|17|      console|     RUNNABLE|
+|18| queue_reader|      WAITING|
+|20|        cmd-0|      WAITING|
+|21|      StatUpg|      WAITING|
+|22|   event_loop|TIMED_WAITING|
+|24|job_manager-0|      WAITING|
+|28|    exec_loop|      WAITING|
+|31|    Thread-16|     RUNNABLE|
++--+-------------+-------------+
+```
 
