@@ -22,3 +22,22 @@ build.label (HEAD -> sysbranch_v26.7.2)
 build.MOS_NOTE KB123450
 build.MOS_LINK https://support.oracle.com/support/?anchorId=&kmContentId=2485457
 ```
+
+# Step 3:
+[oracle@srvdc ~]$ vi config_19c.cf
+
+```
+cat << 'EOF' > /home/oracle/autoupgrade/config_19c.cfg
+global.autoupg_log_dir=/home/oracle/autoupgrade/logs
+upg1.dbname=orcl
+upg1.start_time=NOW
+upg1.source_home=/u01/app/oracle/product/12c/dbhome_1
+upg1.target_home=/u01/app/oracle/product/19c/dbhome_1
+upg1.sid=orcl
+upg1.log_dir=/home/oracle/autoupgrade/logs/orcl
+upg1.upgrade_node=srvdc.localdomain
+upg1.run_utlrp=yes
+upg1.timezone_upg=yes
+upg1.target_version=19
+EOF
+```
