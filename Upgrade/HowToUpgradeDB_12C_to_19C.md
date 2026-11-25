@@ -25,13 +25,13 @@ build.MOS_LINK https://support.oracle.com/support/?anchorId=&kmContentId=2485457
 
 # Step 3:
 *scp autoupgrade.jar to /u01/software*
+
 [oracle@srvdc ~]$ mkdir -p /home/oracle/autoupgrade/logs
+
 [oracle@srvdc ~]$ vi config_19c.cfg
 
 ```
-cat << 'EOF' > /home/oracle/autoupgrade/config_19c.cfg
 global.autoupg_log_dir=/home/oracle/autoupgrade/logs
-upg1.dbname=orcl
 upg1.start_time=NOW
 upg1.source_home=/u01/app/oracle/product/12c/dbhome_1
 upg1.target_home=/u01/app/oracle/product/19c/dbhome_1
@@ -41,8 +41,70 @@ upg1.upgrade_node=srvdc.localdomain
 upg1.run_utlrp=yes
 upg1.timezone_upg=yes
 upg1.target_version=19
-EOF
 ```
+
+# Step 4:
+[oracle@srvdc ~]$ /u01/app/oracle/product/19c/dbhome_1/jdk/bin/java -jar /u01/software/autoupgrade.jar -config /home/oracle/autoupgrade/config_19c.cfg -mode analyze
+```
+AutoUpgrade 26.7.2.261111 launched with default internal options
+Processing config file ...
++--------------------------------+
+| Starting AutoUpgrade execution |
++--------------------------------+
+1 Non-CDB(s) will be analyzed
+Type 'help' to list console commands
+upg> Job 102 completed
+------------------- Final Summary --------------------
+Number of databases            [ 1 ]
+
+Jobs finished                  [1]
+Jobs failed                    [0]
+
+Checks Report
++------------+------+-----------+---------+-------+-------+
+| Job Number | INFO | RECOMMEND | WARNING | ERROR | Total |
++------------+------+-----------+---------+-------+-------+
+| 102        |    7 |         5 |       6 |     0 |    18 |
++------------+------+-----------+---------+-------+-------+
+
+Please read the analyze report below for each job and follow the recommendations.
+
+/home/oracle/autoupgrade/logs/orcl/orcl/102/prechecks/orcl_preupgrade.html
+/home/oracle/autoupgrade/logs/orcl/orcl/102/prechecks/orcl_preupgrade.log
+
+Please check the summary report at:
+/home/oracle/autoupgrade/logs/cfgtoollogs/upgrade/auto/status/status.html
+/home/oracle/autoupgrade/logs/cfgtoollogs/upgrade/auto/status/status.log
+```
+
+## Check status and log
+```
+[oracle@srvdc ~]$ cat /home/oracle/autoupgrade/logs/cfgtoollogs/upgrade/auto/status/status.log
+==========================================
+          Autoupgrade Summary Report
+==========================================
+[Date]           Wed Nov 25 22:02:25 ICT 2026
+[Number of Jobs] 1
+==========================================
+[Job ID] 102
+==========================================
+[DB Name]                orcl
+[Version Before Upgrade] 12.2.0.1.0
+[Version After Upgrade]  19.33.0.0.0
+------------------------------------------
+[Stage Name]    PRECHECKS
+[Status]        SUCCESS
+[Start Time]    2026-11-25 22:01:34
+[Duration]      0:00:50
+[Log Directory] /home/oracle/autoupgrade/logs/orcl/orcl/102/prechecks
+[Detail]        /home/oracle/autoupgrade/logs/orcl/orcl/102/prechecks/orcl_preupgrade.log
+                Check passed and no manual intervention needed
+```
+
+# Step 5: Fixed mode if have errors
+```/u01/app/oracle/product/19c/dbhome_1/jdk/bin/java -jar /u01/software/autoupgrade.jar -config /home/oracle/autoupgrade/config_19c.cfg -mode fixups```
+
+# Step 6: Upgrade
 
 
 
