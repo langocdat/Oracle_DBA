@@ -106,5 +106,13 @@ Please check the summary report at:
 
 # Step 6: Upgrade
 
+-- Create restore point
+SQL> CREATE RESTORE POINT before_upg_1932 GUARANTEE FLASHBACK DATABASE;
+
+-- Xác nhận đã tạo thành công
+SQL> SELECT name, guarantee_flashback_database, time FROM v$restore_point;
+
+
+```/u01/app/oracle/product/19c/dbhome_1/jdk/bin/java -jar /u01/software/autoupgrade.jar -config /home/oracle/autoupgrade/config_19c.cfg -mode deploy```
 
 
