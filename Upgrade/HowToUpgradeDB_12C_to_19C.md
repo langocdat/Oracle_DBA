@@ -163,3 +163,16 @@ upg> ```tasks```
 +--+-------------+-------------+
 ```
 
+-- Nếu không may ấn nhầm Ctrl C hoặc Ctrl Z, cần tiếp tục chạy lại job
+```
+upg> resume -job 103
+Resuming job: [103][orcl]
+upg> lsj
++----+-------+---------+---------+-------+----------+-------+-------+
+|Job#|DB_NAME|    STAGE|OPERATION| STATUS|START_TIME|UPDATED|MESSAGE|
++----+-------+---------+---------+-------+----------+-------+-------+
+| 103|   orcl|DBUPGRADE|EXECUTING|RUNNING|  22:09:55| 7s ago|Running|
++----+-------+---------+---------+-------+----------+-------+-------+
+Total jobs 1
+```
+
